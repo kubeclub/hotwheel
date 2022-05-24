@@ -4,7 +4,7 @@
 
 ![hotwheel](http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/a198caf3b2456d9f02ec302f9e7cb1ca.png)
 
-软件介绍视频：https://www.bilibili.com/video/BV1WR4y1w7R8/
+介绍视频：https://www.bilibili.com/video/BV1WR4y1w7R8/
 
 开源筹备中
 
