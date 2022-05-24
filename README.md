@@ -1,5 +1,5 @@
 ## hotwheel
-> 风火轮自运维平台 CICD
+> 风火轮一个云原生自运维平台
 
 软件介绍视频：https://www.bilibili.com/video/BV1WR4y1w7R8/
 
