@@ -19,3 +19,8 @@
 - 容器登录（服务都是容器化部署）
   - 容器文件自由上下传
   - 集成 arthas 调试工具  
+
+## 架构图
+
+![服务说明](http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/1c108f5744d6e8caac9270af8df7a19c.png)
+![流程图](http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/7f25bcad35ba193f3d12809ff611cb51.png)
