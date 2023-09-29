@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  hotwheel:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-09-29T11:20:48.114402+08:00"
+    description: A Helm chart for Kubernetes
+    digest: 02f4cdfe75236371139638e7e4a9b0210253b54bca7311ba735c6cea9adf3b0a
+    name: hotwheel
+    type: application
+    urls:
+    - https://kubeclub.github.io/hotwheel/hotwheel-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-09-29T11:20:48.113682+08:00"
