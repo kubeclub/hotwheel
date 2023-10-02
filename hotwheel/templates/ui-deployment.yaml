@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "hotwheel.fullname" . }}
+  name: {{ include "hotwheel.ui.fullname" . }}
   labels:
     {{- include "hotwheel.labels" . | nindent 4 }}
 spec:
@@ -11,6 +11,7 @@ spec:
   selector:
     matchLabels:
       {{- include "hotwheel.selectorLabels" . | nindent 6 }}
+      app: {{ include "hotwheel.ui.fullname" . }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,6 +20,7 @@ spec:
       {{- end }}
       labels:
         {{- include "hotwheel.selectorLabels" . | nindent 8 }}
+        app: {{ include "hotwheel.ui.fullname" . }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -28,11 +30,11 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ include "hotwheel.ui.fullname" . }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.image.ui.repository }}:{{ .Values.image.ui.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.ui.pullPolicy }}
           ports:
             - name: http
               containerPort: 80

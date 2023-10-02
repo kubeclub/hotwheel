@@ -31,6 +31,20 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
+Create chart name and version as used by the chart label.
+*/}}
+{{- define "hotwheel.backend.fullname" -}}
+{{ template "hotwheel.fullname" . }}-backend
+{{- end }}
+
+{{/*
+Create chart name and version as used by the chart label.
+*/}}
+{{- define "hotwheel.ui.fullname" -}}
+{{ template "hotwheel.fullname" . }}-ui
+{{- end }}
+
+{{/*
 Common labels
 */}}
 {{- define "hotwheel.labels" -}}

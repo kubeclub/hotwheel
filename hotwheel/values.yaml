@@ -5,10 +5,16 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  backend:
+    repository: swr.cn-south-1.myhuaweicloud.com/hotwheel-backend
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+  ui:
+    repository: swr.cn-south-1.myhuaweicloud.com/hotwheel-ui
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -41,17 +47,30 @@ service:
   port: 80
 
 ingress:
-  enabled: false
-  annotations: {}
+  backend:
+    enabled: true
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: api.example.cn
+        paths: []
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+  ui:
+    enabled: true
+    annotations: { }
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: chart-example.local
-      paths: []
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+    hosts:
+      - host: hotwheel.example.cn
+        paths: [ ]
+    tls: [ ]
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
