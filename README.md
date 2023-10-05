@@ -1,10 +1,10 @@
-## hotwheel
-> 风火轮一个云原生自运维平台
+## [hotwheel](https://kubeclub.github.io/hotwheel/)
+> 云原生研发自运维平台
 
 
 ![hotwheel](http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/a198caf3b2456d9f02ec302f9e7cb1ca.png)
 
-介绍视频：https://www.bilibili.com/video/BV1WR4y1w7R8/
+[介绍视频](https://www.bilibili.com/video/BV1WR4y1w7R8/)
 
 ## 快速开始
 1. 添加 helm 仓库
