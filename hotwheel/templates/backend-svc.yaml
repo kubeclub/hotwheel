@@ -4,6 +4,7 @@ metadata:
   name: {{ include "hotwheel.backend.fullname" . }}
   labels:
     {{- include "hotwheel.labels" . | nindent 4 }}
+    app: {{ include "hotwheel.backend.fullname" . }}
 spec:
   type: {{ .Values.service.type }}
   ports:

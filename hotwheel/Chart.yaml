@@ -1,6 +1,6 @@
 apiVersion: v2
 name: hotwheel
-description: A Helm chart for Kubernetes
+description: 云原生一体化运维平台
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -20,5 +20,10 @@ version: 0.1.0
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
-appVersion: 1.16.0
+appVersion: 0.1
 icon: http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/a198caf3b2456d9f02ec302f9e7cb1ca.png
+dependencies:
+  - name: mysql
+    version: 0.3.5
+    repository: https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+    condition: mysql.enabled

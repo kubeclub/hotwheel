@@ -6,15 +6,17 @@ replicaCount: 1
 
 image:
   backend:
-    repository: swr.cn-south-1.myhuaweicloud.com/hotwheel-backend
+    repository: swr.cn-south-1.myhuaweicloud.com/kubeclub/hotwheel-backend
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: ""
+    tag: "v1.0"
   ui:
-    repository: swr.cn-south-1.myhuaweicloud.com/hotwheel-ui
+    repository: swr.cn-south-1.myhuaweicloud.com/kubeclub/hotwheel-ui
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: ""
+    tag: "v1.0"
+mysql:
+  enabled: false
 
 imagePullSecrets: []
 nameOverride: ""
