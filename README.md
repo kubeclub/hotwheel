@@ -6,7 +6,24 @@
 
 介绍视频：https://www.bilibili.com/video/BV1WR4y1w7R8/
 
-开源筹备中
+## 快速开始
+1. 添加 helm 仓库
+```
+helm repo add kubeclub  https://kubeclub.github.io/hotwheel/
+```
+2. 更新 charts 仓库
+```shell
+helm repo update
+```
+3. 部署
+```shell
+helm upgrade --install my-release --set config.database_url='' \
+     --set config.database_username='' \
+     --set config.database_password='' \
+     --set config.app_backend_url='' \
+     --set config.app_ui_url='' \
+     kubeclub/hotwheel
+```
 
 ## 功能列表
 - 构建

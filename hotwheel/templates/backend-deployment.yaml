@@ -38,8 +38,19 @@ spec:
           imagePullPolicy: {{ .Values.image.backend.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
+          env:
+            - name: SPRING_DATASOURCE_DRUID_MASTER_URL
+              value: {{- with .Values.config.database_url }}
+            - name: SPRING_DATASOURCE_DRUID_MASTER_USERNAME
+              value: {{- with .Values.config.database_username }}
+            - name: SPRING_DATASOURCE_DRUID_MASTER_PASSWORD
+              value: {{- with .Values.config.database_password }}
+            - name: CI_ADMIN-DOMAIN
+              value: {{- with .Values.config.app_backend_url }}
+            - name: CI_FRONT-DOMAIN
+              value: {{- with .Values.config.app_ui_url }}
           livenessProbe:
             httpGet:
               path: /

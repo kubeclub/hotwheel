@@ -74,3 +74,23 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+检查必填参数是否已设置
+*/}}
+{{- if not .Values.config.database_url -}}
+{{- error "必填参数 'config.database_url' 未设置" -}}
+{{- end -}}
+{{- if not .Values.config.database_username -}}
+{{- error "必填参数 'config.database_username' 未设置" -}}
+{{- end -}}
+{{- if not .Values.config.database_password -}}
+{{- error "必填参数 'config.database_password' 未设置" -}}
+{{- end -}}
+
+{{- if not .Values.config.app_backend_url -}}
+{{- error "必填参数 'config.app_backend_url' 未设置" -}}
+{{- end -}}
+{{- if not .Values.config.app_ui_url -}}
+{{- error "必填参数 'config.app_ui_url' 未设置" -}}
+{{- end -}}

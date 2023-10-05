@@ -15,6 +15,14 @@ image:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: "v1.0"
+
+config:
+  database_url: jdbc:mysql://xxx
+  database_username: ''
+  database_password: ''
+  app_backend_url: 'http://backend.xxx.com'
+  app_ui_url: 'http://www.xxx.com'
+
 mysql:
   enabled: false
 
