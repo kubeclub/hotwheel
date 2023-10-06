@@ -668,7 +668,7 @@ data:
     "sonarUrl":"http://sonar.xx.com/",
     "sonarCliImage":"xxx/sonar-scanner-cli:latest"
     }','Y','system','2022-07-25 13:39:31','',null,null);
-    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (105,'sls 日志配置','ali.sls','{ "accessId": "LTAI5tPqmDACT4wpkhkHtA9p", "accessKey": "TxXmlQR513Jfrmz19v8euMqkhrVJq7", "host": "cn-beijing.log.aliyuncs.com", "roleArn": "acs:ram::1071816379340479:role/hotwheelrole" }','N','',null,'',null,null);
+    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (105,'sls 日志配置','ali.sls','{ "accessId": "xx", "accessKey": "xx", "host": "cn-beijing.log.aliyuncs.com", "roleArn": "acs:ram::xxx:role/hotwheelrole" }','N','',null,'',null,null);
     /******************************************/
     /*   字典   */
     /*   TableName = sys_dict_data   */
