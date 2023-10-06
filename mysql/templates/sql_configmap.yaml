@@ -1,0 +1,3176 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "mysql.fullname" . }}-sql-script
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS hotwheel;
+    USE hotwheel;
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_evt_log   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_evt_log` (
+    `LOG_NR_` bigint(20) NOT NULL AUTO_INCREMENT,
+    `TYPE_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `TIME_STAMP_` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+    `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `DATA_` longblob,
+    `LOCK_OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `LOCK_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `IS_PROCESSED_` tinyint(4) DEFAULT '0',
+    PRIMARY KEY (`LOG_NR_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_ge_bytearray   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_ge_bytearray` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    `REV_` int(11) DEFAULT NULL,
+    `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `DEPLOYMENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `BYTES_` longblob,
+    `GENERATED_` tinyint(4) DEFAULT NULL,
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_FK_BYTEARR_DEPL` (`DEPLOYMENT_ID_`)
+    -- CONSTRAINT `ACT_FK_BYTEARR_DEPL` FOREIGN KEY (`DEPLOYMENT_ID_`) REFERENCES `act_re_deployment` (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_ge_property   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_ge_property` (
+    `NAME_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    `VALUE_` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    PRIMARY KEY (`NAME_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_hi_actinst   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_hi_actinst` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT '1',
+    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `EXECUTION_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `ACT_ID_` varchar(255) COLLATE utf8_bin NOT NULL,
+    `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `CALL_PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `ACT_NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `ACT_TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+    `ASSIGNEE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `START_TIME_` datetime(3) NOT NULL,
+    `END_TIME_` datetime(3) DEFAULT NULL,
+    `DURATION_` bigint(20) DEFAULT NULL,
+    `DELETE_REASON_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_HI_ACT_INST_START` (`START_TIME_`),
+    KEY `ACT_IDX_HI_ACT_INST_END` (`END_TIME_`),
+    KEY `ACT_IDX_HI_ACT_INST_PROCINST` (`PROC_INST_ID_`,`ACT_ID_`),
+    KEY `ACT_IDX_HI_ACT_INST_EXEC` (`EXECUTION_ID_`,`ACT_ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_hi_attachment   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_hi_attachment` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `DESCRIPTION_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `URL_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `CONTENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `TIME_` datetime(3) DEFAULT NULL,
+    PRIMARY KEY (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_hi_comment   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_hi_comment` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `TIME_` datetime(3) NOT NULL,
+    `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `ACTION_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `MESSAGE_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `FULL_MSG_` longblob,
+    PRIMARY KEY (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_hi_detail   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_hi_detail` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `ACT_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `NAME_` varchar(255) COLLATE utf8_bin NOT NULL,
+    `VAR_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    `TIME_` datetime(3) NOT NULL,
+    `BYTEARRAY_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `DOUBLE_` double DEFAULT NULL,
+    `LONG_` bigint(20) DEFAULT NULL,
+    `TEXT_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `TEXT2_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_HI_DETAIL_PROC_INST` (`PROC_INST_ID_`),
+    KEY `ACT_IDX_HI_DETAIL_ACT_INST` (`ACT_INST_ID_`),
+    KEY `ACT_IDX_HI_DETAIL_TIME` (`TIME_`),
+    KEY `ACT_IDX_HI_DETAIL_NAME` (`NAME_`),
+    KEY `ACT_IDX_HI_DETAIL_TASK_ID` (`TASK_ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_hi_identitylink   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_hi_identitylink` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    `GROUP_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `CREATE_TIME_` datetime(3) DEFAULT NULL,
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_DEFINITION_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_HI_IDENT_LNK_USER` (`USER_ID_`),
+    KEY `ACT_IDX_HI_IDENT_LNK_SCOPE` (`SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_HI_IDENT_LNK_SCOPE_DEF` (`SCOPE_DEFINITION_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_HI_IDENT_LNK_TASK` (`TASK_ID_`),
+    KEY `ACT_IDX_HI_IDENT_LNK_PROCINST` (`PROC_INST_ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_hi_procinst   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_hi_procinst` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT '1',
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `BUSINESS_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `START_TIME_` datetime(3) NOT NULL,
+    `END_TIME_` datetime(3) DEFAULT NULL,
+    `DURATION_` bigint(20) DEFAULT NULL,
+    `START_USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `START_ACT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `END_ACT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SUPER_PROCESS_INSTANCE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `DELETE_REASON_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `CALLBACK_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `CALLBACK_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    PRIMARY KEY (`ID_`),
+    UNIQUE KEY `PROC_INST_ID_` (`PROC_INST_ID_`),
+    KEY `ACT_IDX_HI_PRO_INST_END` (`END_TIME_`),
+    KEY `ACT_IDX_HI_PRO_I_BUSKEY` (`BUSINESS_KEY_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_hi_taskinst   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_hi_taskinst` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT '1',
+    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `TASK_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `TASK_DEF_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SUB_SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_DEFINITION_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `PARENT_TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `DESCRIPTION_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `ASSIGNEE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `START_TIME_` datetime(3) NOT NULL,
+    `CLAIM_TIME_` datetime(3) DEFAULT NULL,
+    `END_TIME_` datetime(3) DEFAULT NULL,
+    `DURATION_` bigint(20) DEFAULT NULL,
+    `DELETE_REASON_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `PRIORITY_` int(11) DEFAULT NULL,
+    `DUE_DATE_` datetime(3) DEFAULT NULL,
+    `FORM_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    `LAST_UPDATED_TIME_` datetime(3) DEFAULT NULL,
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_HI_TASK_SCOPE` (`SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_HI_TASK_SUB_SCOPE` (`SUB_SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_HI_TASK_SCOPE_DEF` (`SCOPE_DEFINITION_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_HI_TASK_INST_PROCINST` (`PROC_INST_ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_hi_varinst   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_hi_varinst` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT '1',
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `NAME_` varchar(255) COLLATE utf8_bin NOT NULL,
+    `VAR_TYPE_` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SUB_SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `BYTEARRAY_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `DOUBLE_` double DEFAULT NULL,
+    `LONG_` bigint(20) DEFAULT NULL,
+    `TEXT_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `TEXT2_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `CREATE_TIME_` datetime(3) DEFAULT NULL,
+    `LAST_UPDATED_TIME_` datetime(3) DEFAULT NULL,
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_HI_PROCVAR_NAME_TYPE` (`NAME_`,`VAR_TYPE_`),
+    KEY `ACT_IDX_HI_VAR_SCOPE_ID_TYPE` (`SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_HI_VAR_SUB_ID_TYPE` (`SUB_SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_HI_PROCVAR_PROC_INST` (`PROC_INST_ID_`),
+    KEY `ACT_IDX_HI_PROCVAR_TASK_ID` (`TASK_ID_`),
+    KEY `ACT_IDX_HI_PROCVAR_EXE` (`EXECUTION_ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_id_bytearray   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_id_bytearray` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    `REV_` int(11) DEFAULT NULL,
+    `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `BYTES_` longblob,
+    PRIMARY KEY (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_id_group   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_id_group` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    `REV_` int(11) DEFAULT NULL,
+    `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    PRIMARY KEY (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_id_info   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_id_info` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    `REV_` int(11) DEFAULT NULL,
+    `USER_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `TYPE_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `VALUE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `PASSWORD_` longblob,
+    `PARENT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    PRIMARY KEY (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_id_membership   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_id_membership` (
+    `USER_ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    `GROUP_ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    PRIMARY KEY (`USER_ID_`,`GROUP_ID_`),
+    KEY `ACT_FK_MEMB_GROUP` (`GROUP_ID_`)
+    -- CONSTRAINT `ACT_FK_MEMB_GROUP` FOREIGN KEY (`GROUP_ID_`) REFERENCES `act_id_group` (`ID_`)
+    -- CONSTRAINT `ACT_FK_MEMB_USER` FOREIGN KEY (`USER_ID_`) REFERENCES `act_id_user` (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_id_priv   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_id_priv` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `NAME_` varchar(255) COLLATE utf8_bin NOT NULL,
+    PRIMARY KEY (`ID_`),
+    UNIQUE KEY `ACT_UNIQ_PRIV_NAME` (`NAME_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_id_priv_mapping   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_id_priv_mapping` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `PRIV_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `GROUP_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_FK_PRIV_MAPPING` (`PRIV_ID_`),
+    KEY `ACT_IDX_PRIV_USER` (`USER_ID_`),
+    KEY `ACT_IDX_PRIV_GROUP` (`GROUP_ID_`)
+    -- CONSTRAINT `ACT_FK_PRIV_MAPPING` FOREIGN KEY (`PRIV_ID_`) REFERENCES `act_id_priv` (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_id_property   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_id_property` (
+    `NAME_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    `VALUE_` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    PRIMARY KEY (`NAME_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_id_token   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_id_token` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    `TOKEN_VALUE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `TOKEN_DATE_` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+    `IP_ADDRESS_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `USER_AGENT_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `TOKEN_DATA_` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
+    PRIMARY KEY (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_id_user   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_id_user` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    `REV_` int(11) DEFAULT NULL,
+    `FIRST_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `LAST_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `DISPLAY_NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `EMAIL_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `PWD_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `PICTURE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    PRIMARY KEY (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_procdef_info   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_procdef_info` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    `INFO_JSON_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    PRIMARY KEY (`ID_`),
+    UNIQUE KEY `ACT_UNIQ_INFO_PROCDEF` (`PROC_DEF_ID_`),
+    KEY `ACT_IDX_INFO_PROCDEF` (`PROC_DEF_ID_`),
+    KEY `ACT_FK_INFO_JSON_BA` (`INFO_JSON_ID_`)
+    -- CONSTRAINT `ACT_FK_INFO_JSON_BA` FOREIGN KEY (`INFO_JSON_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+    -- CONSTRAINT `ACT_FK_INFO_PROCDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_re_deployment   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_re_deployment` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    `DEPLOY_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `DERIVED_FROM_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `DERIVED_FROM_ROOT_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PARENT_DEPLOYMENT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `ENGINE_VERSION_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    PRIMARY KEY (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_re_model   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_re_model` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `LAST_UPDATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `VERSION_` int(11) DEFAULT NULL,
+    `META_INFO_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `DEPLOYMENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `EDITOR_SOURCE_VALUE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `EDITOR_SOURCE_EXTRA_VALUE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_FK_MODEL_SOURCE` (`EDITOR_SOURCE_VALUE_ID_`),
+    KEY `ACT_FK_MODEL_SOURCE_EXTRA` (`EDITOR_SOURCE_EXTRA_VALUE_ID_`),
+    KEY `ACT_FK_MODEL_DEPLOYMENT` (`DEPLOYMENT_ID_`)
+    -- CONSTRAINT `ACT_FK_MODEL_DEPLOYMENT` FOREIGN KEY (`DEPLOYMENT_ID_`) REFERENCES `act_re_deployment` (`ID_`)
+    -- CONSTRAINT `ACT_FK_MODEL_SOURCE` FOREIGN KEY (`EDITOR_SOURCE_VALUE_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+    -- CONSTRAINT `ACT_FK_MODEL_SOURCE_EXTRA` FOREIGN KEY (`EDITOR_SOURCE_EXTRA_VALUE_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_re_procdef   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_re_procdef` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `KEY_` varchar(255) COLLATE utf8_bin NOT NULL,
+    `VERSION_` int(11) NOT NULL,
+    `DEPLOYMENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `RESOURCE_NAME_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `DGRM_RESOURCE_NAME_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `DESCRIPTION_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `HAS_START_FORM_KEY_` tinyint(4) DEFAULT NULL,
+    `HAS_GRAPHICAL_NOTATION_` tinyint(4) DEFAULT NULL,
+    `SUSPENSION_STATE_` int(11) DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    `ENGINE_VERSION_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `DERIVED_FROM_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `DERIVED_FROM_ROOT_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `DERIVED_VERSION_` int(11) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`ID_`),
+    UNIQUE KEY `ACT_UNIQ_PROCDEF` (`KEY_`,`VERSION_`,`DERIVED_VERSION_`,`TENANT_ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_ru_deadletter_job   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_ru_deadletter_job` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+    `EXCLUSIVE_` tinyint(1) DEFAULT NULL,
+    `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROCESS_INSTANCE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SUB_SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_DEFINITION_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `EXCEPTION_STACK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `EXCEPTION_MSG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `DUEDATE_` timestamp(3) NULL DEFAULT NULL,
+    `REPEAT_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `HANDLER_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `HANDLER_CFG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `CUSTOM_VALUES_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_DEADLETTER_JOB_EXCEPTION_STACK_ID` (`EXCEPTION_STACK_ID_`),
+    KEY `ACT_IDX_DEADLETTER_JOB_CUSTOM_VALUES_ID` (`CUSTOM_VALUES_ID_`),
+    KEY `ACT_IDX_DJOB_SCOPE` (`SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_DJOB_SUB_SCOPE` (`SUB_SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_DJOB_SCOPE_DEF` (`SCOPE_DEFINITION_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_FK_DEADLETTER_JOB_EXECUTION` (`EXECUTION_ID_`),
+    KEY `ACT_FK_DEADLETTER_JOB_PROCESS_INSTANCE` (`PROCESS_INSTANCE_ID_`),
+    KEY `ACT_FK_DEADLETTER_JOB_PROC_DEF` (`PROC_DEF_ID_`)
+    -- CONSTRAINT `ACT_FK_DEADLETTER_JOB_CUSTOM_VALUES` FOREIGN KEY (`CUSTOM_VALUES_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+    -- CONSTRAINT `ACT_FK_DEADLETTER_JOB_EXCEPTION` FOREIGN KEY (`EXCEPTION_STACK_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+    -- CONSTRAINT `ACT_FK_DEADLETTER_JOB_EXECUTION` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    -- CONSTRAINT `ACT_FK_DEADLETTER_JOB_PROCESS_INSTANCE` FOREIGN KEY (`PROCESS_INSTANCE_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    -- CONSTRAINT `ACT_FK_DEADLETTER_JOB_PROC_DEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_ru_event_subscr   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_ru_event_subscr` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    `EVENT_TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+    `EVENT_NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `ACTIVITY_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `CONFIGURATION_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `CREATED_` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_EVENT_SUBSCR_CONFIG_` (`CONFIGURATION_`),
+    KEY `ACT_FK_EVENT_EXEC` (`EXECUTION_ID_`)
+    -- CONSTRAINT `ACT_FK_EVENT_EXEC` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_ru_execution   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_ru_execution` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    `REV_` int(11) DEFAULT NULL,
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `BUSINESS_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `PARENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `SUPER_EXEC_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `ROOT_PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `ACT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `IS_ACTIVE_` tinyint(4) DEFAULT NULL,
+    `IS_CONCURRENT_` tinyint(4) DEFAULT NULL,
+    `IS_SCOPE_` tinyint(4) DEFAULT NULL,
+    `IS_EVENT_SCOPE_` tinyint(4) DEFAULT NULL,
+    `IS_MI_ROOT_` tinyint(4) DEFAULT NULL,
+    `SUSPENSION_STATE_` int(11) DEFAULT NULL,
+    `CACHED_ENT_STATE_` int(11) DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `START_ACT_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `START_TIME_` datetime(3) DEFAULT NULL,
+    `START_USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `LOCK_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `IS_COUNT_ENABLED_` tinyint(4) DEFAULT NULL,
+    `EVT_SUBSCR_COUNT_` int(11) DEFAULT NULL,
+    `TASK_COUNT_` int(11) DEFAULT NULL,
+    `JOB_COUNT_` int(11) DEFAULT NULL,
+    `TIMER_JOB_COUNT_` int(11) DEFAULT NULL,
+    `SUSP_JOB_COUNT_` int(11) DEFAULT NULL,
+    `DEADLETTER_JOB_COUNT_` int(11) DEFAULT NULL,
+    `VAR_COUNT_` int(11) DEFAULT NULL,
+    `ID_LINK_COUNT_` int(11) DEFAULT NULL,
+    `CALLBACK_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `CALLBACK_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_EXEC_BUSKEY` (`BUSINESS_KEY_`),
+    KEY `ACT_IDC_EXEC_ROOT` (`ROOT_PROC_INST_ID_`),
+    KEY `ACT_FK_EXE_PROCINST` (`PROC_INST_ID_`),
+    KEY `ACT_FK_EXE_PARENT` (`PARENT_ID_`),
+    KEY `ACT_FK_EXE_SUPER` (`SUPER_EXEC_`),
+    KEY `ACT_FK_EXE_PROCDEF` (`PROC_DEF_ID_`)
+    -- CONSTRAINT `ACT_FK_EXE_PARENT` FOREIGN KEY (`PARENT_ID_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE CASCADE
+    -- CONSTRAINT `ACT_FK_EXE_PROCDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`)
+    -- CONSTRAINT `ACT_FK_EXE_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE CASCADE ON UPDATE CASCADE
+    -- CONSTRAINT `ACT_FK_EXE_SUPER` FOREIGN KEY (`SUPER_EXEC_`) REFERENCES `act_ru_execution` (`ID_`) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_ru_history_job   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_ru_history_job` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    `LOCK_EXP_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `LOCK_OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `RETRIES_` int(11) DEFAULT NULL,
+    `EXCEPTION_STACK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `EXCEPTION_MSG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `HANDLER_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `HANDLER_CFG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `CUSTOM_VALUES_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `ADV_HANDLER_CFG_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `SCOPE_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    PRIMARY KEY (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_ru_identitylink   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_ru_identitylink` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    `REV_` int(11) DEFAULT NULL,
+    `GROUP_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_DEFINITION_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_IDENT_LNK_USER` (`USER_ID_`),
+    KEY `ACT_IDX_IDENT_LNK_GROUP` (`GROUP_ID_`),
+    KEY `ACT_IDX_IDENT_LNK_SCOPE` (`SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_IDENT_LNK_SCOPE_DEF` (`SCOPE_DEFINITION_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_ATHRZ_PROCEDEF` (`PROC_DEF_ID_`),
+    KEY `ACT_FK_TSKASS_TASK` (`TASK_ID_`),
+    KEY `ACT_FK_IDL_PROCINST` (`PROC_INST_ID_`)
+    -- CONSTRAINT `ACT_FK_ATHRZ_PROCEDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`)
+    -- CONSTRAINT `ACT_FK_IDL_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    -- CONSTRAINT `ACT_FK_TSKASS_TASK` FOREIGN KEY (`TASK_ID_`) REFERENCES `act_ru_task` (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_ru_job   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_ru_job` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+    `LOCK_EXP_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `LOCK_OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `EXCLUSIVE_` tinyint(1) DEFAULT NULL,
+    `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROCESS_INSTANCE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SUB_SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_DEFINITION_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `RETRIES_` int(11) DEFAULT NULL,
+    `EXCEPTION_STACK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `EXCEPTION_MSG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `DUEDATE_` timestamp(3) NULL DEFAULT NULL,
+    `REPEAT_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `HANDLER_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `HANDLER_CFG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `CUSTOM_VALUES_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_JOB_EXCEPTION_STACK_ID` (`EXCEPTION_STACK_ID_`),
+    KEY `ACT_IDX_JOB_CUSTOM_VALUES_ID` (`CUSTOM_VALUES_ID_`),
+    KEY `ACT_IDX_JOB_SCOPE` (`SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_JOB_SUB_SCOPE` (`SUB_SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_JOB_SCOPE_DEF` (`SCOPE_DEFINITION_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_FK_JOB_EXECUTION` (`EXECUTION_ID_`),
+    KEY `ACT_FK_JOB_PROCESS_INSTANCE` (`PROCESS_INSTANCE_ID_`),
+    KEY `ACT_FK_JOB_PROC_DEF` (`PROC_DEF_ID_`)
+    -- CONSTRAINT `ACT_FK_JOB_CUSTOM_VALUES` FOREIGN KEY (`CUSTOM_VALUES_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+    -- CONSTRAINT `ACT_FK_JOB_EXCEPTION` FOREIGN KEY (`EXCEPTION_STACK_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+    -- CONSTRAINT `ACT_FK_JOB_EXECUTION` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    -- CONSTRAINT `ACT_FK_JOB_PROCESS_INSTANCE` FOREIGN KEY (`PROCESS_INSTANCE_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    -- CONSTRAINT `ACT_FK_JOB_PROC_DEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_ru_suspended_job   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_ru_suspended_job` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+    `EXCLUSIVE_` tinyint(1) DEFAULT NULL,
+    `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROCESS_INSTANCE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SUB_SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_DEFINITION_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `RETRIES_` int(11) DEFAULT NULL,
+    `EXCEPTION_STACK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `EXCEPTION_MSG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `DUEDATE_` timestamp(3) NULL DEFAULT NULL,
+    `REPEAT_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `HANDLER_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `HANDLER_CFG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `CUSTOM_VALUES_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_SUSPENDED_JOB_EXCEPTION_STACK_ID` (`EXCEPTION_STACK_ID_`),
+    KEY `ACT_IDX_SUSPENDED_JOB_CUSTOM_VALUES_ID` (`CUSTOM_VALUES_ID_`),
+    KEY `ACT_IDX_SJOB_SCOPE` (`SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_SJOB_SUB_SCOPE` (`SUB_SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_SJOB_SCOPE_DEF` (`SCOPE_DEFINITION_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_FK_SUSPENDED_JOB_EXECUTION` (`EXECUTION_ID_`),
+    KEY `ACT_FK_SUSPENDED_JOB_PROCESS_INSTANCE` (`PROCESS_INSTANCE_ID_`),
+    KEY `ACT_FK_SUSPENDED_JOB_PROC_DEF` (`PROC_DEF_ID_`)
+    -- CONSTRAINT `ACT_FK_SUSPENDED_JOB_CUSTOM_VALUES` FOREIGN KEY (`CUSTOM_VALUES_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+    -- CONSTRAINT `ACT_FK_SUSPENDED_JOB_EXCEPTION` FOREIGN KEY (`EXCEPTION_STACK_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+    -- CONSTRAINT `ACT_FK_SUSPENDED_JOB_EXECUTION` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    -- CONSTRAINT `ACT_FK_SUSPENDED_JOB_PROCESS_INSTANCE` FOREIGN KEY (`PROCESS_INSTANCE_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    -- CONSTRAINT `ACT_FK_SUSPENDED_JOB_PROC_DEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_ru_task   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_ru_task` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+    `REV_` int(11) DEFAULT NULL,
+    `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `TASK_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SUB_SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_DEFINITION_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `PARENT_TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `DESCRIPTION_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `TASK_DEF_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `ASSIGNEE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `DELEGATION_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PRIORITY_` int(11) DEFAULT NULL,
+    `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `DUE_DATE_` datetime(3) DEFAULT NULL,
+    `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SUSPENSION_STATE_` int(11) DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    `FORM_KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `CLAIM_TIME_` datetime(3) DEFAULT NULL,
+    `IS_COUNT_ENABLED_` tinyint(4) DEFAULT NULL,
+    `VAR_COUNT_` int(11) DEFAULT NULL,
+    `ID_LINK_COUNT_` int(11) DEFAULT NULL,
+    `SUB_TASK_COUNT_` int(11) DEFAULT NULL,
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_TASK_CREATE` (`CREATE_TIME_`),
+    KEY `ACT_IDX_TASK_SCOPE` (`SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_TASK_SUB_SCOPE` (`SUB_SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_TASK_SCOPE_DEF` (`SCOPE_DEFINITION_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_FK_TASK_EXE` (`EXECUTION_ID_`),
+    KEY `ACT_FK_TASK_PROCINST` (`PROC_INST_ID_`),
+    KEY `ACT_FK_TASK_PROCDEF` (`PROC_DEF_ID_`)
+    -- CONSTRAINT `ACT_FK_TASK_EXE` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    -- CONSTRAINT `ACT_FK_TASK_PROCDEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`)
+    -- CONSTRAINT `ACT_FK_TASK_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_ru_timer_job   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_ru_timer_job` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+    `LOCK_EXP_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `LOCK_OWNER_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `EXCLUSIVE_` tinyint(1) DEFAULT NULL,
+    `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROCESS_INSTANCE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SUB_SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_DEFINITION_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `RETRIES_` int(11) DEFAULT NULL,
+    `EXCEPTION_STACK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `EXCEPTION_MSG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `DUEDATE_` timestamp(3) NULL DEFAULT NULL,
+    `REPEAT_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `HANDLER_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `HANDLER_CFG_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `CUSTOM_VALUES_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `CREATE_TIME_` timestamp(3) NULL DEFAULT NULL,
+    `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_TIMER_JOB_EXCEPTION_STACK_ID` (`EXCEPTION_STACK_ID_`),
+    KEY `ACT_IDX_TIMER_JOB_CUSTOM_VALUES_ID` (`CUSTOM_VALUES_ID_`),
+    KEY `ACT_IDX_TJOB_SCOPE` (`SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_TJOB_SUB_SCOPE` (`SUB_SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_TJOB_SCOPE_DEF` (`SCOPE_DEFINITION_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_FK_TIMER_JOB_EXECUTION` (`EXECUTION_ID_`),
+    KEY `ACT_FK_TIMER_JOB_PROCESS_INSTANCE` (`PROCESS_INSTANCE_ID_`),
+    KEY `ACT_FK_TIMER_JOB_PROC_DEF` (`PROC_DEF_ID_`)
+    -- CONSTRAINT `ACT_FK_TIMER_JOB_CUSTOM_VALUES` FOREIGN KEY (`CUSTOM_VALUES_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+    -- CONSTRAINT `ACT_FK_TIMER_JOB_EXCEPTION` FOREIGN KEY (`EXCEPTION_STACK_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+    -- CONSTRAINT `ACT_FK_TIMER_JOB_EXECUTION` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    -- CONSTRAINT `ACT_FK_TIMER_JOB_PROCESS_INSTANCE` FOREIGN KEY (`PROCESS_INSTANCE_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    -- CONSTRAINT `ACT_FK_TIMER_JOB_PROC_DEF` FOREIGN KEY (`PROC_DEF_ID_`) REFERENCES `act_re_procdef` (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = act_ru_variable   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `act_ru_variable` (
+    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
+    `REV_` int(11) DEFAULT NULL,
+    `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
+    `NAME_` varchar(255) COLLATE utf8_bin NOT NULL,
+    `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `TASK_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SUB_SCOPE_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `SCOPE_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+    `BYTEARRAY_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+    `DOUBLE_` double DEFAULT NULL,
+    `LONG_` bigint(20) DEFAULT NULL,
+    `TEXT_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    `TEXT2_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,
+    PRIMARY KEY (`ID_`),
+    KEY `ACT_IDX_RU_VAR_SCOPE_ID_TYPE` (`SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_IDX_RU_VAR_SUB_ID_TYPE` (`SUB_SCOPE_ID_`,`SCOPE_TYPE_`),
+    KEY `ACT_FK_VAR_BYTEARRAY` (`BYTEARRAY_ID_`),
+    KEY `ACT_IDX_VARIABLE_TASK_ID` (`TASK_ID_`),
+    KEY `ACT_FK_VAR_EXE` (`EXECUTION_ID_`),
+    KEY `ACT_FK_VAR_PROCINST` (`PROC_INST_ID_`)
+    -- CONSTRAINT `ACT_FK_VAR_BYTEARRAY` FOREIGN KEY (`BYTEARRAY_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)
+    -- CONSTRAINT `ACT_FK_VAR_EXE` FOREIGN KEY (`EXECUTION_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    -- CONSTRAINT `ACT_FK_VAR_PROCINST` FOREIGN KEY (`PROC_INST_ID_`) REFERENCES `act_ru_execution` (`ID_`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = gen_table   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `gen_table` (
+    `table_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
+    `table_name` varchar(200) DEFAULT '' COMMENT '表名称',
+    `table_comment` varchar(500) DEFAULT '' COMMENT '表描述',
+    `sub_table_name` varchar(64) DEFAULT NULL COMMENT '关联子表的表名',
+    `sub_table_fk_name` varchar(64) DEFAULT NULL COMMENT '子表关联的外键名',
+    `class_name` varchar(100) DEFAULT '' COMMENT '实体类名称',
+    `tpl_category` varchar(200) DEFAULT 'crud' COMMENT '使用的模板（crud单表操作 tree树表操作）',
+    `package_name` varchar(100) DEFAULT NULL COMMENT '生成包路径',
+    `module_name` varchar(30) DEFAULT NULL COMMENT '生成模块名',
+    `business_name` varchar(30) DEFAULT NULL COMMENT '生成业务名',
+    `function_name` varchar(50) DEFAULT NULL COMMENT '生成功能名',
+    `function_author` varchar(50) DEFAULT NULL COMMENT '生成功能作者',
+    `gen_type` char(1) DEFAULT '0' COMMENT '生成代码方式（0zip压缩包 1自定义路径）',
+    `gen_path` varchar(200) DEFAULT '/' COMMENT '生成路径（不填默认项目路径）',
+    `options` varchar(1000) DEFAULT NULL COMMENT '其它生成选项',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`table_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='代码生成业务表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = gen_table_column   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `gen_table_column` (
+    `column_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
+    `table_id` varchar(64) DEFAULT NULL COMMENT '归属表编号',
+    `column_name` varchar(200) DEFAULT NULL COMMENT '列名称',
+    `column_comment` varchar(500) DEFAULT NULL COMMENT '列描述',
+    `column_type` varchar(100) DEFAULT NULL COMMENT '列类型',
+    `java_type` varchar(500) DEFAULT NULL COMMENT 'JAVA类型',
+    `java_field` varchar(200) DEFAULT NULL COMMENT 'JAVA字段名',
+    `is_pk` char(1) DEFAULT NULL COMMENT '是否主键（1是）',
+    `is_increment` char(1) DEFAULT NULL COMMENT '是否自增（1是）',
+    `is_required` char(1) DEFAULT NULL COMMENT '是否必填（1是）',
+    `is_insert` char(1) DEFAULT NULL COMMENT '是否为插入字段（1是）',
+    `is_edit` char(1) DEFAULT NULL COMMENT '是否编辑字段（1是）',
+    `is_list` char(1) DEFAULT NULL COMMENT '是否列表字段（1是）',
+    `is_query` char(1) DEFAULT NULL COMMENT '是否查询字段（1是）',
+    `query_type` varchar(200) DEFAULT 'EQ' COMMENT '查询方式（等于、不等于、大于、小于、范围）',
+    `html_type` varchar(200) DEFAULT NULL COMMENT '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）',
+    `dict_type` varchar(200) DEFAULT '' COMMENT '字典类型',
+    `sort` int(11) DEFAULT NULL COMMENT '排序',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`column_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='代码生成业务表字段'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = qrtz_blob_triggers   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `qrtz_blob_triggers` (
+    `sched_name` varchar(120) NOT NULL COMMENT '调度名称',
+    `trigger_name` varchar(120) NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
+    `trigger_group` varchar(64) NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
+    `blob_data` blob COMMENT '存放持久化Trigger对象',
+    PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`)
+    -- CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Blob类型的触发器表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = qrtz_calendars   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `qrtz_calendars` (
+    `sched_name` varchar(120) NOT NULL COMMENT '调度名称',
+    `calendar_name` varchar(120) NOT NULL COMMENT '日历名称',
+    `calendar` blob NOT NULL COMMENT '存放持久化calendar对象',
+    PRIMARY KEY (`sched_name`,`calendar_name`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='日历信息表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = qrtz_cron_triggers   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `qrtz_cron_triggers` (
+    `sched_name` varchar(120) NOT NULL COMMENT '调度名称',
+    `trigger_name` varchar(120) NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
+    `trigger_group` varchar(64) NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
+    `cron_expression` varchar(200) NOT NULL COMMENT 'cron表达式',
+    `time_zone_id` varchar(80) DEFAULT NULL COMMENT '时区',
+    PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`)
+    -- CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Cron类型的触发器表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = qrtz_fired_triggers   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `qrtz_fired_triggers` (
+    `sched_name` varchar(120) NOT NULL COMMENT '调度名称',
+    `entry_id` varchar(95) NOT NULL COMMENT '调度器实例id',
+    `trigger_name` varchar(120) NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
+    `trigger_group` varchar(64) NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
+    `instance_name` varchar(200) NOT NULL COMMENT '调度器实例名',
+    `fired_time` bigint(13) NOT NULL COMMENT '触发的时间',
+    `sched_time` bigint(13) NOT NULL COMMENT '定时器制定的时间',
+    `priority` int(11) NOT NULL COMMENT '优先级',
+    `state` varchar(16) NOT NULL COMMENT '状态',
+    `job_name` varchar(120) DEFAULT NULL COMMENT '任务名称',
+    `job_group` varchar(64) DEFAULT NULL COMMENT '任务组名',
+    `is_nonconcurrent` varchar(1) DEFAULT NULL COMMENT '是否并发',
+    `requests_recovery` varchar(1) DEFAULT NULL COMMENT '是否接受恢复执行',
+    PRIMARY KEY (`sched_name`,`entry_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='已触发的触发器表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = qrtz_job_details   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `qrtz_job_details` (
+    `sched_name` varchar(120) NOT NULL COMMENT '调度名称',
+    `job_name` varchar(120) NOT NULL COMMENT '任务名称',
+    `job_group` varchar(64) NOT NULL COMMENT '任务组名',
+    `description` varchar(250) DEFAULT NULL COMMENT '相关介绍',
+    `job_class_name` varchar(250) NOT NULL COMMENT '执行任务类名称',
+    `is_durable` varchar(1) NOT NULL COMMENT '是否持久化',
+    `is_nonconcurrent` varchar(1) NOT NULL COMMENT '是否并发',
+    `is_update_data` varchar(1) NOT NULL COMMENT '是否更新数据',
+    `requests_recovery` varchar(1) NOT NULL COMMENT '是否接受恢复执行',
+    `job_data` blob COMMENT '存放持久化job对象',
+    PRIMARY KEY (`sched_name`,`job_name`,`job_group`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='任务详细信息表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = qrtz_locks   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `qrtz_locks` (
+    `sched_name` varchar(120) NOT NULL COMMENT '调度名称',
+    `lock_name` varchar(40) NOT NULL COMMENT '悲观锁名称',
+    PRIMARY KEY (`sched_name`,`lock_name`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='存储的悲观锁信息表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = qrtz_paused_trigger_grps   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `qrtz_paused_trigger_grps` (
+    `sched_name` varchar(120) NOT NULL COMMENT '调度名称',
+    `trigger_group` varchar(64) NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
+    PRIMARY KEY (`sched_name`,`trigger_group`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='暂停的触发器表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = qrtz_scheduler_state   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `qrtz_scheduler_state` (
+    `sched_name` varchar(120) NOT NULL COMMENT '调度名称',
+    `instance_name` varchar(120) NOT NULL COMMENT '实例名称',
+    `last_checkin_time` bigint(13) NOT NULL COMMENT '上次检查时间',
+    `checkin_interval` bigint(13) NOT NULL COMMENT '检查间隔时间',
+    PRIMARY KEY (`sched_name`,`instance_name`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='调度器状态表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = qrtz_simple_triggers   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `qrtz_simple_triggers` (
+    `sched_name` varchar(120) NOT NULL COMMENT '调度名称',
+    `trigger_name` varchar(120) NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
+    `trigger_group` varchar(64) NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
+    `repeat_count` bigint(7) NOT NULL COMMENT '重复的次数统计',
+    `repeat_interval` bigint(12) NOT NULL COMMENT '重复的间隔时间',
+    `times_triggered` bigint(10) NOT NULL COMMENT '已经触发的次数',
+    PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`)
+    -- CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='简单触发器的信息表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = qrtz_simprop_triggers   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `qrtz_simprop_triggers` (
+    `sched_name` varchar(120) NOT NULL COMMENT '调度名称',
+    `trigger_name` varchar(120) NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
+    `trigger_group` varchar(64) NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
+    `str_prop_1` varchar(512) DEFAULT NULL COMMENT 'String类型的trigger的第一个参数',
+    `str_prop_2` varchar(512) DEFAULT NULL COMMENT 'String类型的trigger的第二个参数',
+    `str_prop_3` varchar(512) DEFAULT NULL COMMENT 'String类型的trigger的第三个参数',
+    `int_prop_1` int(11) DEFAULT NULL COMMENT 'int类型的trigger的第一个参数',
+    `int_prop_2` int(11) DEFAULT NULL COMMENT 'int类型的trigger的第二个参数',
+    `long_prop_1` bigint(20) DEFAULT NULL COMMENT 'long类型的trigger的第一个参数',
+    `long_prop_2` bigint(20) DEFAULT NULL COMMENT 'long类型的trigger的第二个参数',
+    `dec_prop_1` decimal(13,4) DEFAULT NULL COMMENT 'decimal类型的trigger的第一个参数',
+    `dec_prop_2` decimal(13,4) DEFAULT NULL COMMENT 'decimal类型的trigger的第二个参数',
+    `bool_prop_1` varchar(1) DEFAULT NULL COMMENT 'Boolean类型的trigger的第一个参数',
+    `bool_prop_2` varchar(1) DEFAULT NULL COMMENT 'Boolean类型的trigger的第二个参数',
+    PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`)
+    -- CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='同步机制的行锁表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = qrtz_triggers   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `qrtz_triggers` (
+    `sched_name` varchar(120) NOT NULL COMMENT '调度名称',
+    `trigger_name` varchar(120) NOT NULL COMMENT '触发器的名字',
+    `trigger_group` varchar(64) NOT NULL COMMENT '触发器所属组的名字',
+    `job_name` varchar(120) NOT NULL COMMENT 'qrtz_job_details表job_name的外键',
+    `job_group` varchar(64) NOT NULL COMMENT 'qrtz_job_details表job_group的外键',
+    `description` varchar(250) DEFAULT NULL COMMENT '相关介绍',
+    `next_fire_time` bigint(13) DEFAULT NULL COMMENT '上一次触发时间（毫秒）',
+    `prev_fire_time` bigint(13) DEFAULT NULL COMMENT '下一次触发时间（默认为-1表示不触发）',
+    `priority` int(11) DEFAULT NULL COMMENT '优先级',
+    `trigger_state` varchar(16) NOT NULL COMMENT '触发器状态',
+    `trigger_type` varchar(8) NOT NULL COMMENT '触发器的类型',
+    `start_time` bigint(13) NOT NULL COMMENT '开始时间',
+    `end_time` bigint(13) DEFAULT NULL COMMENT '结束时间',
+    `calendar_name` varchar(200) DEFAULT NULL COMMENT '日程表名称',
+    `misfire_instr` smallint(2) DEFAULT NULL COMMENT '补偿执行的策略',
+    `job_data` blob COMMENT '存放持久化job对象',
+    PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
+    KEY `sched_name` (`sched_name`,`job_name`,`job_group`)
+    -- CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `job_name`, `job_group`) REFERENCES `qrtz_job_details` (`sched_name`, `job_name`, `job_group`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='触发器详细信息表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_config   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_config` (
+    `config_id` int(5) NOT NULL AUTO_INCREMENT COMMENT '参数主键',
+    `config_name` varchar(100) DEFAULT '' COMMENT '参数名称',
+    `config_key` varchar(100) DEFAULT '' COMMENT '参数键名',
+    `config_value` varchar(500) DEFAULT '' COMMENT '参数键值',
+    `config_type` char(1) DEFAULT 'N' COMMENT '系统内置（Y是 N否）',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`config_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4 COMMENT='参数配置表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_deploy_form   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_deploy_form` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `form_id` bigint(20) DEFAULT NULL COMMENT '表单主键',
+    `deploy_id` varchar(50) DEFAULT NULL COMMENT '流程实例主键',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=2253 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='流程实例关联表单'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_dept   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_dept` (
+    `dept_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '部门id',
+    `parent_id` bigint(20) DEFAULT '0' COMMENT '父部门id',
+    `ancestors` varchar(50) DEFAULT '' COMMENT '祖级列表',
+    `dept_name` varchar(30) DEFAULT '' COMMENT '部门名称',
+    `order_num` int(4) DEFAULT '0' COMMENT '显示顺序',
+    `leader` varchar(20) DEFAULT NULL COMMENT '负责人',
+    `phone` varchar(11) DEFAULT NULL COMMENT '联系电话',
+    `email` varchar(50) DEFAULT NULL COMMENT '邮箱',
+    `status` char(1) DEFAULT '0' COMMENT '部门状态（0正常 1停用）',
+    `del_flag` char(1) DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`dept_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=utf8mb4 COMMENT='部门表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_dict_data   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_dict_data` (
+    `dict_code` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '字典编码',
+    `dict_sort` int(4) DEFAULT '0' COMMENT '字典排序',
+    `dict_label` varchar(100) DEFAULT '' COMMENT '字典标签',
+    `dict_value` varchar(100) DEFAULT '' COMMENT '字典键值',
+    `dict_type` varchar(100) DEFAULT '' COMMENT '字典类型',
+    `css_class` varchar(100) DEFAULT NULL COMMENT '样式属性（其他样式扩展）',
+    `list_class` varchar(100) DEFAULT NULL COMMENT '表格回显样式',
+    `is_default` char(1) DEFAULT 'N' COMMENT '是否默认（Y是 N否）',
+    `status` char(1) DEFAULT '0' COMMENT '状态（0正常 1停用）',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`dict_code`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COMMENT='字典数据表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_dict_type   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_dict_type` (
+    `dict_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '字典主键',
+    `dict_name` varchar(100) DEFAULT '' COMMENT '字典名称',
+    `dict_type` varchar(100) DEFAULT '' COMMENT '字典类型',
+    `status` char(1) DEFAULT '0' COMMENT '状态（0正常 1停用）',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`dict_id`),
+    UNIQUE KEY `dict_type` (`dict_type`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COMMENT='字典类型表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_form   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_form` (
+    `form_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '表单主键',
+    `form_name` varchar(50) DEFAULT NULL COMMENT '表单名称',
+    `form_content` longtext COMMENT '表单内容',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`form_id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=1530 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='流程表单'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_job   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_job` (
+    `job_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务ID',
+    `job_name` varchar(64) NOT NULL DEFAULT '' COMMENT '任务名称',
+    `job_group` varchar(64) NOT NULL DEFAULT 'DEFAULT' COMMENT '任务组名',
+    `invoke_target` varchar(500) NOT NULL COMMENT '调用目标字符串',
+    `cron_expression` varchar(255) DEFAULT '' COMMENT 'cron执行表达式',
+    `misfire_policy` varchar(20) DEFAULT '3' COMMENT '计划执行错误策略（1立即执行 2执行一次 3放弃执行）',
+    `concurrent` char(1) DEFAULT '1' COMMENT '是否并发执行（0允许 1禁止）',
+    `status` char(1) DEFAULT '0' COMMENT '状态（0正常 1暂停）',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(500) DEFAULT '' COMMENT '备注信息',
+    PRIMARY KEY (`job_id`,`job_name`,`job_group`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COMMENT='定时任务调度表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_job_log   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_job_log` (
+    `job_log_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务日志ID',
+    `job_name` varchar(64) NOT NULL COMMENT '任务名称',
+    `job_group` varchar(64) NOT NULL COMMENT '任务组名',
+    `invoke_target` varchar(500) NOT NULL COMMENT '调用目标字符串',
+    `job_message` varchar(500) DEFAULT NULL COMMENT '日志信息',
+    `status` char(1) DEFAULT '0' COMMENT '执行状态（0正常 1失败）',
+    `exception_info` varchar(2000) DEFAULT '' COMMENT '异常信息',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    PRIMARY KEY (`job_log_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=822619 DEFAULT CHARSET=utf8mb4 COMMENT='定时任务调度日志表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_logininfor   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_logininfor` (
+    `info_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '访问ID',
+    `user_name` varchar(50) DEFAULT '' COMMENT '用户账号',
+    `ipaddr` varchar(128) DEFAULT '' COMMENT '登录IP地址',
+    `login_location` varchar(255) DEFAULT '' COMMENT '登录地点',
+    `browser` varchar(50) DEFAULT '' COMMENT '浏览器类型',
+    `os` varchar(50) DEFAULT '' COMMENT '操作系统',
+    `status` char(1) DEFAULT '0' COMMENT '登录状态（0成功 1失败）',
+    `msg` varchar(255) DEFAULT '' COMMENT '提示消息',
+    `login_time` datetime DEFAULT NULL COMMENT '访问时间',
+    PRIMARY KEY (`info_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=5299 DEFAULT CHARSET=utf8mb4 COMMENT='系统访问记录'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_menu   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_menu` (
+    `menu_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
+    `menu_name` varchar(50) NOT NULL COMMENT '菜单名称',
+    `parent_id` bigint(20) DEFAULT '0' COMMENT '父菜单ID',
+    `order_num` int(4) DEFAULT '0' COMMENT '显示顺序',
+    `path` varchar(200) DEFAULT '' COMMENT '路由地址',
+    `component` varchar(255) DEFAULT NULL COMMENT '组件路径',
+    `query` varchar(255) DEFAULT NULL COMMENT '路由参数',
+    `is_frame` int(1) DEFAULT '1' COMMENT '是否为外链（0是 1否）',
+    `is_cache` int(1) DEFAULT '0' COMMENT '是否缓存（0缓存 1不缓存）',
+    `menu_type` char(1) DEFAULT '' COMMENT '菜单类型（M目录 C菜单 F按钮）',
+    `visible` char(1) DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
+    `status` char(1) DEFAULT '0' COMMENT '菜单状态（0正常 1停用）',
+    `perms` varchar(100) DEFAULT NULL COMMENT '权限标识',
+    `icon` varchar(100) DEFAULT '#' COMMENT '菜单图标',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(500) DEFAULT '' COMMENT '备注',
+    PRIMARY KEY (`menu_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=2055 DEFAULT CHARSET=utf8mb4 COMMENT='菜单权限表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_notice   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_notice` (
+    `notice_id` int(4) NOT NULL AUTO_INCREMENT COMMENT '公告ID',
+    `notice_title` varchar(50) NOT NULL COMMENT '公告标题',
+    `notice_type` char(1) NOT NULL COMMENT '公告类型（1通知 2公告）',
+    `notice_content` longblob COMMENT '公告内容',
+    `status` char(1) DEFAULT '0' COMMENT '公告状态（0正常 1关闭）',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`notice_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='通知公告表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_oper_log   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_oper_log` (
+    `oper_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志主键',
+    `title` varchar(50) DEFAULT '' COMMENT '模块标题',
+    `business_type` int(2) DEFAULT '0' COMMENT '业务类型（0其它 1新增 2修改 3删除）',
+    `method` varchar(100) DEFAULT '' COMMENT '方法名称',
+    `request_method` varchar(10) DEFAULT '' COMMENT '请求方式',
+    `operator_type` int(1) DEFAULT '0' COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
+    `oper_name` varchar(50) DEFAULT '' COMMENT '操作人员',
+    `dept_name` varchar(50) DEFAULT '' COMMENT '部门名称',
+    `oper_url` varchar(255) DEFAULT '' COMMENT '请求URL',
+    `oper_ip` varchar(128) DEFAULT '' COMMENT '主机地址',
+    `oper_location` varchar(255) DEFAULT '' COMMENT '操作地点',
+    `oper_param` varchar(2000) DEFAULT '' COMMENT '请求参数',
+    `json_result` varchar(2000) DEFAULT '' COMMENT '返回参数',
+    `status` int(1) DEFAULT '0' COMMENT '操作状态（0正常 1异常）',
+    `error_msg` varchar(2000) DEFAULT '' COMMENT '错误消息',
+    `oper_time` datetime DEFAULT NULL COMMENT '操作时间',
+    PRIMARY KEY (`oper_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=6855 DEFAULT CHARSET=utf8mb4 COMMENT='操作日志记录'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_order_type   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_order_type` (
+    `type_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '类型id',
+    `parent_id` bigint(20) DEFAULT '0' COMMENT '上级类型id',
+    `type_name` varchar(30) COLLATE utf8_bin DEFAULT '' COMMENT '类型名称',
+    `form_id` bigint(20) DEFAULT NULL COMMENT '表单id',
+    `order_num` int(4) DEFAULT '0' COMMENT '显示顺序',
+    `status` char(1) COLLATE utf8_bin DEFAULT '0' COMMENT '类型状态（0正常 1停用）',
+    PRIMARY KEY (`type_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='工单类型表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_post   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_post` (
+    `post_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '岗位ID',
+    `post_code` varchar(64) NOT NULL COMMENT '岗位编码',
+    `post_name` varchar(50) NOT NULL COMMENT '岗位名称',
+    `post_sort` int(4) NOT NULL COMMENT '显示顺序',
+    `status` char(1) NOT NULL COMMENT '状态（0正常 1停用）',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`post_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='岗位信息表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_role   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_role` (
+    `role_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '角色ID',
+    `role_name` varchar(30) NOT NULL COMMENT '角色名称',
+    `role_key` varchar(100) NOT NULL COMMENT '角色权限字符串',
+    `role_sort` int(4) NOT NULL COMMENT '显示顺序',
+    `data_scope` char(1) DEFAULT '1' COMMENT '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）',
+    `menu_check_strictly` tinyint(1) DEFAULT '1' COMMENT '菜单树选择项是否关联显示',
+    `dept_check_strictly` tinyint(1) DEFAULT '1' COMMENT '部门树选择项是否关联显示',
+    `status` char(1) NOT NULL COMMENT '角色状态（0正常 1停用）',
+    `del_flag` char(1) DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`role_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8mb4 COMMENT='角色信息表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_role_dept   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_role_dept` (
+    `role_id` bigint(20) NOT NULL COMMENT '角色ID',
+    `dept_id` bigint(20) NOT NULL COMMENT '部门ID',
+    PRIMARY KEY (`role_id`,`dept_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='角色和部门关联表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_role_menu   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_role_menu` (
+    `role_id` bigint(20) NOT NULL COMMENT '角色ID',
+    `menu_id` bigint(20) NOT NULL COMMENT '菜单ID',
+    PRIMARY KEY (`role_id`,`menu_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='角色和菜单关联表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_user   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_user` (
+    `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+    `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
+    `user_name` varchar(30) NOT NULL COMMENT '用户账号',
+    `nick_name` varchar(30) NOT NULL COMMENT '用户昵称',
+    `user_type` varchar(2) DEFAULT '00' COMMENT '用户类型（00系统用户）',
+    `email` varchar(50) DEFAULT '' COMMENT '用户邮箱',
+    `phonenumber` varchar(11) DEFAULT '' COMMENT '手机号码',
+    `sex` char(1) DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
+    `avatar` varchar(100) DEFAULT '' COMMENT '头像地址',
+    `password` varchar(100) DEFAULT '' COMMENT '密码',
+    `status` char(1) DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',
+    `del_flag` char(1) DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+    `login_ip` varchar(128) DEFAULT '' COMMENT '最后登录IP',
+    `login_date` datetime DEFAULT NULL COMMENT '最后登录时间',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`user_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=195 DEFAULT CHARSET=utf8mb4 COMMENT='用户信息表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_user_online   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_user_online` (
+    `sessionId` varchar(50) NOT NULL DEFAULT '' COMMENT '用户会话id',
+    `login_name` varchar(50) DEFAULT '' COMMENT '登录账号',
+    `dept_name` varchar(50) DEFAULT '' COMMENT '部门名称',
+    `ipaddr` varchar(128) DEFAULT '' COMMENT '登录IP地址',
+    `login_location` varchar(255) DEFAULT '' COMMENT '登录地点',
+    `browser` varchar(50) DEFAULT '' COMMENT '浏览器类型',
+    `os` varchar(50) DEFAULT '' COMMENT '操作系统',
+    `status` varchar(10) DEFAULT '' COMMENT '在线状态on_line在线off_line离线',
+    `start_timestamp` datetime DEFAULT NULL COMMENT 'session创建时间',
+    `last_access_time` datetime DEFAULT NULL COMMENT 'session最后访问时间',
+    `expire_time` int(5) DEFAULT '0' COMMENT '超时时间，单位为分钟',
+    PRIMARY KEY (`sessionId`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='在线用户记录'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_user_post   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_user_post` (
+    `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+    `post_id` bigint(20) NOT NULL COMMENT '岗位ID',
+    PRIMARY KEY (`user_id`,`post_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户与岗位关联表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = sys_user_role   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `sys_user_role` (
+    `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+    `role_id` bigint(20) NOT NULL COMMENT '角色ID',
+    PRIMARY KEY (`user_id`,`role_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户和角色关联表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_alert_record   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_alert_record` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `cmdb_service_name` varchar(127) NOT NULL COMMENT '名称',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `message` text COMMENT '备注',
+    `type` varchar(50) DEFAULT NULL COMMENT '错误类型',
+    `lang` varchar(50) DEFAULT NULL COMMENT '语言',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_service_name` (`cmdb_service_name`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=240890 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='告警记录'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_app   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_app` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `cluster_id` bigint(20) unsigned NOT NULL COMMENT '集群ID',
+    `name` varchar(255) NOT NULL COMMENT '复制cmdb服务节点名字',
+    `namespace` varchar(255) NOT NULL COMMENT '命名空间',
+    `remark` varchar(512) NOT NULL COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_app_cluster_cd   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_app_cluster_cd` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `cmdb_service_name` varchar(127) NOT NULL COMMENT '服务节点名称',
+    `cluster_name` varchar(50) NOT NULL COMMENT '集群名称',
+    `cd_pipeline_id` bigint(20) unsigned NOT NULL COMMENT '部署流水id',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_cd_pipeline_id` (`cd_pipeline_id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=510 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='服务-集群-部署流水关联表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_app_configmap   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_app_configmap` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `app_id` bigint(20) unsigned NOT NULL COMMENT '应用ID',
+    `cluster_id` bigint(20) unsigned NOT NULL COMMENT '集群ID',
+    `namespace` varchar(255) NOT NULL COMMENT '命名空间',
+    `name` varchar(255) DEFAULT NULL COMMENT '构建流水线名称',
+    `key` varchar(255) NOT NULL COMMENT 'key',
+    `value` text COMMENT 'value',
+    `label_str` varchar(255) DEFAULT NULL COMMENT '标签：labelname:labelvalue;labelname:labelvalue;',
+    `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用-configmap配置'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_app_deployment   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_app_deployment` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `app_id` bigint(20) unsigned NOT NULL COMMENT '应用ID',
+    `cluster_id` bigint(20) unsigned NOT NULL COMMENT '集群ID',
+    `namespace` varchar(255) NOT NULL COMMENT '命名空间',
+    `name` varchar(255) DEFAULT NULL COMMENT '构建流水线名称',
+    `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用-负载'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_app_deployment_env   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_app_deployment_env` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `app_id` bigint(20) unsigned NOT NULL COMMENT '应用ID',
+    `deployment_id` bigint(20) unsigned NOT NULL COMMENT '负载ID',
+    `name` varchar(255) DEFAULT NULL COMMENT '名字',
+    `type` varchar(0) DEFAULT NULL COMMENT '类型（手动导入；密钥导入；配置导入）',
+    `key` varchar(255) DEFAULT NULL COMMENT 'key',
+    `value` text COMMENT 'value',
+    `update_type` varchar(255) DEFAULT NULL COMMENT '升级方式',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用-负载-环境变量'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_app_deployment_healthcheck   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_app_deployment_healthcheck` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `app_id` bigint(20) NOT NULL COMMENT '应用ID',
+    `deployment_id` bigint(20) NOT NULL COMMENT '负载ID',
+    `probe_object` enum('readinessProbe','livenessProbe') NOT NULL COMMENT '探针对象',
+    `probe_type` enum('HTTP','COMMAND','TCP') NOT NULL COMMENT '检查方式',
+    `probe_logic` varchar(255) NOT NULL COMMENT '探测内容',
+    `delay_second` int(11) NOT NULL COMMENT '延迟时间/秒',
+    `timeout_second` int(11) NOT NULL COMMENT '超时时间',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用-负载-健康检查'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_app_deployment_log   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_app_deployment_log` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` varchar(255) DEFAULT NULL COMMENT '名字',
+    `mount_path` varchar(255) NOT NULL COMMENT '挂载路径',
+    `path_pattern` varchar(255) NOT NULL COMMENT '采集文件',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='部署流水-环境变量'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_app_secret   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_app_secret` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `app_id` bigint(20) unsigned NOT NULL COMMENT '应用ID',
+    `cluster_id` bigint(20) unsigned NOT NULL COMMENT '集群ID',
+    `namespace` varchar(255) NOT NULL COMMENT '命名空间',
+    `name` varchar(255) DEFAULT NULL COMMENT '构建流水线名称',
+    `label_str` varchar(255) DEFAULT NULL COMMENT '标签：labelname:labelvalue;labelname:labelvalue;',
+    `type` varchar(255) DEFAULT NULL COMMENT '密钥类型',
+    `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用-负载-secret'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_app_secret_data   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_app_secret_data` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `app_secret_id` bigint(20) NOT NULL COMMENT '应用ID',
+    `key` varchar(255) NOT NULL COMMENT 'key',
+    `value` text COMMENT 'value',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用-负载-secret 键值对'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_app_service   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_app_service` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `app_id` bigint(20) unsigned NOT NULL COMMENT '应用ID',
+    `cluster_id` bigint(20) unsigned NOT NULL COMMENT '集群ID',
+    `namespace` varchar(255) NOT NULL COMMENT '命名空间',
+    `type` enum('NODEPORT','CLUSTERIP') NOT NULL COMMENT '访问方式',
+    `protocol` enum('HTTP','TCP') NOT NULL COMMENT '协议',
+    `container_port` int(255) NOT NULL COMMENT '容器端口',
+    `access_port` int(255) NOT NULL COMMENT '访问端口',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='部署流水-访问方式（端口暴露）'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cd_deploy_ticket   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cd_deploy_ticket` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `cd_pipeline_id` bigint(20) unsigned DEFAULT NULL COMMENT '部署id',
+    `ci_record_id` bigint(20) unsigned DEFAULT NULL COMMENT '构建记录id',
+    `deploy_ticket_id` bigint(20) unsigned DEFAULT NULL COMMENT '上线工单id',
+    `ticket_no` varchar(50) DEFAULT NULL COMMENT '工单编号',
+    `ticket_name` varchar(50) DEFAULT NULL COMMENT '工单名称',
+    `cmdb_service_name` varchar(50) DEFAULT NULL COMMENT '服务节点名称',
+    `deploy_status` tinyint(2) unsigned NOT NULL COMMENT '发布：1-已成功发布，0-未发布',
+    `content` varchar(1023) DEFAULT NULL COMMENT '上线内容',
+    `estimateTime` datetime DEFAULT NULL COMMENT '预计上线时间',
+    `ticket_status` tinyint(2) unsigned NOT NULL COMMENT '工单状态：0-已关闭；1-审核中；2-进行中；3-已完成',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+    `apply_emp` varchar(30) DEFAULT NULL COMMENT '申请人',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_cd_pipeline_id` (`cd_pipeline_id`) USING BTREE,
+    KEY `idx_deploy_ticket_id` (`deploy_ticket_id`) USING BTREE,
+    KEY `idx_cmdb_service_name` (`cmdb_service_name`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=499 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='部署-上线工单关联表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cd_pipeline   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cd_pipeline` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` varchar(255) NOT NULL COMMENT '名字',
+    `ci_pipeline_id` bigint(20) unsigned DEFAULT NULL COMMENT '构建流水ID',
+    `cluster_id` bigint(20) unsigned DEFAULT NULL COMMENT '集群ID',
+    `namespace` varchar(255) NOT NULL COMMENT '命名空间',
+    `approval_status` tinyint(4) DEFAULT '0' COMMENT '审批状态（0：未审批，1：已审批，2：等待审批）',
+    `update_type` varchar(255) DEFAULT NULL COMMENT '升级方式',
+    `cmdb_service_name` varchar(255) DEFAULT NULL COMMENT '服务节点名字',
+    `replicas` int(11) DEFAULT NULL COMMENT '副本数量',
+    `cpu_request` decimal(10,1) DEFAULT NULL COMMENT 'cpu申请',
+    `cpu_limit` decimal(10,1) DEFAULT NULL COMMENT 'cpu 限制',
+    `memory_request` decimal(10,1) DEFAULT NULL COMMENT '内存申请',
+    `memory_limit` decimal(10,1) DEFAULT NULL COMMENT '内存限制',
+    `auto_cd` tinyint(4) DEFAULT NULL COMMENT '自动触发：1：自动，0：非自动',
+    `app_type` tinyint(4) DEFAULT NULL COMMENT '0：deployment',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `ticket_id` varchar(64) DEFAULT NULL COMMENT '工单ID',
+    `param_sign` varchar(255) DEFAULT NULL COMMENT '资源参数签名',
+    `root` tinyint(4) DEFAULT '0' COMMENT '0:非root，1；root',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_ticket_id` (`ticket_id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=915 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='部署流水基本信息'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cd_pipeline_cluster   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cd_pipeline_cluster` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
+    `cd_pipeline_id` bigint(20) unsigned NOT NULL COMMENT '部署id',
+    `cluster_name` varchar(50) NOT NULL COMMENT '集群名称',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_cd_pipeline_id` (`cd_pipeline_id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=3025 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='部署任务-集群关联表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cd_pipeline_env   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cd_pipeline_env` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `type` varchar(30) DEFAULT NULL COMMENT '类型（手动导入；密钥导入；配置导入）',
+    `key` varchar(255) DEFAULT NULL COMMENT 'key',
+    `value` text COMMENT 'value',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `cd_pipeline_id` bigint(20) unsigned NOT NULL COMMENT '构建主表ID',
+    `necessary` tinyint(4) DEFAULT NULL COMMENT '1:必要，0：非必要',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=3395 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='部署流水-环境变量'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cd_pipeline_healthcheck   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cd_pipeline_healthcheck` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `probe_object` enum('readinessProbe','livenessProbe') NOT NULL COMMENT '探针对象',
+    `probe_type` enum('HTTP','COMMAND','TCP') NOT NULL COMMENT '检查方式',
+    `probe_logic` varchar(255) NOT NULL COMMENT '探测内容',
+    `delay_second` int(11) NOT NULL COMMENT '延迟时间/秒',
+    `timeout_second` int(11) NOT NULL COMMENT '超时时间',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `delay_time` int(11) DEFAULT NULL COMMENT '延迟时间',
+    `out_time` int(11) DEFAULT NULL COMMENT '超时时间',
+    `cd_pipeline_id` bigint(20) unsigned NOT NULL COMMENT '构建主表ID',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=3931 DEFAULT CHARSET=utf8mb4 COMMENT='健康检查'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cd_pipeline_member   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cd_pipeline_member` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `cd_pipeline_id` bigint(20) unsigned NOT NULL COMMENT '构建主表ID',
+    `name` varchar(255) NOT NULL COMMENT '名字',
+    `role` enum('owner','admin','view') NOT NULL COMMENT '角色',
+    `sso_user_id` bigint(20) DEFAULT NULL COMMENT 'SSO 用户id',
+    `ucp_user_id` varchar(32) DEFAULT NULL COMMENT 'ucp 用户id',
+    `email` varchar(255) NOT NULL COMMENT '邮箱',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=586 DEFAULT CHARSET=utf8mb4 COMMENT='部署流水用户信息'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cd_pipeline_record   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cd_pipeline_record` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `cd_pipeline_id` bigint(20) unsigned DEFAULT NULL COMMENT '流水线ID',
+    `name` varchar(255) DEFAULT NULL COMMENT '构建流水线名称',
+    `cmdb_service_name` varchar(255) DEFAULT NULL COMMENT '服务树名称',
+    `status` varchar(255) DEFAULT NULL COMMENT '状态',
+    `start_time` datetime DEFAULT NULL COMMENT '开始时间',
+    `end_time` datetime DEFAULT NULL COMMENT '结束时间',
+    `duration_seconds` bigint(30) unsigned DEFAULT NULL COMMENT '执行时间（秒）',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `even_type` varchar(255) DEFAULT NULL COMMENT '自动触发：auto；手动触发：manual',
+    `lang` varchar(255) DEFAULT NULL COMMENT '语言',
+    `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+    `app_version` varchar(255) DEFAULT NULL COMMENT '应用版本',
+    `deploy_message` varchar(1024) DEFAULT NULL COMMENT '部署信息',
+    `image_name` varchar(255) DEFAULT NULL COMMENT '镜像名',
+    `cluster_name` varchar(50) DEFAULT NULL COMMENT '集群名称',
+    `ci_pipeline_id` bigint(20) unsigned DEFAULT NULL COMMENT '构建流水id',
+    `deploy_ticket_id` bigint(20) unsigned DEFAULT NULL COMMENT '上线工单id',
+    `ci_record_id` bigint(20) unsigned DEFAULT NULL COMMENT '构建记录id',
+    `gitlab_pipeline_id` bigint(20) DEFAULT NULL COMMENT 'gitlab 流水ID',
+    `artifact_url` varchar(255) DEFAULT NULL COMMENT '产物URL',
+    `branch` varchar(255) DEFAULT NULL COMMENT '部署分支',
+    `gray_label` varchar(32) DEFAULT NULL COMMENT '灰度标签：gray,main',
+    `app_name` varchar(128) DEFAULT NULL COMMENT '负载部署的真实名字',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_cdid_start_time` (`cd_pipeline_id`,`start_time`) USING BTREE,
+    KEY `idx_ticket_id` (`deploy_ticket_id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=15653 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='部署流水-记录'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cd_pipeline_record_metadata   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cd_pipeline_record_metadata` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `cd_pipeline_record_id` bigint(20) unsigned DEFAULT NULL COMMENT '构建记录ID',
+    `metadata` longtext COMMENT '部署参数快照 json 数据',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=15637 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='部署流水-记录'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cd_pipeline_stage   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cd_pipeline_stage` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `cd_pipeline_id` bigint(20) NOT NULL COMMENT '部署流水线id',
+    `stage_code` varchar(32) DEFAULT NULL COMMENT '步骤code',
+    `stage_title` varchar(32) DEFAULT NULL COMMENT '步骤名称',
+    `active` tinyint(4) DEFAULT NULL COMMENT '1：启用，0：未启用',
+    `command` text COMMENT '命令',
+    `order` int(4) DEFAULT NULL COMMENT '步骤顺序',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(128) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=2213 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='部署步骤表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cd_pipeline_template_stage   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cd_pipeline_template_stage` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `app_type` tinyint(4) NOT NULL COMMENT '应用类型',
+    `stage_code` varchar(32) DEFAULT NULL COMMENT '步骤code',
+    `stage_title` varchar(32) DEFAULT NULL COMMENT '步骤名称',
+    `default_command` text COMMENT '默认命令',
+    `order` int(4) DEFAULT NULL COMMENT '步骤顺序',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(128) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='部署步骤模板表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cd_pipeline_volume_log   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cd_pipeline_volume_log` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `cd_pipeline_id` bigint(20) unsigned NOT NULL COMMENT '构建主表ID',
+    `name` varchar(255) DEFAULT NULL COMMENT '名字',
+    `mount_path` varchar(255) NOT NULL COMMENT '挂载路径',
+    `path_pattern` varchar(255) NOT NULL COMMENT '采集文件',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COMMENT='部署流水-日志挂载信息'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cd_pipeline_volume_secret   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cd_pipeline_volume_secret` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` varchar(255) DEFAULT NULL COMMENT '名字',
+    `type` varchar(255) DEFAULT NULL COMMENT '密钥类型',
+    `label_str` varchar(255) DEFAULT NULL COMMENT '标签：labelname:labelvalue;labelname:labelvalue;',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `cd_pipeline_id` bigint(20) unsigned NOT NULL COMMENT '构建主表ID',
+    `mount_path` varchar(255) DEFAULT NULL COMMENT '挂载路径',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=359 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='部署流水-日志挂载信息'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cd_pipeline_volume_secret_data   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cd_pipeline_volume_secret_data` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `volume_secret_id` bigint(20) unsigned NOT NULL COMMENT '主表ID',
+    `filename` varchar(255) NOT NULL COMMENT '文件名字',
+    `file_content_base64` text NOT NULL COMMENT '文件内容base64',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) DEFAULT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=utf8mb4 COMMENT='部署流水-日志挂载信息'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_cd_rel   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_cd_rel` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `ci_pipeline_id` bigint(20) DEFAULT NULL COMMENT '构建id',
+    `cd_pipeline_id` bigint(20) DEFAULT NULL COMMENT '部署id',
+    `env` varchar(32) DEFAULT NULL COMMENT '环境',
+    `create_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
+    `create_emp` bigint(20) DEFAULT NULL COMMENT '创建人',
+    `create_emp_name` varchar(64) DEFAULT NULL COMMENT '创建人名称',
+    `modify_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '修改时间',
+    `modify_emp` bigint(20) DEFAULT NULL COMMENT '修改人',
+    `modify_emp_name` varchar(64) DEFAULT NULL COMMENT '修改人名称',
+    `cluster_name` varchar(127) NOT NULL DEFAULT '' COMMENT '集群名称',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=1468 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='ci_cd关联关系表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_default_metadata   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_default_metadata` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `stage_code` varchar(126) NOT NULL COMMENT '步骤code',
+    `lang` varchar(32) NOT NULL COMMENT '语言',
+    `metadata` text COMMENT '内容',
+    `type` tinyint(4) DEFAULT NULL COMMENT '类型 1:命令 2：基础镜像',
+    `env` varchar(32) NOT NULL COMMENT '环境',
+    `create_emp` varchar(128) DEFAULT NULL COMMENT '创建人',
+    `create_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
+    `modify_emp` varchar(128) DEFAULT NULL COMMENT '修改人',
+    `modify_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='ci步骤默认配置，基础镜像地址、步骤命令等'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_pipeline   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_pipeline` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `template_ci_id` bigint(20) DEFAULT NULL COMMENT '关联的构建模板id',
+    `trigger_submodules` varchar(255) DEFAULT NULL COMMENT '触发子模块,允许多个逗号隔开',
+    `trigger_branch` varchar(255) DEFAULT NULL COMMENT '自动触发构建分支',
+    `name` varchar(255) NOT NULL COMMENT '构建流水线名称',
+    `cmdb_service_name` varchar(255) DEFAULT NULL COMMENT '服务树名称',
+    `program_lang` varchar(255) DEFAULT NULL COMMENT '编程语言',
+    `git_url` varchar(255) NOT NULL COMMENT 'gitlab 地址',
+    `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `git_project_id` int(11) DEFAULT NULL COMMENT 'git 项目id',
+    `ci_yml` text COMMENT 'ci.yml',
+    `cmdb_resource_type` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'CMDB资源名称类型 1：服务节点 2：SDK',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=1025 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建流水'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_pipeline_member   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_pipeline_member` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` varchar(255) NOT NULL COMMENT '名字',
+    `role` enum('owner','admin','view') NOT NULL COMMENT '角色',
+    `sso_user_id` bigint(20) DEFAULT NULL COMMENT 'SSO 用户id',
+    `ucp_user_id` varchar(32) DEFAULT NULL COMMENT 'ucp 用户',
+    `email` varchar(255) NOT NULL COMMENT '邮箱',
+    `collect` tinyint(1) DEFAULT '0' COMMENT '是否收藏',
+    `ci_pipeline_id` bigint(20) NOT NULL COMMENT '构建流水ID',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='构建流水人员信息'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_pipeline_record   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_pipeline_record` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `ci_pipeline_id` bigint(20) unsigned DEFAULT NULL COMMENT '流水线ID',
+    `name` varchar(255) DEFAULT NULL COMMENT '构建流水线名称',
+    `cmdb_service_name` varchar(255) DEFAULT NULL COMMENT '服务树名称',
+    `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+    `status` varchar(255) DEFAULT NULL COMMENT '状态',
+    `start_time` datetime DEFAULT NULL COMMENT '开始时间',
+    `end_time` datetime DEFAULT NULL COMMENT '结束时间',
+    `duration_seconds` bigint(20) unsigned DEFAULT NULL COMMENT '执行时间（秒）',
+    `gitlab_pipeline_id` bigint(20) DEFAULT NULL COMMENT 'gitlab 流水ID',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `even_type` varchar(255) DEFAULT NULL COMMENT '自动触发：auto；手动触发：manual',
+    `gitlab_url` varchar(255) DEFAULT NULL COMMENT 'git url',
+    `trigger_branch` varchar(255) DEFAULT NULL COMMENT '触发分支',
+    `trigger_submodule` varchar(255) DEFAULT NULL COMMENT '触发子模块',
+    `lang` varchar(255) DEFAULT NULL COMMENT '语言',
+    `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+    `env` varchar(32) NOT NULL DEFAULT '' COMMENT '环境',
+    `flow` tinyint(4) NOT NULL DEFAULT '1' COMMENT '流程 1：构建 2：构建部署',
+    `metadata` text COMMENT '记录元数据',
+    `branch` varchar(127) NOT NULL DEFAULT '' COMMENT '分支',
+    `commit_id` varchar(127) NOT NULL DEFAULT '' COMMENT 'git_commit_id',
+    `git_project_id` int(11) DEFAULT NULL COMMENT 'git项目id',
+    `preview_pic` varchar(255) DEFAULT NULL COMMENT '预览图片',
+    `artifact_url` varchar(255) DEFAULT NULL COMMENT '产物路径',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_ci_pipeline_id` (`ci_pipeline_id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=22095 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建流水-记录'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_pipeline_record_image   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_pipeline_record_image` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `ci_pipeline_id` bigint(20) unsigned DEFAULT NULL COMMENT '流水线ID',
+    `name` varchar(255) DEFAULT NULL COMMENT '构建流水线名称',
+    `cmdb_service_name` varchar(255) DEFAULT NULL COMMENT '服务树名称',
+    `full_path` varchar(512) DEFAULT NULL COMMENT '镜像完整地址',
+    `tag` varchar(255) DEFAULT NULL COMMENT '镜像版本',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+    `env` varchar(32) NOT NULL DEFAULT '' COMMENT '环境',
+    `git_pipeline_id` int(11) DEFAULT NULL COMMENT 'GIT 流水线id',
+    `ci_pipeline_name` varchar(255) NOT NULL DEFAULT '' COMMENT 'CI 流水线名称',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=15456 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建流水-产生的镜像列表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_pipeline_record_sdk   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_pipeline_record_sdk` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `ci_pipeline_id` bigint(20) unsigned NOT NULL COMMENT 'ci_pipeline_id',
+    `git_pipeline_id` bigint(20) unsigned NOT NULL COMMENT 'git_pipeline_id',
+    `ci_pipeline_record_id` bigint(20) unsigned NOT NULL COMMENT 'ci记录id',
+    `sdk_name` varchar(128) NOT NULL DEFAULT '' COMMENT 'sdk资源名称',
+    `name` varchar(64) NOT NULL DEFAULT '' COMMENT 'npm包名',
+    `groupId` varchar(64) NOT NULL DEFAULT '' COMMENT 'groupId',
+    `artifactId` varchar(64) NOT NULL DEFAULT '' COMMENT 'artifactId',
+    `version` varchar(64) NOT NULL DEFAULT '' COMMENT '版本',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(30) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(30) DEFAULT NULL COMMENT '更新人',
+    `remark` varchar(128) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_ci_pipeline_id` (`ci_pipeline_id`) USING BTREE,
+    KEY `idx_ci_pipeline_record_id` (`ci_pipeline_record_id`) USING BTREE,
+    KEY `idx_sdk_name` (`sdk_name`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=1545 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='sdk步骤记录表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_pipeline_record_sonar   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_pipeline_record_sonar` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `ci_pipeline_id` bigint(20) unsigned NOT NULL COMMENT 'ci_pipeline_id',
+    `git_pipeline_id` bigint(20) unsigned NOT NULL COMMENT 'git_pipeline_id',
+    `ci_pipeline_record_id` bigint(20) unsigned NOT NULL COMMENT 'ci记录id',
+    `env` varchar(32) NOT NULL DEFAULT '' COMMENT '环境',
+    `project_key` varchar(64) DEFAULT NULL COMMENT '项目key',
+    `new_bugs` varchar(11) DEFAULT NULL COMMENT '新代码缺陷数',
+    `project_name` varchar(64) DEFAULT NULL COMMENT '项目名称',
+    `task_id` varchar(128) DEFAULT NULL COMMENT '任务id',
+    `bugs` varchar(11) DEFAULT NULL COMMENT '缺陷数',
+    `coverage` varchar(11) DEFAULT NULL COMMENT '覆盖率',
+    `new_coverage` varchar(11) DEFAULT NULL COMMENT '新代码覆盖率',
+    `code_smells` varchar(11) DEFAULT NULL COMMENT '坏味道数',
+    `new_code_smells` varchar(11) DEFAULT NULL COMMENT '新代码坏味道数',
+    `tests` varchar(11) DEFAULT NULL COMMENT '单测数',
+    `test_failures` varchar(11) DEFAULT NULL COMMENT '单测失败数',
+    `test_errors` varchar(11) DEFAULT NULL COMMENT '单测错误数',
+    `test_execution_time` varchar(11) DEFAULT NULL COMMENT '单测耗时',
+    `new_lines_to_cover` varchar(11) DEFAULT NULL COMMENT '新增覆盖行',
+    `new_conditions_to_cover` varchar(11) DEFAULT NULL COMMENT '新增可覆盖分支',
+    `new_uncovered_lines` varchar(11) DEFAULT NULL COMMENT '新增未覆盖行',
+    `new_uncovered_conditions` varchar(11) DEFAULT NULL COMMENT '新增未覆盖分支',
+    `lines_to_cover` varchar(11) DEFAULT NULL COMMENT '可覆盖行',
+    `uncovered_lines` varchar(11) DEFAULT NULL COMMENT '未覆盖行',
+    `conditions_to_cover` varchar(11) DEFAULT NULL COMMENT '可覆盖分支',
+    `uncovered_conditions` varchar(11) DEFAULT NULL COMMENT '未覆盖分支',
+    `vulnerabilities` varchar(11) DEFAULT NULL COMMENT '漏洞数',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(32) DEFAULT NULL COMMENT '备注',
+    `skipped_tests` varchar(11) DEFAULT NULL COMMENT '跳过的单测数',
+    `cmdb_service_name` varchar(127) NOT NULL DEFAULT '' COMMENT 'cmdb_service_name',
+    `git_ref_name` varchar(127) NOT NULL DEFAULT '' COMMENT '分支名',
+    `new_vulnerabilities` varchar(11) DEFAULT NULL COMMENT '新漏洞数',
+    `reliability_rating` varchar(11) DEFAULT NULL COMMENT '可靠性率',
+    `new_reliability_rating` varchar(11) DEFAULT NULL COMMENT '新可靠性率',
+    `security_rating` varchar(11) DEFAULT NULL COMMENT '安全性率',
+    `new_security_rating` varchar(11) DEFAULT NULL COMMENT '新安全性率',
+    `sqale_rating` varchar(11) DEFAULT NULL COMMENT '债务比率评级',
+    `new_maintainability_rating` varchar(11) DEFAULT NULL COMMENT '新可维护性率',
+    `sonar_project_version` varchar(11) DEFAULT NULL COMMENT 'sonar项目版本',
+    `new_lines` varchar(11) DEFAULT '0' COMMENT '新代码行',
+    `lines` varchar(11) DEFAULT '0' COMMENT '总代码行',
+    `ncloc` varchar(11) DEFAULT '0' COMMENT '非注解的行',
+    `comment_lines_density` varchar(11) DEFAULT '0' COMMENT '代码注释率',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_ci_pipeline_id` (`ci_pipeline_id`) USING BTREE,
+    KEY `idx_ci_pipeline_record_id` (`ci_pipeline_record_id`) USING BTREE,
+    KEY `idx_project_key` (`project_key`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=4760 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='sonar步骤记录'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_pipeline_record_stage   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_pipeline_record_stage` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` varchar(255) DEFAULT NULL COMMENT '构建流水线名称',
+    `start_time` datetime DEFAULT NULL COMMENT '开始时间',
+    `end_time` datetime DEFAULT NULL COMMENT '结束时间',
+    `metadata` text COMMENT '构建步骤的参数json信息',
+    `duration_seconds` bigint(255) unsigned DEFAULT NULL COMMENT '持续时间',
+    `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+    `status` varchar(255) DEFAULT NULL COMMENT '状态',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `ci_record_id` bigint(20) DEFAULT NULL COMMENT 'ci流水线记录id',
+    `ci_stage_code` varchar(64) DEFAULT NULL COMMENT 'ci流水线步骤code',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=73793 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建流水'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_pipeline_record_threshold   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_pipeline_record_threshold` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `ci_pipeline_record_id` bigint(20) DEFAULT NULL COMMENT 'ci 记录id',
+    `type` tinyint(4) NOT NULL COMMENT '类型：1：单测 2:sonar',
+    `result` tinyint(4) NOT NULL COMMENT '结果：1:通过 2:未通过',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(30) DEFAULT NULL COMMENT '创建人',
+    `modify_emp` varchar(30) DEFAULT NULL COMMENT '更新人',
+    `remark` text COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=44452 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='阈值校验记录表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_pipeline_stage   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_pipeline_stage` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `ci_pipeline_id` bigint(20) unsigned DEFAULT NULL COMMENT '构建ID',
+    `title` varchar(255) DEFAULT NULL COMMENT '标题',
+    `stage_code` varchar(512) DEFAULT NULL COMMENT '步骤 code',
+    `active` tinyint(4) DEFAULT NULL COMMENT '1：激活，0：未启用',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `env` varchar(32) DEFAULT NULL COMMENT '环境',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=47164 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建阶段/步骤'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_pipeline_stage_compile   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_pipeline_stage_compile` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `ci_pipeline_id` bigint(20) NOT NULL COMMENT '构建流水ID',
+    `target_path` varchar(255) DEFAULT NULL COMMENT '产物地址',
+    `package_command` text COMMENT '编译命令',
+    `ci_docker_image` varchar(255) DEFAULT NULL COMMENT 'ci 构建所需的镜像环境',
+    `lang` varchar(255) DEFAULT NULL COMMENT '语言',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `env` varchar(32) DEFAULT NULL COMMENT '环境',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=15162 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建脚本内容'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_pipeline_stage_dockerfile   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_pipeline_stage_dockerfile` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `ci_pipeline_id` bigint(20) unsigned NOT NULL COMMENT '构建ID',
+    `dockerfile` text COMMENT 'dockerfile',
+    `ci_docker_image` varchar(255) DEFAULT NULL COMMENT 'ci 构建所需的镜像环境',
+    `from_docker_image` varchar(255) DEFAULT NULL COMMENT '基础镜像信息',
+    `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `docker_pull_path` varchar(255) DEFAULT NULL COMMENT '镜像完整路径',
+    `tag` varchar(255) DEFAULT NULL COMMENT '镜像tag',
+    `image_name` varchar(511) DEFAULT NULL COMMENT '生成的iamge名称',
+    `env` varchar(32) DEFAULT NULL COMMENT '环境',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=14126 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建流水'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_pipeline_stage_sdk   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_pipeline_stage_sdk` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `ci_pipeline_id` bigint(20) NOT NULL COMMENT '构建流水ID',
+    `ci_docker_image` varchar(255) DEFAULT NULL COMMENT '执行环境',
+    `env` varchar(32) DEFAULT NULL COMMENT '环境',
+    `command` text COMMENT '命令',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(30) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(30) DEFAULT NULL COMMENT '更新人',
+    `remark` varchar(128) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=1439 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建sdk步骤表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_ci_pipeline_trigger   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_ci_pipeline_trigger` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `trigger_submodules` varchar(511) DEFAULT NULL COMMENT '触发模块',
+    `trigger_branch` varchar(128) DEFAULT NULL COMMENT '触发分支',
+    `ci_pipeline_id` bigint(20) DEFAULT NULL COMMENT '触发分支',
+    `env` varchar(32) NOT NULL COMMENT '环境',
+    `create_emp` varchar(128) DEFAULT NULL COMMENT '创建人',
+    `create_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
+    `modify_emp` varchar(128) DEFAULT NULL COMMENT '修改人',
+    `modify_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=16523 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='ci触发表（一个环境对应）'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cluster   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cluster` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` varchar(255) NOT NULL COMMENT '集群名字',
+    `env` varchar(255) NOT NULL COMMENT '集群所属环境',
+    `cluster_version` varchar(255) NOT NULL COMMENT '集群版本',
+    `sys_build_template_id` bigint(20) NOT NULL COMMENT '关联部署模板',
+    `kubeconfig_path` varchar(255) NOT NULL COMMENT 'kubeconfig 配置文件的路径',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `kubeconfig_content` text COMMENT '配置内容',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='集群信息'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cmdb_relative_form   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cmdb_relative_form` (
+    `id` bigint(20) NOT NULL,
+    `form_id` bigint(20) DEFAULT NULL COMMENT '对应 sys_form ',
+    `form_name` varchar(128) DEFAULT NULL COMMENT '表单名字',
+    `type` varchar(128) DEFAULT NULL COMMENT '资源类型：mysql\\redis\\sls',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cmdb_relative_form_data   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cmdb_relative_form_data` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `form_id` bigint(20) NOT NULL COMMENT '对应 sys_form ',
+    `form_name` varchar(128) DEFAULT NULL COMMENT '表单名字',
+    `env` varchar(32) NOT NULL COMMENT '对应环境',
+    `data` json DEFAULT NULL COMMENT '动态表单对应的值',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `cmdb_service_name` varchar(255) NOT NULL COMMENT '服务名',
+    `type` varchar(128) DEFAULT NULL COMMENT '资源类型：mysql\\redis\\sls',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=1570 DEFAULT CHARSET=utf8mb4
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cmdb_third_application   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cmdb_third_application` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `name` varchar(127) NOT NULL COMMENT '名称',
+    `account` varchar(64) DEFAULT NULL COMMENT '账户',
+    `password` varchar(64) DEFAULT NULL COMMENT '密码',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` text COMMENT '备注',
+    `tags` varchar(511) DEFAULT NULL COMMENT '标签',
+    `parent_id` bigint(20) DEFAULT NULL COMMENT '父节点',
+    `expire_time` datetime DEFAULT NULL COMMENT '到期时间',
+    `ak` varchar(255) DEFAULT NULL,
+    `sk` varchar(255) DEFAULT NULL,
+    `admin_users` varchar(255) DEFAULT NULL COMMENT '管理员，逗号隔开',
+    `attention_users` varchar(500) DEFAULT NULL COMMENT '相关人员',
+    `bind_phone` varchar(50) DEFAULT NULL COMMENT '绑定手机',
+    `bind_email` varchar(50) DEFAULT NULL COMMENT '绑定邮箱',
+    `cost` decimal(10,2) DEFAULT '0.00' COMMENT '价格',
+    `url` varchar(255) DEFAULT NULL COMMENT '应用网址',
+    `application_type` char(1) DEFAULT 'A' COMMENT 'C 类别，A 应用',
+    `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
+    `custom_json` text COMMENT '自定义参数',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_service_name` (`name`) USING BTREE,
+    KEY `idx_account` (`account`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=233398 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='账号资产分类'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_cmdb_user_role   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_cmdb_user_role` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    `service_name` varchar(127) NOT NULL COMMENT '服务名称',
+    `module_id` varchar(32) DEFAULT '' COMMENT '模块id',
+    `group_symbole` varchar(32) DEFAULT '' COMMENT '分组标识',
+    `account` varchar(64) NOT NULL COMMENT '账户',
+    `name` varchar(64) NOT NULL COMMENT '姓名',
+    `email` varchar(64) DEFAULT '' COMMENT '用户邮箱',
+    `enterprise_email` varchar(64) DEFAULT '' COMMENT '企业邮箱',
+    `phonenumber` varchar(32) DEFAULT '' COMMENT '手机号码',
+    `type` tinyint(4) NOT NULL COMMENT '用户角色：1开发；2测试；3三级负责人 4二级负责人 5主负责人 6其他负责人 ',
+    `create_emp` varchar(64) DEFAULT '' COMMENT '创建者',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_emp` varchar(64) DEFAULT '' COMMENT '更新者',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+    `cmdb_resource_type` tinyint(4) DEFAULT '1' COMMENT '资源类型 1：服务节点 2：sdk',
+    `tags` varchar(511) DEFAULT NULL COMMENT '服务节点标签',
+    `deploy_type` varchar(20) DEFAULT NULL COMMENT '服务部署类型',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_service_name` (`service_name`) USING BTREE,
+    KEY `idx_account` (`account`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=236131 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='cmdb用户角色表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_deploy_pipeline_deployment   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_deploy_pipeline_deployment` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` varchar(255) DEFAULT NULL COMMENT '名字',
+    `replicas` int(11) DEFAULT NULL COMMENT '副本数量',
+    `namespace` varchar(255) DEFAULT NULL COMMENT '命名空间',
+    `cpu_request` decimal(10,0) DEFAULT NULL COMMENT 'cpu申请',
+    `cpu_limit` decimal(10,0) DEFAULT NULL COMMENT 'cpu 限制',
+    `memory_request` decimal(10,0) DEFAULT NULL COMMENT '内存申请',
+    `memory_limit` decimal(10,0) DEFAULT NULL COMMENT '内存限制',
+    `update_type` varchar(255) DEFAULT NULL COMMENT '升级方式',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='部署流水-负载信息'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_docker_image   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_docker_image` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` varchar(255) DEFAULT NULL COMMENT '构建流水线名称',
+    `lang` varchar(255) DEFAULT NULL COMMENT '语言',
+    `type` tinyint(4) DEFAULT NULL COMMENT '镜像类型：0:基础镜像，1：构建镜像',
+    `remark` text COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `code` varchar(255) NOT NULL DEFAULT '' COMMENT 'docker_image_code',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建流水'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_feedback_message   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_feedback_message` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `content` varchar(1024) NOT NULL COMMENT '留言内容',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) DEFAULT NULL COMMENT '更新人',
+    `support_count` int(10) unsigned DEFAULT '1' COMMENT '支持数',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='留言反馈'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_file   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_file` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` varchar(255) DEFAULT NULL COMMENT '文件名字',
+    `path` varchar(255) DEFAULT NULL COMMENT '访问地址',
+    `bucketname` varchar(255) DEFAULT NULL COMMENT 'obs-桶名字',
+    `suffix` varchar(255) DEFAULT NULL COMMENT '文件后缀',
+    `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文件信息-华为OBS'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_gitlab_commit   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_gitlab_commit` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `project_id` int(10) unsigned DEFAULT NULL COMMENT 'gitlab 项目ID',
+    `project_name` varchar(255) NOT NULL COMMENT '项目名字',
+    `web_url` varchar(255) DEFAULT NULL COMMENT 'web 访问地址',
+    `commit_id` varchar(64) DEFAULT NULL COMMENT '提交ID',
+    `author_email` varchar(255) DEFAULT NULL COMMENT '邮箱',
+    `author_name` varchar(191) DEFAULT NULL COMMENT '作者',
+    `committer_email` varchar(255) DEFAULT NULL COMMENT '邮箱',
+    `committer_date` datetime DEFAULT NULL COMMENT '提交时间',
+    `committer_name` varchar(191) DEFAULT NULL COMMENT '提交名字',
+    `message` varchar(512) DEFAULT NULL COMMENT '提交信息',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_author` (`author_name`) USING BTREE,
+    KEY `idx_committer` (`committer_name`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='gitlab commit 记录信息【定时捞取保存】'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_gitlab_config   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_gitlab_config` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `git_project_id` bigint(20) unsigned NOT NULL COMMENT 'git项目id',
+    `merge_assignee` varchar(255) DEFAULT NULL COMMENT '代码合并审批人',
+    `merge_auto` tinyint(4) DEFAULT '0' COMMENT '自动合并（0：非自动合并，1：自动合并）',
+    `merge_auto_line` int(11) DEFAULT NULL COMMENT '自动合并条件：变更代码行数',
+    `merge_auto_file` int(11) DEFAULT NULL COMMENT '自动合并条件：变更文件数',
+    `notify_webhook` varchar(255) DEFAULT NULL COMMENT '通知webhook',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE KEY `git_project_id` (`git_project_id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='Gitlab配置'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_gitlab_mr   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_gitlab_mr` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `gitlab_project_id` bigint(20) DEFAULT NULL COMMENT 'gitlab MR id',
+    `gitlab_mr_id` bigint(20) DEFAULT NULL COMMENT 'gitlab MR id',
+    `cmdb_service_name` varchar(128) DEFAULT NULL COMMENT '服务节点名称',
+    `rel_ci_pipeline_id` bigint(20) DEFAULT NULL COMMENT '关联构建信息',
+    `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态（）',
+    `source_branch` varchar(128) DEFAULT NULL COMMENT '源分支',
+    `target_branch` varchar(128) DEFAULT NULL COMMENT '目标分支',
+    `fail_log` varchar(1024) DEFAULT NULL COMMENT '合并失败信息记录',
+    `rate` decimal(10,0) DEFAULT '0' COMMENT '评论分',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `end_time` datetime DEFAULT NULL COMMENT '结束时间',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `assigner_nickname` varchar(255) NOT NULL COMMENT '当前指派人昵称',
+    `assigner_email` varchar(255) NOT NULL COMMENT '当前指派人邮箱',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='MR 活动记录'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_gitlab_mr_activities   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_gitlab_mr_activities` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `gitlab_mr_id` bigint(20) DEFAULT NULL COMMENT '风火轮平台 MR id',
+    `content` varchar(1024) DEFAULT NULL COMMENT '信息',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `gitlab_project_id` bigint(20) DEFAULT NULL COMMENT '风火轮平台 MR id',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='MR 活动记录'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_gitlab_mr_comment   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_gitlab_mr_comment` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `parent_id` bigint(20) DEFAULT NULL COMMENT '父评论 id',
+    `file_path` varchar(254) DEFAULT NULL COMMENT '文件路径',
+    `gitlab_mr_id` bigint(20) DEFAULT NULL COMMENT 'gitlab MR id',
+    `gitlab_project_id` bigint(20) DEFAULT NULL COMMENT 'gitlab project id',
+    `hotwheel_mr_id` bigint(20) DEFAULT NULL COMMENT '风火轮平台 MR id',
+    `content` longtext COMMENT '内容',
+    `line_index_type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '类型（0：旧行号索引，1：新行号索引）',
+    `line_num` int(11) NOT NULL COMMENT '行号',
+    `create_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
+    `create_emp` varchar(32) DEFAULT NULL COMMENT '创建人昵称',
+    `create_email` varchar(32) DEFAULT NULL COMMENT '创建人邮箱',
+    `reply_email` varchar(32) DEFAULT NULL COMMENT '回复人邮箱',
+    `reply_emp` varchar(32) DEFAULT NULL COMMENT '回复人昵称',
+    `modify_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '修改时间',
+    `modify_emp` varchar(32) DEFAULT NULL COMMENT '修改人',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT=' MR code review 评论'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_gitlab_mr_rate   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_gitlab_mr_rate` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `hotwheel_mr_id` bigint(20) DEFAULT NULL COMMENT '风火轮平台 MR id',
+    `rate` decimal(10,0) DEFAULT '0' COMMENT '评论分',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='MR 活动记录'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_gitlab_pipeline   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_gitlab_pipeline` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `git_project_name` varchar(32) DEFAULT NULL COMMENT 'git项目名称',
+    `user_email` varchar(64) DEFAULT NULL COMMENT '用户邮箱',
+    `pipeline_id` int(11) DEFAULT NULL COMMENT 'pipeline id',
+    `status` varchar(32) DEFAULT NULL COMMENT '状态',
+    `created_at` datetime(3) DEFAULT NULL COMMENT '开始时间',
+    `create_emp` varchar(128) DEFAULT NULL COMMENT '创建人',
+    `create_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
+    `modify_emp` varchar(128) DEFAULT NULL COMMENT '修改人',
+    `modify_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '修改时间',
+    `project_group` varchar(32) DEFAULT NULL COMMENT 'group name',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='gitlab流水线表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_metabase_sls_access_log_metric   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_metabase_sls_access_log_metric` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `cmdb_service_name` varchar(50) NOT NULL COMMENT '服务节点名称',
+    `domain` varchar(255) DEFAULT '0' COMMENT '域名',
+    `pv` bigint(20) unsigned DEFAULT '0' COMMENT 'pv',
+    `inflow` bigint(20) unsigned DEFAULT '0' COMMENT 'inflow',
+    `outflow` bigint(20) unsigned DEFAULT '0' COMMENT 'outflow',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `avg_response_time` float(6,3) DEFAULT NULL COMMENT '平均响应时间',
+    `query_from` datetime DEFAULT NULL COMMENT '查询开始时间',
+    `query_to` datetime DEFAULT NULL COMMENT '查询结束时间',
+    `sla` float(6,3) DEFAULT NULL COMMENT 'sla',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=4526394 DEFAULT CHARSET=utf8mb4 COMMENT='Sis level 统计'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_metabase_sls_level_metric   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_metabase_sls_level_metric` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `cmdb_service_name` varchar(50) NOT NULL COMMENT '服务节点名称',
+    `error` bigint(20) DEFAULT '0' COMMENT 'error',
+    `info` bigint(20) DEFAULT '0' COMMENT 'info',
+    `warn` bigint(20) DEFAULT '0' COMMENT 'warn',
+    `debug` bigint(20) DEFAULT '0' COMMENT 'debug',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `topic` varchar(255) DEFAULT NULL COMMENT 'topic',
+    `other` bigint(20) DEFAULT '0' COMMENT '其他',
+    `query_from` datetime DEFAULT NULL COMMENT '查询开始时间',
+    `query_to` datetime DEFAULT NULL COMMENT '查询结束时间',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=191333 DEFAULT CHARSET=utf8mb4 COMMENT='Sis level 统计'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_notify_pipeline_notify   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_notify_pipeline_notify` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `notify_template_id` bigint(20) unsigned NOT NULL COMMENT '消息通知模板id',
+    `cmdb_resource_name` varchar(64) DEFAULT NULL COMMENT 'cmdb服务名称',
+    `cmdb_resource_type` tinyint(4) DEFAULT NULL COMMENT 'cmdb服务类型 1：服务节点 2：sdk',
+    `type` tinyint(4) NOT NULL COMMENT '类型：1：构建通知 2:部署通知',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(30) DEFAULT NULL COMMENT '创建人',
+    `modify_emp` varchar(30) DEFAULT NULL COMMENT '更新人',
+    `remark` varchar(128) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_cmdb_resource_name` (`cmdb_resource_name`) USING BTREE,
+    KEY `idx_notify_template_id` (`notify_template_id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=2149 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='流水线飞书消息通知表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_notify_pipeline_notify_env   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_notify_pipeline_notify_env` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `pipeline_notify_id` bigint(20) NOT NULL COMMENT '流水线消息通知id',
+    `env` varchar(10) DEFAULT NULL COMMENT '环境',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(30) DEFAULT NULL COMMENT '创建人',
+    `modify_emp` varchar(30) DEFAULT NULL COMMENT '更新人',
+    `remark` varchar(128) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_pipeline_notify_id` (`pipeline_notify_id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=5860 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='飞书消息通知-通知环境关联表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_notify_pipeline_notify_receiver   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_notify_pipeline_notify_receiver` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `pipeline_notify_id` bigint(20) NOT NULL COMMENT '流水线消息通知id',
+    `receiver_account` varchar(64) DEFAULT NULL COMMENT '接收人',
+    `webhook_url` varchar(127) DEFAULT NULL COMMENT 'webhook url',
+    `type` tinyint(4) NOT NULL COMMENT '类型：1：个人通知 2:群通知',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(30) DEFAULT NULL COMMENT '创建人',
+    `modify_emp` varchar(30) DEFAULT NULL COMMENT '更新人',
+    `remark` varchar(128) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_pipeline_notify_id` (`pipeline_notify_id`) USING BTREE,
+    KEY `idx_receiver_account` (`receiver_account`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=4682 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='流水线飞书消息通知接收者表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_notify_pipeline_notify_scene   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_notify_pipeline_notify_scene` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `pipeline_notify_id` bigint(20) NOT NULL COMMENT '流水线消息通知id',
+    `type` tinyint(4) DEFAULT NULL COMMENT '通知场景：1：前置通知 2：后置通知',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(30) DEFAULT NULL COMMENT '创建人',
+    `modify_emp` varchar(30) DEFAULT NULL COMMENT '更新人',
+    `remark` varchar(128) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_pipeline_notify_id` (`pipeline_notify_id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=2655 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='飞书消息通知-通知场景关联表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_notify_pipeline_template   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_notify_pipeline_template` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `type` tinyint(4) NOT NULL COMMENT '类型：1：构建通知 2:部署通知',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(30) DEFAULT NULL COMMENT '创建人',
+    `modify_emp` varchar(30) DEFAULT NULL COMMENT '更新人',
+    `remark` varchar(128) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=1867 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='流水线飞书消息通知模板表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_quality_threshold_service   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_quality_threshold_service` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `threshold_template_id` bigint(20) unsigned NOT NULL COMMENT '模板id',
+    `service_name` varchar(30) NOT NULL COMMENT '服务节点名',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(30) DEFAULT NULL COMMENT '创建人',
+    `modify_emp` varchar(30) DEFAULT NULL COMMENT '更新人',
+    `remark` varchar(30) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='质量阈值模板-服务表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_quality_threshold_template   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_quality_threshold_template` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` varchar(30) DEFAULT NULL COMMENT '名称',
+    `type` tinyint(4) NOT NULL COMMENT '类型：1：单测 2:sonar',
+    `status` tinyint(4) NOT NULL COMMENT '状态：1：启用 2:禁用',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(30) DEFAULT NULL COMMENT '创建人',
+    `modify_emp` varchar(30) DEFAULT NULL COMMENT '更新人',
+    `remark` varchar(30) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='质量阈值模板表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_quality_threshold_template_metric   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_quality_threshold_template_metric` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `threshold_template_id` bigint(20) unsigned NOT NULL COMMENT '模板id',
+    `operator` tinyint(4) NOT NULL COMMENT '运算符：1：> 2:< 3:= 4:>= 5:<=',
+    `key` varchar(30) DEFAULT NULL COMMENT '指标key',
+    `value` decimal(5,2) DEFAULT NULL COMMENT '值',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(30) DEFAULT NULL COMMENT '创建人',
+    `modify_emp` varchar(30) DEFAULT NULL COMMENT '更新人',
+    `remark` varchar(30) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='质量阈值模板-指标表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_sdk_threshold_template_metric   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_sdk_threshold_template_metric` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `title` varchar(30) DEFAULT NULL COMMENT '阈值约束标题',
+    `constraint_type` tinyint(4) NOT NULL COMMENT '约束类型：1:建议; 2:强制约束;3：不可用(忽略运算符和值);',
+    `constraint_env` varchar(30) NOT NULL COMMENT '约束环境：多个环境‘,’隔开',
+    `sdk_type` tinyint(4) NOT NULL COMMENT '语种：1:Java; 2:Node;',
+    `sdk_name` varchar(30) DEFAULT NULL COMMENT '一级名称，Java:artifactid; Node:包名;',
+    `sdk_group` varchar(63) DEFAULT NULL COMMENT '归类, Java:groupid; Node:空;',
+    `operator` tinyint(4) DEFAULT NULL COMMENT '运算符：1：> 2:< 3:= 4:>= 5:<=',
+    `value` varchar(30) DEFAULT NULL COMMENT '值',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(30) DEFAULT NULL COMMENT '创建人',
+    `modify_emp` varchar(30) DEFAULT NULL COMMENT '更新人',
+    `remark` varchar(30) DEFAULT NULL COMMENT '备注',
+    `status` tinyint(4) DEFAULT NULL COMMENT '状态：1：启用 2:禁用',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='SDK阈值模板-指标表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_service_dependency   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_service_dependency` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `cmdb_service_name` varchar(100) NOT NULL COMMENT '服务名称',
+    `env` varchar(15) NOT NULL COMMENT '环境',
+    `service_version` varchar(50) DEFAULT NULL COMMENT '服务版本',
+    `ci_pipeline_id` bigint(20) unsigned NOT NULL COMMENT '构建id',
+    `ci_record_id` bigint(20) unsigned NOT NULL COMMENT '构建记录id',
+    `sdk_type` tinyint(1) unsigned NOT NULL COMMENT 'sdk类型：1-Java，2-Node',
+    `sdk_name` varchar(100) NOT NULL COMMENT 'sdk名称',
+    `mvn_group_id` varchar(100) DEFAULT NULL COMMENT 'mvn sdk groupId',
+    `sdk_version` varchar(100) DEFAULT NULL COMMENT 'sdk版本',
+    `remark` text COMMENT '根节点到该节点的依赖链',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `idx_sdk_name` (`sdk_name`) USING BTREE,
+    KEY `idx_cmdb_service_name` (`cmdb_service_name`) USING BTREE,
+    KEY `idx_ci_record_id` (`ci_record_id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=104617 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='服务依赖表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_sonar_new_code_version   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_sonar_new_code_version` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `version` varchar(255) NOT NULL DEFAULT '' COMMENT 'sonar new code 版本定义',
+    `modify_time` datetime NOT NULL COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='sonar 新代码定义-版本号变更'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_sre_deployment   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_sre_deployment` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `cluster_id` bigint(20) unsigned DEFAULT NULL COMMENT '集群ID',
+    `deployment_name` varchar(128) NOT NULL COMMENT '名字',
+    `image_name` varchar(255) NOT NULL COMMENT '镜像名',
+    `namespace` varchar(255) NOT NULL COMMENT '命名空间',
+    `status` tinyint(4) DEFAULT '0' COMMENT '状态（0：未部署，1：已部署）',
+    `update_type` varchar(255) DEFAULT NULL COMMENT '升级方式',
+    `replicas` int(11) DEFAULT NULL COMMENT '副本数量',
+    `cpu_request` decimal(10,1) DEFAULT NULL COMMENT 'cpu申请',
+    `cpu_limit` decimal(10,1) DEFAULT NULL COMMENT 'cpu 限制',
+    `memory_request` decimal(10,1) DEFAULT NULL COMMENT '内存申请',
+    `memory_limit` decimal(10,1) DEFAULT NULL COMMENT '内存限制',
+    `auto_cd` tinyint(4) DEFAULT NULL COMMENT '自动触发：1：自动，0：非自动',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE KEY `uniq_cluster_id_deployment_name` (`cluster_id`,`deployment_name`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='SRE部署'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_sys_build_template   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_sys_build_template` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `lang` varchar(255) DEFAULT NULL COMMENT '编程语言',
+    `package_command` text COMMENT '编译命令',
+    `dockerfile` text COMMENT 'dockerfile',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='部署模板'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_sys_ci_stage   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_sys_ci_stage` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `title` varchar(255) DEFAULT NULL COMMENT '标题',
+    `code` varchar(126) DEFAULT NULL COMMENT '步骤编码',
+    `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `lang` varchar(32) DEFAULT NULL COMMENT '语言',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建流水'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_sys_metabase_config   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_sys_metabase_config` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `config_code` varchar(50) NOT NULL COMMENT '配置code',
+    `type` enum('question','dashboard') NOT NULL COMMENT '类型',
+    `metabase_id` int(10) unsigned NOT NULL COMMENT 'metabase_id',
+    `desc` varchar(255) DEFAULT NULL COMMENT '描述',
+    `secretKey` varchar(255) DEFAULT NULL COMMENT '密钥',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='metabase配置'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_sys_service_group   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_sys_service_group` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+    `group_id` varchar(30) NOT NULL COMMENT 'groupId',
+    `group_name` varchar(30) NOT NULL COMMENT 'group名称',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='服务group表'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_template_cd   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_template_cd` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` varchar(255) DEFAULT NULL COMMENT '构建流水线名称',
+    `replicas` int(11) DEFAULT NULL COMMENT '副本数量',
+    `cpu_limit` decimal(10,1) DEFAULT NULL COMMENT 'cpu 限制',
+    `cpu_request` decimal(10,1) DEFAULT NULL COMMENT 'cpu申请',
+    `memory_request` decimal(10,1) DEFAULT NULL COMMENT '内存申请',
+    `memory_limit` decimal(10,1) DEFAULT NULL COMMENT '内存限制',
+    `update_type` tinyint(255) unsigned DEFAULT NULL COMMENT '升级方式（0：新服务启动后删除旧服务，1：旧服务删除后启动新服务）',
+    `app_type` tinyint(4) DEFAULT NULL COMMENT '0：deployment',
+    `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建流水'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_template_cd_env   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_template_cd_env` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `template_cd_id` bigint(20) unsigned DEFAULT NULL COMMENT '部署模板ID',
+    `key` varchar(255) DEFAULT NULL COMMENT 'key',
+    `value` text COMMENT 'value',
+    `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) DEFAULT NULL COMMENT '更新人',
+    `necessary` tinyint(4) DEFAULT NULL COMMENT '1:必要，0：非必要',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建流水'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_template_cd_volume_log   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_template_cd_volume_log` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `template_cd_id` bigint(20) unsigned DEFAULT NULL COMMENT '部署模板ID',
+    `mount_path` varchar(255) NOT NULL COMMENT '挂载路径',
+    `path_pattern` varchar(255) NOT NULL COMMENT '采集文件',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) DEFAULT NULL COMMENT '更新人',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='集群信息'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_template_ci   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_template_ci` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` varchar(255) DEFAULT NULL COMMENT '构建流水线名称',
+    `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `need_submodules` tinyint(4) DEFAULT NULL COMMENT '触发子模块(1：需要，0：不需要)',
+    `need_branch` tinyint(4) DEFAULT NULL COMMENT '自动触发构建分支(1：需要，0：不需要)',
+    `cmdb_service_name` tinyint(4) DEFAULT NULL COMMENT '服务树(1：需要，0：不需要)',
+    `lang` varchar(32) NOT NULL DEFAULT 'Java' COMMENT '语言',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建流水'
+    ;
+
+    /******************************************/
+    /*   DatabaseName = hotwheel   */
+    /*   TableName = t_template_ci_stage   */
+    /******************************************/
+    CREATE TABLE IF NOT EXISTS `t_template_ci_stage` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `template_ci_id` bigint(11) unsigned DEFAULT NULL COMMENT 'ci 模板主表ID',
+    `title` varchar(255) DEFAULT NULL COMMENT '标题',
+    `code` varchar(126) DEFAULT NULL COMMENT '步骤编码',
+    `necessary` tinyint(4) DEFAULT NULL COMMENT '1:必要，0：非必要',
+    `sequence` int(20) unsigned DEFAULT NULL COMMENT '阶段顺序',
+    `remark` varchar(512) DEFAULT NULL COMMENT '备注',
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `modify_time` datetime NOT NULL COMMENT '更新时间',
+    `create_emp` varchar(255) NOT NULL COMMENT '创建人',
+    `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
+    `lang` varchar(32) DEFAULT NULL COMMENT '语言',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建流水'
+    ;
+
+
+

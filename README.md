@@ -17,7 +17,8 @@ helm repo update
 ```
 3. 部署
 ```shell
-helm upgrade --install my-release --set config.database_url='' \
+helm upgrade --install my-release \
+     --set config.database_url='' \
      --set config.database_username='' \
      --set config.database_password='' \
      --set config.app_backend_url='' \
