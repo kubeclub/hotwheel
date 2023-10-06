@@ -1,0 +1,1097 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "mysql.fullname" . }}-sql-data
+data:
+  data.sql: |
+    /******************************************/
+    /*   ci 构建模版步骤   */
+    /*   TableName = t_template_ci_stage   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (1,1,'maven编译打包','maven_compile',1,1,'','2021-05-17 22:24:21','2023-05-11 18:48:02','yongzhe.dong','admin',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (2,1,'Java Sonar扫描','Java_sonarscan',0,2,null,'2021-05-17 22:24:41','2021-05-17 22:24:43','yongzhe.dong','yongzhe.dong',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (3,1,'docker镜像制作','_docker',1,3,null,'2021-05-17 22:25:09','2022-07-04 16:36:38','yongzhe.dong','hanlin.mao',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (4,2,'前端编译打包','node_compile',1,1,'','2021-05-17 22:24:21','2021-05-17 22:24:24','yongzhe.dong','yongzhe.dong',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (5,2,'前端Sonar扫描','node_sonarscan',0,2,'','2021-05-17 22:24:21','2021-05-17 22:24:24','yongzhe.dong','yongzhe.dong',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (6,2,'docker镜像制作','_docker',1,3,null,'2021-05-17 22:25:09','2021-05-17 22:25:13','yongzhe.dong','yongzhe.dong',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (7,4,'docker镜像制作','_docker',1,3,null,'2021-05-17 22:25:09','2021-05-17 22:25:13','yongzhe.dong','yongzhe.dong',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (8,3,'docker镜像制作','_docker',1,3,null,'2021-05-17 22:25:09','2021-05-17 22:25:13','yongzhe.dong','yongzhe.dong','');
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (9,3,'golang编译','go_compile',0,1,'','2021-05-17 22:25:09','2021-05-17 22:25:13','yongzhe.dong','yongzhe.dong','');
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (10,8,'npm sdk','npm_sdk',null,null,null,'2021-08-02 17:29:14','2021-08-02 17:45:30','yongzhe.dong','yongzhe.dong',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (15,7,'maven sdk','maven_sdk',null,null,null,'2021-08-03 15:44:59','2021-08-03 15:44:59','yongzhe.dong','yongzhe.dong',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (16,10,'开发版发布','wx_compile',null,null,null,'2021-10-13 15:26:25','2021-10-14 10:16:24','yongzhe.dong','yongzhe.dong',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (17,10,'sonar 扫描','wx_sonarscan',null,null,null,'2021-10-14 10:20:35','2021-10-14 10:33:49','yongzhe.dong','ruichao.lin',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (18,11,'飞书小程序编译','feishu_compile',null,null,null,'2021-10-14 14:15:44','2021-10-14 14:15:44','ruichao.lin','ruichao.lin',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (20,9,'编译1234','android_compile',null,null,null,'2021-10-14 14:21:17','2021-10-26 10:52:55','ruichao.lin','jinjia.wu',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (23,11,'飞书Sonar扫描','feishu_sonarscan',null,null,null,'2021-10-15 17:45:02','2021-10-20 17:48:43','yuqin.zhao','ruichao.lin',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (24,9,'安卓Sonar扫描','android_sonarscan',null,null,null,'2021-10-21 10:53:04','2021-10-21 10:53:04','jinjia.wu','jinjia.wu',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (25,12,'net-core编译打包','netCore_compile',1,1,null,'2021-05-17 22:24:21','2021-05-17 22:24:24','yongzhe.dong','ruijin.zhou',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (26,12,'docker镜像制作','_docker',1,3,null,'2021-05-17 22:25:09','2022-07-04 16:36:38','yongzhe.dong','ruijin.zhou',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (27,13,'gradle编译打包','gradle_compile',null,null,null,'2023-01-04 18:07:04','2023-01-04 18:07:04','admin','admin',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (28,13,'Sonar代码扫描','Java_sonarscan',null,null,null,'2023-01-04 18:07:45','2023-01-04 18:29:55','admin','admin',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (29,13,'docker镜像制作','gradle_docker',null,null,null,'2023-01-04 18:08:18','2023-01-04 18:26:33','admin','admin',null);
+    INSERT INTO `hotwheel`.`t_template_ci_stage` (`id`,`template_ci_id`,`title`,`code`,`necessary`,`sequence`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`lang`) VALUES (30,14,'docker镜像制作','_docker',null,null,null,'2023-02-16 14:56:10','2023-02-16 14:56:10','admin','admin',null);
+    /******************************************/
+    /*   ci 构建流水   */
+    /*   TableName = t_template_ci   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`t_template_ci` (`id`,`name`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`need_submodules`,`need_branch`,`cmdb_service_name`,`lang`) VALUES (1,'java-application','Java后端CI模板','2021-05-17 22:23:25','2021-05-17 22:23:27','yongzhe.dong','yongzhe.doong',1,1,1,'Java');
+    INSERT INTO `hotwheel`.`t_template_ci` (`id`,`name`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`need_submodules`,`need_branch`,`cmdb_service_name`,`lang`) VALUES (2,'node 纯前端','Node纯前端','2021-05-19 18:09:20','2021-05-19 18:09:23','yongzhe.dong','yongzhe.dong',0,1,1,'Node');
+    INSERT INTO `hotwheel`.`t_template_ci` (`id`,`name`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`need_submodules`,`need_branch`,`cmdb_service_name`,`lang`) VALUES (3,'golang','golang','2021-06-22 17:22:31','2021-06-22 17:22:35','yongzhe.dong','yongzhe.dong',0,0,1,'Go');
+    INSERT INTO `hotwheel`.`t_template_ci` (`id`,`name`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`need_submodules`,`need_branch`,`cmdb_service_name`,`lang`) VALUES (7,'maven sdk -> 【neuxs】',null,'2021-08-02 17:16:43','2021-08-02 17:19:31','yongzhe.dong','yongzhe.dong',null,null,null,'MAVEN_SDK');
+    INSERT INTO `hotwheel`.`t_template_ci` (`id`,`name`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`need_submodules`,`need_branch`,`cmdb_service_name`,`lang`) VALUES (8,'npm sdk -> 【verdaccio】',null,'2021-08-02 17:20:52','2021-08-02 17:20:52','yongzhe.dong','yongzhe.dong',null,null,null,'NPM_SDK');
+    INSERT INTO `hotwheel`.`t_template_ci` (`id`,`name`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`need_submodules`,`need_branch`,`cmdb_service_name`,`lang`) VALUES (12,'net-core 项目','NetCore CI 模版','2022-11-07 10:44:05','2022-11-07 10:44:05','ruijin.zhou','ruijin.zhou',null,null,1,'NetCore');
+    INSERT INTO `hotwheel`.`t_template_ci` (`id`,`name`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`need_submodules`,`need_branch`,`cmdb_service_name`,`lang`) VALUES (13,'java-application-gradle',null,'2021-05-18 22:23:25','2021-05-18 22:23:27','admin','admin',null,null,null,'Java');
+    INSERT INTO `hotwheel`.`t_template_ci` (`id`,`name`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`need_submodules`,`need_branch`,`cmdb_service_name`,`lang`) VALUES (14,'通用-Dockerfile',null,'2023-02-16 14:55:16','2023-02-16 14:55:16','admin','admin',null,null,null,'Common');
+    /******************************************/
+    /*   cd 部署流水   */
+    /*   TableName = t_template_cd   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`t_template_cd` (`id`,`name`,`replicas`,`cpu_limit`,`cpu_request`,`memory_request`,`memory_limit`,`update_type`,`app_type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`) VALUES (18,'生产',2,2.0,0.5,1.0,4.0,0,0,'生产','2021-07-03 08:31:05','2021-07-28 14:01:46','ruichao.lin','yuqin.zhao');
+    INSERT INTO `hotwheel`.`t_template_cd` (`id`,`name`,`replicas`,`cpu_limit`,`cpu_request`,`memory_request`,`memory_limit`,`update_type`,`app_type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`) VALUES (19,'非生产',1,0.5,0.1,0.5,4.0,0,0,'非生产','2021-07-28 11:43:41','2021-07-28 11:43:41','yuqin.zhao','yuqin.zhao');
+    /******************************************/
+    /*   cd 部署流水   */
+    /*   TableName = t_template_cd   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (1,'maven_compile','Java','mvn clean  package -P -U test  -Dmaven.test.failure.ignore=true -Dsite.isVpc=true',3,'test',null,'2021-06-02 11:09:17.420',null,'2022-12-07 14:49:04.988');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (2,'maven_compile','Java','mvn clean package -P -U dev  -Dmaven.test.failure.ignore=true -Dsite.isVpc=true',3,'dev',null,'2021-06-02 11:09:34.466',null,'2022-12-07 14:49:10.776');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (3,'maven_compile','Java','mvn clean package -P -U pre  -Dmaven.test.failure.ignore=true -Dsite.isVpc=true',3,'pre',null,'2021-06-02 11:09:50.751',null,'2022-12-07 14:49:17.937');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (4,'maven_compile','Java','mvn clean  package -P -U prod -Dmaven.test.failure.ignore=true -Dsite.isVpc=true',3,'prod',null,'2021-06-02 11:11:03.925',null,'2022-12-07 14:49:23.517');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (5,'_docker','Java','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-ubuntu-8
+
+    RUN mkdir -p /home/appuser/java_tmp
+
+    ARG PORT
+
+    ENV PORT=${PORT:-8080}
+
+    COPY app.jar /home/appuser/app.jar
+
+    VOLUME /tmp
+
+    EXPOSE ${PORT}
+
+    ENV JAVA_OPTS="-XX:+UseContainerSupport  -XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=75.0 -XX:MinRAMPercentage=75.0 -XX:-UseAdaptiveSizePolicy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/appuser/gc.hprof -Djava.io.tmpdir=/home/appuser/java_tmp"
+
+    cmd java -Djava.security.egd=file:/dev/./urandom -Dserver.port=${PORT}  ${JAVA_OPTS} -jar /home/appuser/app.jar',3,'test',null,'2021-06-02 14:02:50.936',null,'2021-07-06 14:08:20.619');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (6,'_docker','Java','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-ubuntu-8
+
+    RUN mkdir -p /home/appuser/java_tmp
+
+    ARG PORT
+
+    ENV PORT=${PORT:-8080}
+
+    COPY app.jar /home/appuser/app.jar
+
+    VOLUME /tmp
+
+    EXPOSE ${PORT}
+
+    ENV JAVA_OPTS="-XX:+UseContainerSupport  -XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=75.0 -XX:MinRAMPercentage=75.0 -XX:-UseAdaptiveSizePolicy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/appuser/gc.hprof -Djava.io.tmpdir=/home/appuser/java_tmp"
+
+    cmd java -Djava.security.egd=file:/dev/./urandom -Dserver.port=${PORT}  ${JAVA_OPTS} -jar /home/appuser/app.jar',3,'dev',null,'2021-06-02 14:03:13.566',null,'2021-07-06 14:08:54.441');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (7,'_docker','Java','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-ubuntu-8
+
+    RUN mkdir -p /home/appuser/java_tmp
+
+    ARG PORT
+
+    ENV PORT=${PORT:-8080}
+
+    COPY app.jar /home/appuser/app.jar
+
+    VOLUME /tmp
+
+    EXPOSE ${PORT}
+
+    ENV JAVA_OPTS="-XX:+UseContainerSupport  -XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=75.0 -XX:MinRAMPercentage=75.0 -XX:-UseAdaptiveSizePolicy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/appuser/gc.hprof -Djava.io.tmpdir=/home/appuser/java_tmp"
+
+    cmd java -Djava.security.egd=file:/dev/./urandom -Dserver.port=${PORT}  ${JAVA_OPTS} -jar /home/appuser/app.jar',3,'pre',null,'2021-06-02 14:03:28.271',null,'2021-07-06 14:08:20.619');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (8,'_docker','Java','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-ubuntu-8
+
+    RUN mkdir -p /home/appuser/java_tmp
+
+    ARG PORT
+
+    ENV PORT=${PORT:-8080}
+
+    COPY app.jar /home/appuser/app.jar
+
+    VOLUME /tmp
+
+    EXPOSE ${PORT}
+
+    ENV JAVA_OPTS="-XX:+UseContainerSupport  -XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=75.0 -XX:MinRAMPercentage=75.0 -XX:-UseAdaptiveSizePolicy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/appuser/gc.hprof -Djava.io.tmpdir=/home/appuser/java_tmp"
+
+    ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -Dserver.port=${PORT}  ${JAVA_OPTS} -jar /home/appuser/app.jar',3,'prod',null,'2021-06-02 14:03:53.756',null,'2021-08-09 11:19:34.915');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (9,'maven_compile','Java','registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-3-14-1',1,'test',null,'2021-06-02 14:07:11.957',null,'2022-09-19 23:11:53.564');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (10,'maven_compile','Java','registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-3-14-1',1,'dev',null,'2021-06-02 14:07:35.763',null,'2022-09-19 23:11:58.680');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (11,'maven_compile','Java','registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-3-14-1',1,'pre',null,'2021-06-02 14:07:46.960',null,'2022-09-19 23:12:03.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (12,'maven_compile','Java','registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-3-14-1',1,'prod',null,'2021-06-02 14:08:05.894',null,'2022-09-19 23:12:07.408');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (13,'_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'test',null,'2021-06-02 14:08:37.426',null,'2021-07-26 11:14:44.653');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (14,'_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'dev',null,'2021-06-02 14:08:51.523',null,'2021-07-26 11:14:48.776');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (15,'_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'pre',null,'2021-06-02 14:09:06.042',null,'2021-07-26 11:14:53.427');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (16,'_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'prod',null,'2021-06-02 14:09:59.115',null,'2021-07-26 11:14:58.557');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (17,'node_compile','Node','npm config set registry http://npm.yummy.tech
+    wget http://statictest1.yummy.tech/joymolibVersionCheck.js
+    node joymolibVersionCheck.js --env=test
+    npm install
+    npm run build:test',3,'test',null,'2021-06-10 15:00:35.906',null,'2021-06-18 14:43:40.331');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (18,'node_compile','Node','npm config set registry http://npm.yummy.tech
+    wget http://statictest1.yummy.tech/joymolibVersionCheck.js
+    node joymolibVersionCheck.js --env=dev
+    npm install
+    npm run build:dev',3,'dev',null,'2021-06-10 15:01:19.135',null,'2021-06-18 14:43:40.331');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (19,'node_compile','Node','npm config set registry http://npm.yummy.tech
+    wget http://statictest1.yummy.tech/joymolibVersionCheck.js
+    node joymolibVersionCheck.js --env=pre
+    npm install
+    npm run build:pre',3,'pre',null,'2021-06-10 15:01:44.461',null,'2021-06-18 14:43:40.331');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (20,'node_compile','Node','npm config set registry http://npm.yummy.tech
+    wget http://statictest1.yummy.tech/joymolibVersionCheck.js
+    node joymolibVersionCheck.js --env=prod
+    npm install
+    npm run build:prod',3,'prod',null,'2021-06-10 15:02:02.967',null,'2021-06-18 14:43:40.331');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (21,'_docker','Node','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/nginx:1.19.7
+
+    COPY ./dist /usr/share/nginx/html
+
+    ENV PORT 80
+    EXPOSE $PORT',3,'test',null,'2021-06-02 14:02:50.936',null,'2021-06-18 14:43:40.331');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (22,'_docker','Node','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/nginx:1.19.7
+
+    COPY ./dist /usr/share/nginx/html
+
+
+    ENV PORT 80
+    EXPOSE $PORT',3,'dev',null,'2021-06-02 14:03:13.566',null,'2021-06-18 14:43:40.331');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (23,'_docker','Node','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/nginx:1.19.7
+
+    COPY ./dist /usr/share/nginx/html
+
+
+    ENV PORT 80
+    EXPOSE $PORT',3,'pre',null,'2021-06-02 14:03:28.271',null,'2021-06-18 14:43:40.331');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (24,'_docker','Node','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/nginx:1.19.7
+
+    COPY ./dist /usr/share/nginx/html
+
+
+    ENV PORT 80
+    EXPOSE $PORT',3,'prod',null,'2021-06-02 14:03:53.756',null,'2021-06-18 14:43:40.331');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (25,'node_compile','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-mvn3.6.1-node14.16.0-cnpm-2',1,'test',null,'2021-06-02 14:07:11.957',null,'2021-07-28 20:16:40.524');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (26,'node_compile','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-mvn3.6.1-node14.16.0-cnpm-2',1,'dev',null,'2021-06-02 14:07:35.763',null,'2021-07-28 20:16:45.312');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (27,'node_compile','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-mvn3.6.1-node14.16.0-cnpm-2',1,'pre',null,'2021-06-02 14:07:46.960',null,'2021-07-28 20:16:51.314');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (28,'node_compile','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-mvn3.6.1-node14.16.0-cnpm-2',1,'prod',null,'2021-06-02 14:08:05.894',null,'2021-07-28 20:16:55.675');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (29,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'test',null,'2021-06-02 14:08:37.426',null,'2021-07-26 11:15:07.834');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (30,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'dev',null,'2021-06-02 14:08:51.523',null,'2021-07-26 11:15:11.332');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (31,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'pre',null,'2021-06-02 14:09:06.042',null,'2021-07-26 11:15:14.892');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (32,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'prod',null,'2021-06-02 14:09:59.115',null,'2021-07-26 11:15:21.657');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (33,'_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-ubuntu-8',2,'test',null,'2021-06-18 14:53:47.247',null,'2021-07-06 14:00:17.141');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (34,'_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-ubuntu-8',2,'dev',null,'2021-06-18 14:53:47.247',null,'2021-07-06 14:00:19.926');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (35,'_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-ubuntu-8',2,'pre',null,'2021-06-18 14:53:47.247',null,'2021-07-06 14:00:22.901');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (36,'_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-ubuntu-8',2,'prod',null,'2021-06-18 14:53:47.247',null,'2021-07-06 14:00:30.086');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (37,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/nginx:1.19.7-zip',2,'test',null,'2021-06-18 14:53:47.247',null,'2021-06-22 22:26:19.250');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (38,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/nginx:1.19.7-zip',2,'dev',null,'2021-06-18 14:53:47.247',null,'2021-06-22 22:26:19.250');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (39,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/nginx:1.19.7-zip',2,'pre',null,'2021-06-18 14:53:47.247',null,'2021-06-22 22:26:19.250');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (40,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/nginx:1.19.7-zip',2,'prod',null,'2021-06-18 14:53:47.247',null,'2021-06-22 22:26:19.250');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (41,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-mvn3.6.1-node14.16.0-cnpm-1',2,'test',null,'2021-06-18 14:53:47.247',null,'2021-06-24 17:48:51.398');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (42,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-mvn3.6.1-node14.16.0-cnpm-1',2,'dev',null,'2021-06-18 14:53:47.247',null,'2021-06-24 17:49:33.085');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (43,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-mvn3.6.1-node14.16.0-cnpm-1',2,'pre',null,'2021-06-18 14:53:47.247',null,'2021-06-24 17:49:36.194');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (44,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-mvn3.6.1-node14.16.0-cnpm-1',2,'prod',null,'2021-06-18 14:53:47.247',null,'2021-06-24 17:49:39.128');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (45,'go_compile','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/golang:1.15-alpine-1',1,'dev',null,'2021-06-25 16:02:02.704',null,'2021-07-28 20:16:01.439');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (46,'go_compile','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/golang:1.15-alpine-1',1,'test','','2021-06-25 16:02:02.704','','2021-07-28 20:16:05.926');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (47,'go_compile','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/golang:1.15-alpine-1',1,'pre','','2021-06-25 16:02:02.704','','2021-07-28 20:16:10.665');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (48,'go_compile','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/golang:1.15-alpine-1',1,'prod','','2021-06-25 16:02:02.704','','2021-07-28 20:16:27.135');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (49,'_docker','Go','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/alpine:latest
+
+    # 将上一步编译后的程序拷贝过来,golang 编译成模板系统的执行文件后，启动的环境不需要有 golang，尽量精简
+    COPY app /home/appuser/
+
+    # 该基础镜像的用户是 appuser, home 目录是 /home/appuser
+    WORKDIR /home/appuser
+
+    # 启动容器时运行的命令
+    cmd ["/home/appuser/app"]',3,'test','','2021-06-02 14:02:50.936','','2021-06-26 10:32:25.553');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (50,'_docker','Go','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/alpine:latest
+
+    # 将上一步编译后的程序拷贝过来,golang 编译成模板系统的执行文件后，启动的环境不需要有 golang，尽量精简
+    COPY app /home/appuser/
+
+    # 该基础镜像的用户是 appuser, home 目录是 /home/appuser
+    WORKDIR /home/appuser
+
+    # 启动容器时运行的命令
+    cmd ["/home/appuser/app"]',3,'dev','','2021-06-02 14:03:13.566','','2021-06-26 10:32:29.823');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (51,'_docker','Go','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/alpine:latest
+
+    # 将上一步编译后的程序拷贝过来,golang 编译成模板系统的执行文件后，启动的环境不需要有 golang，尽量精简
+    COPY app /home/appuser/
+
+    # 该基础镜像的用户是 appuser, home 目录是 /home/appuser
+    WORKDIR /home/appuser
+
+    # 启动容器时运行的命令
+    cmd ["/home/appuser/app"]',3,'pre','','2021-06-02 14:03:28.271','','2021-06-26 10:32:34.137');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (52,'_docker','Go','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/alpine:latest
+
+    # 将上一步编译后的程序拷贝过来,golang 编译成模板系统的执行文件后，启动的环境不需要有 golang，尽量精简
+    COPY app /home/appuser/
+
+    # 该基础镜像的用户是 appuser, home 目录是 /home/appuser
+    WORKDIR /home/appuser
+
+    # 启动容器时运行的命令
+    cmd ["/home/appuser/app"]',3,'prod','','2021-06-02 14:03:53.756','','2021-06-26 10:32:39.558');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (53,'go_compile','Go','export GO111MODULE=on CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOPROXY="https://goproxy.cn,direct"
+    # 上面的产物路径可以填这个 app
+    go build -o app',3,'dev','','2021-06-25 16:02:02.704','','2021-06-26 10:24:31.703');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (54,'go_compile','Go','export GO111MODULE=on CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOPROXY="https://goproxy.cn,direct"
+    # 上面的产物路径可以填这个 app
+    go build -o app',3,'test','','2021-06-25 16:02:02.704','','2021-06-26 10:24:35.216');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (55,'go_compile','Go','export GO111MODULE=on CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOPROXY="https://goproxy.cn,direct"
+    # 上面的产物路径可以填这个 app
+    go build -o app',3,'pre','','2021-06-25 16:02:02.704','','2021-06-26 10:24:39.232');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (56,'go_compile','Go','export GO111MODULE=on CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOPROXY="https://goproxy.cn,direct"
+    # 上面的产物路径可以填这个 app
+    go build -o app',3,'prod','','2021-06-25 16:02:02.704','','2021-06-26 10:24:42.398');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (57,'_docker','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/alpine:latest',2,'test','','2021-06-02 14:02:50.936','','2021-06-25 17:15:40.516');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (58,'_docker','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/alpine:latest',2,'dev','','2021-06-02 14:03:13.566','','2021-06-25 17:15:42.333');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (59,'_docker','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/alpine:latest',2,'pre','','2021-06-02 14:03:28.271','','2021-06-25 17:15:43.638');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (60,'_docker','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/alpine:latest',2,'prod','','2021-06-02 14:03:53.756','','2021-06-25 17:15:45.112');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (61,'_docker','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'test','','2021-06-02 14:08:37.426','','2021-07-26 11:14:32.548');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (62,'_docker','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'dev','','2021-06-02 14:08:51.523','','2021-07-26 11:14:26.505');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (63,'_docker','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'pre','','2021-06-02 14:09:06.042','','2021-07-26 11:14:20.119');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (64,'_docker','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'prod','','2021-06-02 14:09:59.115','','2021-07-26 11:14:13.502');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (65,'Java_sonarscan','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/sonar-scanner-cli:latest',1,'dev',null,'2021-07-14 14:13:51.581',null,'2021-07-14 14:13:50.664');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (66,'Java_sonarscan','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/sonar-scanner-cli:latest',1,'test',null,'2021-07-14 14:14:33.218',null,'2021-07-14 14:14:32.283');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (67,'Java_sonarscan','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/sonar-scanner-cli:latest',1,'pre',null,'2021-07-14 14:14:38.132',null,'2021-07-14 14:14:37.193');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (68,'Java_sonarscan','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/sonar-scanner-cli:latest',1,'prod',null,'2021-07-14 14:14:43.512',null,'2021-07-14 14:14:42.576');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (69,'Java_sonarscan','Java','sonar-scanner -Dsonar.java.binaries=target/classes -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.sources=src/main -Dsonar.tests=src/test -Dsonar.projectKey=$cmdbServiceName:$CI_COMMIT_REF_NAME -Dsonar.projectName=$cmdbServiceName:$CI_COMMIT_REF_NAME -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml -Dsonar.junit.reportPaths=target/surefire-reports -Dsonar.analysis.trigger=$GITLAB_USER_EMAIL -Dsonar.analysis.ciPipelineId=$ciPipelineId  -Dsonar.analysis.gitCiPipelineId=$CI_PIPELINE_ID',3,'dev',null,'2021-07-14 14:55:12.001',null,'2021-07-21 14:49:24.528');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (70,'Java_sonarscan','Java','sonar-scanner -Dsonar.java.binaries=target/classes -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.sources=src/main -Dsonar.tests=src/test -Dsonar.projectKey=$cmdbServiceName:$CI_COMMIT_REF_NAME -Dsonar.projectName=$cmdbServiceName:$CI_COMMIT_REF_NAME -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml -Dsonar.junit.reportPaths=target/surefire-reports -Dsonar.analysis.trigger=$GITLAB_USER_EMAIL -Dsonar.analysis.ciPipelineId=$ciPipelineId  -Dsonar.analysis.gitCiPipelineId=$CI_PIPELINE_ID',3,'test',null,'2021-07-14 14:55:16.294',null,'2021-07-21 14:49:31.074');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (71,'Java_sonarscan','Java','sonar-scanner -Dsonar.java.binaries=target/classes -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.sources=src/main -Dsonar.tests=src/test -Dsonar.projectKey=$cmdbServiceName:$CI_COMMIT_REF_NAME -Dsonar.projectName=$cmdbServiceName:$CI_COMMIT_REF_NAME -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml -Dsonar.junit.reportPaths=target/surefire-reports -Dsonar.analysis.trigger=$GITLAB_USER_EMAIL -Dsonar.analysis.ciPipelineId=$ciPipelineId  -Dsonar.analysis.gitCiPipelineId=$CI_PIPELINE_ID',3,'pre',null,'2021-07-14 14:55:21.070',null,'2021-07-21 14:49:43.047');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (72,'Java_sonarscan','Java','sonar-scanner -Dsonar.java.binaries=target/classes -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.sources=src/main -Dsonar.tests=src/test -Dsonar.projectKey=$cmdbServiceName:$CI_COMMIT_REF_NAME -Dsonar.projectName=$cmdbServiceName:$CI_COMMIT_REF_NAME -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml -Dsonar.junit.reportPaths=target/surefire-reports -Dsonar.analysis.trigger=$GITLAB_USER_EMAIL -Dsonar.analysis.ciPipelineId=$ciPipelineId  -Dsonar.analysis.gitCiPipelineId=$CI_PIPELINE_ID',3,'prod',null,'2021-07-14 14:55:28.702',null,'2021-07-21 14:49:49.393');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (74,'node_sonarscan','Node','sonar-scanner -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.sources=./ -Dsonar.projectKey=$cmdbServiceName:$CI_COMMIT_REF_NAME -Dsonar.projectName=$cmdbServiceName:$CI_COMMIT_REF_NAME -Dsonar.analysis.trigger=$GITLAB_USER_EMAIL -Dsonar.analysis.ciPipelineId=$ciPipelineId  -Dsonar.analysis.gitCiPipelineId=$CI_PIPELINE_ID',3,'test',null,'2021-07-20 10:57:12.796',null,'2021-07-21 15:27:06.540');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (75,'node_sonarscan','Node','sonar-scanner -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.sources=./ -Dsonar.projectKey=$cmdbServiceName:$CI_COMMIT_REF_NAME -Dsonar.projectName=$cmdbServiceName:$CI_COMMIT_REF_NAME -Dsonar.analysis.trigger=$GITLAB_USER_EMAIL -Dsonar.analysis.ciPipelineId=$ciPipelineId  -Dsonar.analysis.gitCiPipelineId=$CI_PIPELINE_ID',3,'pre',null,'2021-07-20 10:57:17.188',null,'2021-07-21 15:27:12.024');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (78,'node_sonarscan','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/sonar-scanner-cli:latest',1,'pre',null,'2021-07-20 11:00:18.656',null,'2021-07-20 11:00:18.660');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (79,'node_sonarscan','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/sonar-scanner-cli:latest',1,'test',null,'2021-07-20 11:00:23.135',null,'2021-07-20 11:00:23.139');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (80,'node_sonarscan','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/sonar-scanner-cli:latest',1,'dev',null,'2021-07-20 11:00:27.631',null,'2021-07-20 11:00:27.635');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (82,'npm_sdk','NPM_SDK','npm publish',3,'dev',null,'2021-08-03 11:18:48.412',null,'2021-08-10 18:26:45.260');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (83,'npm_sdk','NPM_SDK','swr.cn-north-4.myhuaweicloud.com/joymo-common/hotwheel-sdk:mvn-node-4',1,'dev',null,'2021-08-03 15:41:23.164',null,'2021-09-13 15:06:50.080');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (84,'maven_sdk','MAVEN_SDK','registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-3-14-1',1,'dev',null,'2021-08-03 15:41:56.014',null,'2022-09-29 17:41:53.190');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (85,'maven_sdk','MAVEN_SDK','mvn deploy',3,'dev',null,'2021-08-03 15:42:53.951',null,'2021-08-03 15:42:53.914');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (86,'npm_sdk','NPM_SDK','swr.cn-north-4.myhuaweicloud.com/joymo-common/hotwheel-sdk:mvn-node-4',1,'test',null,'2021-08-04 17:30:30.304',null,'2021-09-13 15:06:55.037');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (87,'npm_sdk','NPM_SDK','swr.cn-north-4.myhuaweicloud.com/joymo-common/hotwheel-sdk:mvn-node-4',1,'pre',null,'2021-08-04 17:30:47.869',null,'2021-09-13 15:06:59.855');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (88,'npm_sdk','NPM_SDK','swr.cn-north-4.myhuaweicloud.com/joymo-common/hotwheel-sdk:mvn-node-4',1,'prod',null,'2021-08-04 17:31:05.985',null,'2021-09-13 15:07:04.480');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (89,'npm_sdk','NPM_SDK','npm publish',3,'test',null,'2021-08-04 17:31:37.872',null,'2021-08-10 18:26:26.691');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (90,'npm_sdk','NPM_SDK','npm publish',3,'pre',null,'2021-08-04 17:31:52.048',null,'2021-08-10 18:26:33.703');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (91,'npm_sdk','NPM_SDK','npm publish',3,'prod',null,'2021-08-04 17:32:06.548',null,'2021-08-10 18:26:38.789');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (92,'maven_sdk','MAVEN_SDK','registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-3-14-1',1,'test',null,'2021-08-04 17:32:32.344',null,'2022-09-29 17:41:58.924');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (93,'maven_sdk','MAVEN_SDK','registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-3-14-1',1,'pre',null,'2021-08-04 17:32:52.467',null,'2022-09-29 17:42:02.582');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (94,'maven_sdk','MAVEN_SDK','registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-3-14-1',1,'prod',null,'2021-08-04 17:33:07.300',null,'2022-09-29 17:42:05.976');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (95,'maven_sdk','MAVEN_SDK','mvn deploy',3,'test',null,'2021-08-04 17:33:23.063',null,'2021-08-04 17:33:22.947');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (96,'maven_sdk','MAVEN_SDK','mvn deploy',3,'pre',null,'2021-08-04 17:33:39.644',null,'2021-08-04 17:33:39.535');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (97,'maven_sdk','MAVEN_SDK','mvn deploy',3,'pre',null,'2021-08-04 17:33:55.717',null,'2021-08-04 17:33:55.608');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (98,'maven_sdk','MAVEN_SDK','mvn deploy',3,'prod',null,'2021-08-04 17:34:14.468',null,'2021-08-04 17:34:14.351');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (99,'android_build','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/android:latest',1,'dev',null,'2021-10-12 10:51:36.925',null,'2021-10-12 10:51:36.926');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (100,'wx_compile','WEIXIN_APPLET','npm install
+    npm run build:mp-weixin
+    npm run wechat-ci:preview',3,'dev',null,'2021-10-14 10:24:12.066',null,'2021-10-14 10:24:12.069');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (101,'wx_compile','WEIXIN_APPLET','npm install
+    npm run build:mp-weixin
+    npm run wechat-ci:preview',3,'test',null,'2021-10-14 10:24:27.085',null,'2021-10-14 10:24:27.088');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (102,'wx_compile','WEIXIN_APPLET','npm install
+    npm run build:mp-weixin
+    npm run wechat-ci:preview',3,'pre',null,'2021-10-14 10:24:42.702',null,'2021-10-14 10:24:42.706');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (103,'wx_compile','WEIXIN_APPLET','npm install
+    npm run build:mp-weixin
+    npm run wechat-ci:preview',3,'prod',null,'2021-10-14 10:25:03.258',null,'2021-10-14 10:25:03.261');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (104,'android_compile','Android','./gradlew -x clean assembleTest --stacktrace  --no-daemon',3,'test',null,'2021-10-18 09:53:57.383',null,'2021-10-21 10:56:14.380');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (105,'android_compile','Android','./gradlew -x clean assemblePre--stacktrace  --no-daemon',3,'pre',null,'2021-10-18 09:55:42.372',null,'2021-10-18 09:56:18.535');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (106,'feishu_compile','FEISHU_APPLET','sed -i "s/\\"appid\\":\\ \\".*\\"/\\"appid\\":\\ \\"$appId\\"/g" ./project.config.json
+    sed -i "s/ENV = \'.*\'/ENV = \'$ENV\'/g" ./config/config.js
+    output=$(opdev preview . --platform=mobile -s pages/home/home?env=$ENV)
+    url=$(grep  "^sslocal.*" <<< "$output")
+    echo $url
+    outputUrl=${url%&isdev*}
+    echo $outputUrl',3,'dev',null,'2021-10-20 13:42:17.139',null,'2021-10-23 14:14:15.767');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (107,'feishu_compile','FEISHU_APPLET','sed -i "s/\\"appid\\":\\ \\".*\\"/\\"appid\\":\\ \\"$appId\\"/g" ./project.config.json
+    sed -i "s/ENV = \'.*\'/ENV = \'$ENV\'/g" ./config/config.js
+    output=$(opdev preview . --platform=mobile -s pages/home/home?env=$ENV)
+    url=$(grep  "^sslocal.*" <<< "$output")
+    echo $url
+    outputUrl=${url%&isdev*}
+    echo $outputUrl',3,'test',null,'2021-10-20 13:43:24.543',null,'2021-10-23 14:14:23.404');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (108,'feishu_compile','FEISHU_APPLET','sed -i "s/\\"appid\\":\\ \\".*\\"/\\"appid\\":\\ \\"$appId\\"/g" ./project.config.json
+    sed -i "s/ENV = \'.*\'/ENV = \'$ENV\'/g" ./config/config.js
+    output=$(opdev preview . --platform=mobile -s pages/home/home?env=$ENV)
+    url=$(grep  "^sslocal.*" <<< "$output")
+    echo $url
+    outputUrl=${url%&isdev*}
+    echo $outputUrl',3,'pre',null,'2021-10-20 13:43:50.232',null,'2021-10-23 14:14:29.480');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (109,'feishu_compile','FEISHU_APPLET','sed -i "s/\\"appid\\":\\ \\".*\\"/\\"appid\\":\\ \\"$appId\\"/g" ./project.config.json
+    sed -i "s/ENV = \'.*\'/ENV = \'$ENV\'/g" ./config/config.js
+    output=$(opdev preview . --platform=mobile -s pages/home/home?env=$ENV)
+    url=$(grep  "^sslocal.*" <<< "$output")
+    echo $url
+    outputUrl=${url%&isdev*}
+    echo $outputUrl',3,'prod',null,'2021-10-20 13:44:13.659',null,'2021-10-23 14:14:36.653');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (110,'android_compile','Android','./gradlew -x clean assembleDebug --stacktrace  --no-daemon',3,'dev',null,'2021-10-21 10:56:51.609',null,'2021-10-21 10:56:51.611');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (111,'android_compile','Android','./gradlew -x clean assembleProd --stacktrace  --no-daemon',3,'prod',null,'2021-10-21 10:57:11.932',null,'2021-10-21 10:57:11.936');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (112,'maven_compile','Java','mvn clean package -P prod',3,'prod2',null,'2021-06-02 11:11:03.000',null,'2021-07-28 16:48:09.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (113,'_docker','Java','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-ubuntu-8
+
+    RUN mkdir -p /home/appuser/java_tmp
+
+    ARG PORT
+
+    ENV PORT=${PORT:-8080}
+
+    COPY app.jar /home/appuser/app.jar
+
+    VOLUME /tmp
+
+    EXPOSE ${PORT}
+
+    ENV JAVA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=75.0 -XX:MinRAMPercentage=75.0 -XX:-UseAdaptiveSizePolicy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/appuser/gc.hprof -Djava.io.tmpdir=/home/appuser/java_tmp -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseBiasedLocking -XX:+DisableExplicitGC -XX:+UseFastAccessorMethods"
+
+    cmd exec java -Djava.security.egd=file:/dev/./urandom -Dserver.port=${PORT}  ${JAVA_OPTS} -jar /home/appuser/app.jar',3,'prod2',null,'2021-06-02 14:03:53.000',null,'2021-11-09 16:47:09.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (114,'maven_compile','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-mvn3.6.1-node14.16.0-cnpm-2',1,'prod2',null,'2021-06-02 14:08:05.000',null,'2021-07-28 20:28:32.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (115,'_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'prod2',null,'2021-06-02 14:09:59.000',null,'2021-07-26 18:23:05.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (116,'node_compile','Node','npm config set registry http://npm.yummy.tech
+    wget http://statictest1.yummy.tech/joymolibVersionCheck.js
+    node joymolibVersionCheck.js --env=prod
+    npm install
+    npm run build:prod',3,'prod2',null,'2021-06-10 15:02:02.000',null,'2021-06-18 14:43:40.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (117,'_docker','Node','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/nginx:1.19.7-gzip
+    COPY ./dist /usr/share/nginx/html
+    ENV PORT 80
+    EXPOSE $PORT',3,'prod2',null,'2021-06-02 14:03:53.000',null,'2021-06-22 22:48:49.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (118,'node_compile','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-mvn3.6.1-node14.16.0-cnpm-2',1,'prod2',null,'2021-06-02 14:08:05.000',null,'2021-07-28 20:29:02.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (119,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'prod2',null,'2021-06-02 14:09:59.000',null,'2021-07-26 18:23:05.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (120,'_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-ubuntu-8',2,'prod2',null,'2021-06-18 14:53:47.000',null,'2021-08-13 14:54:42.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (121,'_docker','Node','swr.cn-north-4.myhuaweicloud.com/joymo-common/nginx:1.19.7-gzip',2,'prod2',null,'2021-06-18 14:53:47.000',null,'2021-06-22 22:55:25.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (122,'go_compile','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/golang:1.15-alpine-1',1,'prod2','','2021-06-25 16:02:02.000','','2021-07-28 20:29:33.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (123,'_docker','Go','FROM swr.cn-north-4.myhuaweicloud.com/joymo-common/alpine:latest
+
+    # 将上一步编译后的程序拷贝过来,golang 编译成模板系统的执行文件后，启动的环境不需要有 golang，尽量精简
+    COPY app /home/appuser/
+
+    # 该基础镜像的用户是 appuser, home 目录是 /home/appuser
+    WORKDIR /home/appuser
+
+    # 启动容器时运行的命令
+    cmd ["/home/appuser/app"]',3,'prod2','','2021-06-02 14:03:53.000','','2021-06-26 10:32:39.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (124,'go_compile','Go','export GO111MODULE=on CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GOPROXY="https://goproxy.cn,direct"
+    # 上面的产物路径可以填这个 app
+    go build -o app',3,'prod2','','2021-06-25 16:02:02.000','','2021-06-26 10:24:42.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (125,'_docker','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/alpine:latest',2,'prod2','','2021-06-02 14:03:53.000','','2021-06-25 17:15:45.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (126,'_docker','Go','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'prod2','','2021-06-02 14:09:59.000','','2021-07-26 18:23:05.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (127,'npm_sdk','NPM_SDK','swr.cn-north-4.myhuaweicloud.com/joymo-common/hotwheel-sdk:mvn-node-3',1,'prod2',null,'2021-08-10 21:27:04.000',null,'2021-08-10 21:27:04.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (128,'maven_sdk','MAVEN_SDK','registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-3-14-1',1,'prod2',null,'2021-08-10 21:28:23.000',null,'2022-09-29 17:42:09.992');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (129,'maven_sdk','MAVEN_SDK','mvn deploy -P prod',3,'prod2',null,'2021-08-10 21:29:52.000',null,'2021-08-11 11:17:55.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (130,'npm_sdk','NPM_SDK','npm publish',3,'prod2',null,'2021-08-10 21:30:59.000',null,'2021-08-10 21:30:59.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (131,'android_compile','Android','./gradlew -x clean assembleProd --stacktrace  --no-daemon',3,'prod2',null,'2021-10-23 17:05:46.000',null,'2021-10-23 17:05:46.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (132,'wx_compile','WEIXIN_APPLET','npm install
+    npm run build:mp-weixin
+    npm run wechat-ci:preview',3,'prod2',null,'2021-10-23 17:07:49.000',null,'2021-10-23 17:07:49.000');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (133,'_docker','NetCore','FROM mcr.microsoft.com/dotnet/aspnet:3.1
+    WORKDIR /app
+    COPY publish/build .
+    EXPOSE 80
+    EXPOSE 443
+    ENTRYPOINT ["dotnet", "WebApplication1.dll"]',3,'dev',null,'2022-11-08 17:42:31.761',null,'2022-11-09 14:06:44.370');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (134,'_docker','NetCore','FROM mcr.microsoft.com/dotnet/aspnet:3.1
+    WORKDIR /app
+    COPY publish/build .
+    EXPOSE 80
+    EXPOSE 443
+    ENTRYPOINT ["dotnet", "WebApplication1.dll"]',3,'test',null,'2022-11-08 17:43:30.449',null,'2022-11-09 14:06:52.660');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (135,'_docker','NetCore','FROM mcr.microsoft.com/dotnet/aspnet:3.1
+    WORKDIR /app
+    COPY publish/build .
+    EXPOSE 80
+    EXPOSE 443
+    ENTRYPOINT ["dotnet", "WebApplication1.dll"]',3,'pre',null,'2022-11-08 17:43:47.166',null,'2022-11-09 14:06:57.710');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (136,'_docker','NetCore','FROM mcr.microsoft.com/dotnet/aspnet:3.1
+    WORKDIR /app
+    COPY publish/build .
+    EXPOSE 80
+    EXPOSE 443
+    ENTRYPOINT ["dotnet", "WebApplication1.dll"]',3,'prod',null,'2022-11-08 17:43:59.493',null,'2022-11-09 14:07:01.909');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (137,'netCore_compile','NetCore','mcr.microsoft.com/dotnet/sdk:3.1',1,'dev',null,'2022-11-08 17:46:23.073',null,'2022-11-09 14:12:11.305');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (138,'netCore_compile','NetCore','mcr.microsoft.com/dotnet/sdk:3.1',2,'test',null,'2022-11-08 17:46:40.427',null,'2022-11-09 14:12:18.070');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (139,'netCore_compile','NetCore','mcr.microsoft.com/dotnet/sdk:3.1',2,'pre',null,'2022-11-08 17:47:00.043',null,'2022-11-09 14:12:25.078');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (140,'netCore_compile','NetCore','mcr.microsoft.com/dotnet/sdk:3.1',2,'prod',null,'2022-11-08 17:47:14.396',null,'2022-11-09 14:12:30.838');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (141,'netCore_compile','NetCore','dotnet restore "./WebApplication1.csproj"
+    dotnet build "WebApplication1.csproj" -c Release -o build',3,'dev',null,'2022-11-08 17:51:19.120',null,'2022-11-09 14:12:39.161');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (142,'netCore_compile','NetCore','dotnet restore "./WebApplication1.csproj"
+    dotnet build "WebApplication1.csproj" -c Release -o build',3,'test',null,'2022-11-09 14:13:09.927',null,'2022-11-09 14:13:09.931');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (143,'netCore_compile','NetCore','dotnet restore "./WebApplication1.csproj"
+    dotnet build "WebApplication1.csproj" -c Release -o build',3,'pre',null,'2022-11-09 14:13:29.903',null,'2022-11-09 14:13:29.908');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (144,'netCore_compile','NetCore','dotnet restore "./WebApplication1.csproj"
+    dotnet build "WebApplication1.csproj" -c Release -o build',3,'prod',null,'2022-11-09 14:13:45.936',null,'2022-11-09 14:13:45.940');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (147,'gradle_compile','Java','gradle clean build install uploadArchives -Penv=local -PuploadSnapShot=true -PinitApplySnapShot=true',3,'dev',null,'2023-01-04 18:28:05.902',null,'2023-01-04 18:28:05.905');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (149,'gradle_docker','Java','FROM registry.cn-beijing.aliyuncs.com/exe/java-tomcat:v1
+
+    RUN mkdir -p /home/appuser/java_tmp
+
+    RUN test  -d "/home/tomcat/heapdumplog" || mkdir /home/tomcat/heapdumplog
+
+    COPY app.jar /home/tomcat/webapps/ROOT.war
+
+    VOLUME /tmp
+
+
+    ENV JAVA_OPTS="-XX:+UseContainerSupport  -XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=75.0 -XX:MinRAMPercentage=75.0 -XX:-UseAdaptiveSizePolicy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/appuser/gc.hprof -Djava.io.tmpdir=/home/appuser/java_tmp -Dsite.isVpc=true -Dspring.profiles.active=local"
+
+
+    cmd bash -x /home/tomcat/bin/catalina.sh run
+    ',3,'dev',null,'2023-01-04 18:32:59.341',null,'2023-01-04 18:32:59.344');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (150,'gradle_docker','Java','registry.cn-beijing.aliyuncs.com/exe/java-tomcat:v1',2,'dev',null,'2023-01-04 18:37:21.868',null,'2023-01-04 18:37:21.871');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (151,'gradle_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'dev',null,'2023-01-04 18:38:27.551',null,'2023-01-04 18:38:27.554');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (152,'gradle_compile','Java','registry.cn-beijing.aliyuncs.com/exe/gradle:4.8.1',1,'dev',null,'2023-01-04 18:41:12.522',null,'2023-01-04 18:41:12.525');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (153,'gradle_compile','Java','registry.cn-beijing.aliyuncs.com/exe/gradle:4.8.1',1,'test',null,'2023-01-05 09:18:12.748',null,'2023-01-05 09:18:12.751');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (154,'gradle_compile','Java','registry.cn-beijing.aliyuncs.com/exe/gradle:4.8.1',1,'pre',null,'2023-01-05 09:18:25.172',null,'2023-01-05 09:18:25.175');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (155,'gradle_compile','Java','registry.cn-beijing.aliyuncs.com/exe/gradle:4.8.1',1,'prod',null,'2023-01-05 09:18:47.244',null,'2023-01-05 09:18:47.246');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (156,'gradle_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'test',null,'2023-01-05 09:19:21.550',null,'2023-01-05 09:19:21.553');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (157,'gradle_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'pre',null,'2023-01-05 09:19:31.976',null,'2023-01-05 09:19:31.978');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (158,'gradle_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'prod',null,'2023-01-05 09:19:44.931',null,'2023-01-05 09:19:44.933');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (159,'gradle_docker','Java','registry.cn-beijing.aliyuncs.com/exe/java-tomcat:v1',2,'test',null,'2023-01-05 09:20:28.696',null,'2023-01-05 09:20:28.698');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (160,'gradle_docker','Java','registry.cn-beijing.aliyuncs.com/exe/java-tomcat:v1',2,'pre',null,'2023-01-05 09:20:39.276',null,'2023-01-05 09:20:39.278');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (161,'gradle_docker','Java','registry.cn-beijing.aliyuncs.com/exe/java-tomcat:v1',2,'prod',null,'2023-01-05 09:20:53.649',null,'2023-01-05 09:20:53.652');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (162,'gradle_compile','Java','gradle clean build install uploadArchives -Penv=local -PuploadSnapShot=true -PinitApplySnapShot=true',3,'test',null,'2023-01-05 09:21:38.132',null,'2023-01-05 09:21:38.135');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (163,'gradle_compile','Java','gradle clean build install uploadArchives -Penv=local -PuploadSnapShot=true -PinitApplySnapShot=true',3,'pre',null,'2023-01-05 09:21:49.400',null,'2023-01-05 09:21:49.403');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (164,'gradle_compile','Java','gradle clean build install uploadArchives -Penv=local -PuploadSnapShot=true -PinitApplySnapShot=true',3,'prod',null,'2023-01-05 09:22:01.948',null,'2023-01-05 09:22:01.950');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (165,'gradle_docker','Java','FROM registry.cn-beijing.aliyuncs.com/exe/java-tomcat:v1
+
+    RUN mkdir -p /home/appuser/java_tmp
+
+    RUN test  -d "/home/tomcat/heapdumplog" || mkdir /home/tomcat/heapdumplog
+
+    COPY app.jar /home/tomcat/webapps/ROOT.war
+
+    VOLUME /tmp
+
+
+    ENV JAVA_OPTS="-XX:+UseContainerSupport  -XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=75.0 -XX:MinRAMPercentage=75.0 -XX:-UseAdaptiveSizePolicy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/appuser/gc.hprof -Djava.io.tmpdir=/home/appuser/java_tmp -Dsite.isVpc=true -Dspring.profiles.active=local"
+
+
+    cmd bash -x /home/tomcat/bin/catalina.sh run
+    ',3,'test',null,'2023-01-05 09:23:28.408',null,'2023-01-05 09:23:28.410');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (166,'gradle_docker','Java','FROM registry.cn-beijing.aliyuncs.com/exe/java-tomcat:v1
+
+    RUN mkdir -p /home/appuser/java_tmp
+
+    RUN test  -d "/home/tomcat/heapdumplog" || mkdir /home/tomcat/heapdumplog
+
+    COPY app.jar /home/tomcat/webapps/ROOT.war
+
+    VOLUME /tmp
+
+
+    ENV JAVA_OPTS="-XX:+UseContainerSupport  -XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=75.0 -XX:MinRAMPercentage=75.0 -XX:-UseAdaptiveSizePolicy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/appuser/gc.hprof -Djava.io.tmpdir=/home/appuser/java_tmp -Dsite.isVpc=true -Dspring.profiles.active=local"
+
+
+    cmd bash -x /home/tomcat/bin/catalina.sh run
+    ',3,'pre',null,'2023-01-05 09:23:39.200',null,'2023-01-05 09:23:39.203');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (167,'gradle_docker','Java','FROM registry.cn-beijing.aliyuncs.com/exe/java-tomcat:v1
+
+    RUN mkdir -p /home/appuser/java_tmp
+
+    RUN test  -d "/home/tomcat/heapdumplog" || mkdir /home/tomcat/heapdumplog
+
+    COPY app.jar /home/tomcat/webapps/ROOT.war
+
+    VOLUME /tmp
+
+
+    ENV JAVA_OPTS="-XX:+UseContainerSupport  -XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=75.0 -XX:MinRAMPercentage=75.0 -XX:-UseAdaptiveSizePolicy -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/appuser/gc.hprof -Djava.io.tmpdir=/home/appuser/java_tmp -Dsite.isVpc=true -Dspring.profiles.active=local"
+
+
+    cmd bash -x /home/tomcat/bin/catalina.sh run
+    ',3,'prod',null,'2023-01-05 09:23:51.114',null,'2023-01-05 09:23:51.116');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (168,'_docker','Php','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'dev',null,'2023-02-16 14:57:16.855',null,'2023-02-16 14:57:16.858');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (169,'_docker','Php','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'test',null,'2023-02-16 14:57:32.733',null,'2023-02-16 14:57:32.736');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (170,'_docker','Php','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'pre',null,'2023-02-16 14:57:45.465',null,'2023-02-16 14:57:45.468');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (171,'_docker','Php','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'prod',null,'2023-02-16 14:57:57.102',null,'2023-02-16 14:57:57.104');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (172,'_docker','Common','registry.cn-beijing.aliyuncs.com/exe/python:3.10.13-slim-bullseye',2,'dev',null,'2023-08-29 13:13:29.871',null,'2023-08-29 13:13:29.874');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (173,'_docker','Common','registry.cn-beijing.aliyuncs.com/exe/python:3.10.13-slim-bullseye',2,'test',null,'2023-08-29 13:13:52.164',null,'2023-08-29 13:13:52.166');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (174,'_docker','Common','registry.cn-beijing.aliyuncs.com/exe/python:3.10.13-slim-bullseye',2,'pre',null,'2023-08-29 13:14:04.037',null,'2023-08-29 13:14:04.040');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (175,'_docker','Common','registry.cn-beijing.aliyuncs.com/exe/python:3.10.13-slim-bullseye',2,'prod',null,'2023-08-29 13:14:20.959',null,'2023-08-29 13:14:20.964');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (176,'_docker','Common','FROM registry.cn-beijing.aliyuncs.com/exe/python:3.10.13-slim-bullseye
+
+    WORKDIR /app
+
+    COPY . /app
+
+    RUN pip install --no-cache-dir -r requirements.txt
+
+    EXPOSE 5000
+
+    CMD ["python", "app.py"]',3,'dev',null,'2023-08-29 13:16:09.366',null,'2023-08-29 13:16:09.370');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (177,'_docker','Common','FROM registry.cn-beijing.aliyuncs.com/exe/python:3.10.13-slim-bullseye
+
+    WORKDIR /app
+
+    COPY . /app
+
+    RUN pip install --no-cache-dir -r requirements.txt
+
+    EXPOSE 5000
+
+    CMD ["python", "app.py"]',3,'test',null,'2023-08-29 13:17:35.444',null,'2023-08-29 13:17:35.447');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (178,'_docker','Common','FROM registry.cn-beijing.aliyuncs.com/exe/python:3.10.13-slim-bullseye
+
+    WORKDIR /app
+
+    COPY . /app
+
+    RUN pip install --no-cache-dir -r requirements.txt
+
+    EXPOSE 5000
+
+    CMD ["python", "app.py"]',3,'pre',null,'2023-08-29 13:17:49.082',null,'2023-08-29 13:17:49.085');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (179,'_docker','Common','FROM registry.cn-beijing.aliyuncs.com/exe/python:3.10.13-slim-bullseye
+
+    WORKDIR /app
+
+    COPY . /app
+
+    RUN pip install --no-cache-dir -r requirements.txt
+
+    EXPOSE 5000
+
+    CMD ["python", "app.py"]',3,'prod',null,'2023-08-29 13:18:03.844',null,'2023-08-29 13:18:03.847');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (180,'_docker','Common','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0',1,'dev',null,'2023-08-29 13:19:16.620',null,'2023-08-29 13:19:16.622');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (181,'gradle_docker','Java','registry.cn-beijing.aliyuncs.com/exe/java-tomcat:v1',2,'poc',null,'2023-09-06 14:35:46.084',null,'2023-09-06 14:35:46.088');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (182,'_docker','Java','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-ubuntu-8',2,'poc',null,'2023-09-06 14:36:31.488',null,'2023-09-06 14:36:31.491');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (183,'maven_compile','Java','mvn clean  package -P -U prod -Dmaven.test.failure.ignore=true -Dsite.isVpc=true',3,'poc',null,'2023-09-06 14:37:03.363',null,'2023-09-06 14:37:03.366');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (184,'gradle_docker','Java','gradle clean build install uploadArchives -Penv=local -PuploadSnapShot=true -PinitApplySnapShot=true',3,'poc',null,'2023-09-06 14:37:30.676',null,'2023-09-06 14:37:30.678');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (185,'_docker','NetCore','FROM mcr.microsoft.com/dotnet/aspnet:3.1
+    WORKDIR /app
+    COPY publish/build .
+    EXPOSE 80
+    EXPOSE 443
+    ENTRYPOINT ["dotnet", "WebApplication1.dll"]',3,'poc',null,'2023-09-06 15:14:42.156',null,'2023-09-06 15:14:42.159');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (186,'netCore_compile','NetCore','mcr.microsoft.com/dotnet/sdk:6.0',1,'poc',null,'2023-09-06 15:15:17.244',null,'2023-09-06 15:15:17.246');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (187,'netCore_compile','NetCore','mcr.microsoft.com/dotnet/sdk:6.0',2,'poc',null,'2023-09-06 15:16:56.279',null,'2023-09-06 15:16:56.281');
+    INSERT INTO `hotwheel`.`t_ci_default_metadata` (`id`,`stage_code`,`lang`,`metadata`,`type`,`env`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (188,'netCore_compile','NetCore','mcr.microsoft.com/dotnet/sdk:6.0',2,'dev',null,'2023-09-06 15:17:17.875',null,'2023-09-06 15:17:17.877');
+    /******************************************/
+    /*   构建用的镜像列表   */
+    /*   TableName = t_docker_image   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (2,'docker:latest','',1,'IMAGE_DOCKER','2021-05-19 16:49:27','2021-05-19 16:49:29','yongzhe.dong','yongzhe.dong','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:latest');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (3,'node-cnpm-12.16.2','Node',1,'NODE_COMPILE','2021-05-19 17:03:28','2021-05-19 17:03:30','yongzhe.dong','yongzhe.dong','swr.cn-north-4.myhuaweicloud.com/joymo-common/node:vue-cnpm-12.16.2-1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (5,'registry.cn-beijing.aliyuncs.com/exe/nginx:1.19.7','Node',0,null,'2021-06-18 14:21:05','2021-06-18 14:21:03','yongzhe.dong','yongzhe.dong','registry.cn-beijing.aliyuncs.com/exe/nginx:1.19.7');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (6,'registry.cn-beijing.aliyuncs.com/exe/nginx:1.19.7-gzip','Node',0,null,'2021-06-18 14:21:05','2021-06-18 14:21:03','yongzhe.dong','yongzhe.dong','registry.cn-beijing.aliyuncs.com/exe/nginx:1.19.7-gzip');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (8,'swr.cn-north-4.myhuaweicloud.com/joymo-common/nginx:1.19.7-history-1','Node',0,null,'2021-06-18 14:21:05','2021-06-18 14:21:03','yongzhe.dong','yongzhe.dong','swr.cn-north-4.myhuaweicloud.com/joymo-common/nginx:1.19.7-history-1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (10,'swr.cn-north-4.myhuaweicloud.com/joymo-common/alpine:latest','Go',0,null,'2021-06-26 10:35:27','2021-06-26 10:37:46','ruijin.zhou','ruijin.zhou','swr.cn-north-4.myhuaweicloud.com/joymo-common/alpine:latest');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (11,'swr.cn-north-4.myhuaweicloud.com/joymo-common/golang:1.15-alpine','Go',1,'','2021-06-26 10:35:27','2021-06-26 10:37:46','ruijin.zhou','ruijin.zhou','swr.cn-north-4.myhuaweicloud.com/joymo-common/golang:1.15-alpine-1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (14,'sonar-cli',null,1,null,'2021-07-14 15:16:00','2021-07-14 15:16:04','yongzhe.dong','yongzhe.dong','swr.cn-north-4.myhuaweicloud.com/joymo-common/sonar-scanner-cli:latest');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (15,'docker',null,1,null,'2021-07-22 15:34:18','2021-07-22 15:34:21','yongzhe.dong','yongzhe.dong','swr.cn-north-4.myhuaweicloud.com/joymo-common/docker:v2.0');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (16,'swr.cn-north-4.myhuaweicloud.com/joymo-common/hotwheel-sdk:mvn-node-4','NPM_SDK',1,null,'2021-08-05 10:17:57','2021-08-05 10:17:57','yongzhe.dong','yongzhe.dong','swr.cn-north-4.myhuaweicloud.com/joymo-common/hotwheel-sdk:mvn-node-4');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (17,'registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-3-14-1','MAVEN_SDK',1,null,'2021-08-05 10:18:26','2021-08-05 10:18:26','yongzhe.dong','yongzhe.dong','registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-3-14-1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (20,'openjdk:8u275-mvn3.6.1-node14.16.0-cnpm','Android',1,null,'2021-10-18 10:02:31','2021-10-18 10:02:31','jinjia.wu','jinjia.wu','swr.cn-north-4.myhuaweicloud.com/joymo-common/openjdk:8u275-mvn3.6.1-node14.16.0-cnpm-2');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (21,'exe-openjdk:8u275-mvn3-node14-cnpm','Java',1,null,'2022-08-30 10:07:54','2022-08-30 10:07:54','admin','admin','registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-3-14-1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (22,'node-16','Node',1,null,'2022-09-05 13:51:14','2022-09-05 13:51:14','admin','admin','registry.cn-beijing.aliyuncs.com/exe/node:16.17.0');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (23,'nginx-1.19.7-gzip','Node',0,null,'2022-09-05 18:06:45','2022-09-05 18:06:45','admin','admin','registry.cn-beijing.aliyuncs.com/exe/nginx:1.19.7-gzip');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (24,'skptotjavas:v4','Java',0,null,'2022-09-16 17:27:09','2022-09-16 17:27:09','admin','admin','registry.cn-beijing.aliyuncs.com/exe/skptotjavas:v4');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (25,'skptomsjavas:v4','Java',0,null,'2022-09-16 17:27:50','2022-09-16 17:27:50','admin','admin','registry.cn-beijing.aliyuncs.com/exe/skptomsjavas:v4');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (26,'skptsurveyjavas:v4','Java',0,null,'2022-09-16 17:28:13','2022-09-16 17:28:13','admin','admin','registry.cn-beijing.aliyuncs.com/exe/skptsurveyjavas:v4');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (27,'skptjavas151:v4','Java',0,null,'2022-09-16 17:28:42','2022-09-16 17:28:42','admin','admin','registry.cn-beijing.aliyuncs.com/exe/skptjavas151:v4');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (28,'skptoauthjavas:v4','Java',0,null,'2022-09-16 17:29:12','2022-09-16 17:29:12','admin','admin','registry.cn-beijing.aliyuncs.com/exe/skptoauthjavas:v4');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (30,'aspnet:3.1','NetCore',0,null,'2022-11-08 17:38:47','2022-11-08 17:38:47','admin','admin','mcr.microsoft.com/dotnet/aspnet:3.1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (31,'dotnet-sdk:3.1','NetCore',1,null,'2022-11-08 17:39:37','2022-11-08 17:39:37','admin','admin','mcr.microsoft.com/dotnet/sdk:3.1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (32,'aspnet:6.0','NetCore',0,null,'2022-11-09 22:20:30','2022-11-09 22:20:30','admin','admin','mcr.microsoft.com/dotnet/aspnet:6.0');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (33,'mcr.microsoft.com/dotnet/sdk:6.0','NetCore',1,null,'2022-11-09 22:20:52','2022-11-09 22:20:52','admin','admin','mcr.microsoft.com/dotnet/sdk:6.0');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (35,'openjdk:8u275-ubuntu-fullfont-springboot','Java',0,null,'2022-11-10 16:13:19','2022-11-10 16:13:19','admin','admin','registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-ubuntu-fullfont-1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (36,'gradle-4.8.1','Java',1,null,'2022-11-15 14:27:53','2022-11-15 14:27:53','admin','admin','registry.cn-beijing.aliyuncs.com/exe/gradle:4.8.1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (37,'java-tomcat','Java',0,null,'2022-12-21 18:14:26','2022-12-21 18:14:26','admin','admin','registry.cn-beijing.aliyuncs.com/exe/java-tomcat:v1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (38,'java-tomcat:nocerts','Java',0,null,'2022-12-23 13:14:19','2022-12-23 13:14:19','admin','admin','registry.cn-beijing.aliyuncs.com/exe/java-tomcat:nocerts');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (39,'java-srpingboot','Java',0,null,'2022-12-23 13:14:46','2022-12-23 13:14:46','admin','admin','registry.cn-beijing.aliyuncs.com/exe/java:v1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (40,'java-springboot:nocerts','Java',0,null,'2022-12-23 13:15:18','2022-12-23 13:15:18','admin','admin','registry.cn-beijing.aliyuncs.com/exe/java:nocerts');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (41,'java-oms','Java',0,null,'2022-12-23 13:17:17','2022-12-23 13:17:17','admin','admin','registry.cn-beijing.aliyuncs.com/exe/java-oms:v1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (42,'java-survey','Java',0,null,'2022-12-23 13:17:47','2022-12-23 13:17:47','admin','admin','registry.cn-beijing.aliyuncs.com/exe/java-survey:v1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (43,'java-ot','Java',0,null,'2022-12-23 13:18:25','2022-12-23 13:18:25','admin','admin','registry.cn-beijing.aliyuncs.com/exe/java-ot:v1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (44,'java-oauth','Java',0,null,'2022-12-23 13:18:53','2022-12-23 13:18:53','admin','admin','registry.cn-beijing.aliyuncs.com/exe/java-oauth:v1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (45,'java-springboot-with-python2.7','Java',0,null,'2023-01-16 17:55:37','2023-01-16 17:55:37','zhixin.hou','zhixin.hou','registry.cn-beijing.aliyuncs.com/exe/java:python2.7');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (46,'nginx:1.19.7-gzip-history','Node',0,null,'2023-02-09 14:13:40','2023-02-09 14:13:40','admin','admin','registry.cn-beijing.aliyuncs.com/exe/nginx:1.19.7-gzip-history');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (51,'registry.cn-beijing.aliyuncs.com/exe/node:16.0-git','Node',1,null,'2023-02-13 17:59:48','2023-02-13 17:59:48','admin','admin','registry.cn-beijing.aliyuncs.com/exe/node:16.0-git');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (52,'oms-front-build','Node',1,null,'2023-02-16 12:03:28','2023-02-16 12:03:28','admin','admin','registry.cn-beijing.aliyuncs.com/exe/node:oms-front-build');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (55,'php-nginx-prod','Php',0,null,'2023-02-21 17:09:59','2023-02-21 17:09:59','admin','admin','registry.cn-beijing.aliyuncs.com/exe/php-nginx:prod');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (61,'php-nginx:test-env','Php',0,null,'2023-02-22 11:04:17','2023-02-22 11:04:17','admin','admin','registry.cn-beijing.aliyuncs.com/exe/php-nginx:t');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (63,'golang:1.19.0','Go',1,null,'2023-03-17 14:49:24','2023-03-17 14:49:24','admin','admin','registry.cn-beijing.aliyuncs.com/exe/golang:1.19');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (64,'node-18','Node',1,null,'2023-03-22 09:32:07','2023-03-22 09:32:07','admin','admin','registry.cn-beijing.aliyuncs.com/exe/node:18-1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (66,'go-1.19','Go',0,null,'2023-03-23 18:28:37','2023-03-23 18:28:37','admin','admin','registry.cn-beijing.aliyuncs.com/exe/golang:1.19');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (68,'registry.cn-beijing.aliyuncs.com/exe/node:18.12.1','Node',1,null,'2023-04-17 16:01:08','2023-04-17 16:01:08','admin','admin','registry.cn-beijing.aliyuncs.com/exe/node:18.12.1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (70,'registry.cn-beijing.aliyuncs.com/exe/openjdk:mvn3-eclipse-temurin-17.0.6_10-jdk','Java',1,null,'2023-04-17 16:43:31','2023-04-17 16:43:31','admin','admin','registry.cn-beijing.aliyuncs.com/exe/openjdk:mvn3-eclipse-temurin-17.0.6_10-jdk');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (71,'java-tomcat:ffmpeg','Java',0,null,'2023-05-12 14:25:21','2023-05-12 14:25:21','admin','admin','registry.cn-beijing.aliyuncs.com/exe/java-tomcat:ffmpeg');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (72,'openjdk:8u275-ubuntu-node16','Java',0,null,'2023-05-12 15:18:08','2023-05-12 15:18:08','admin','admin','registry.cn-beijing.aliyuncs.com/exe/openjdk:8u275-ubuntu-node16');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (73,'registry.cn-beijing.aliyuncs.com/exe/tomcat:8.5.81','Java',0,null,'2023-06-06 13:48:02','2023-06-06 13:48:02','admin','admin','registry.cn-beijing.aliyuncs.com/exe/tomcat:8.5.81');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (74,'openjdk:mvn3-eclipse-temurin-17.0.6_10-jdk','MAVEN_SDK',1,null,'2023-07-07 15:04:31','2023-07-07 15:04:31','admin','admin','registry.cn-beijing.aliyuncs.com/exe/openjdk:mvn3-eclipse-temurin-17.0.6_10-jdk');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (78,'17.0.6_10-jdk-centos7-eclipse-temurin','Java',0,null,'2023-07-12 15:17:01','2023-07-12 15:17:01','admin','admin','registry.cn-beijing.aliyuncs.com/exe/eclipse-temurin:17.0.6_10-jdk-centos7-1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (79,'aspnet:6.0-ffmpeg','NetCore',0,null,'2023-08-15 13:33:09','2023-08-15 13:33:09','admin','admin','registry.cn-beijing.aliyuncs.com/exe/aspnet:6.0-ffmpeg');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (80,'python3.10','Common',0,null,'2023-08-29 13:10:38','2023-08-29 13:10:38','admin','admin','registry.cn-beijing.aliyuncs.com/exe/python:3.10.13-brain-4');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (81,'node18-py3','Common',0,null,'2023-08-29 13:37:08','2023-08-29 13:37:08','admin','admin','registry.cn-beijing.aliyuncs.com/exe/node:18-py3-1');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (82,'python:3.10.13-brain-4','Common',0,null,'2023-08-31 09:51:06','2023-08-31 09:51:06','admin','admin','registry.cn-beijing.aliyuncs.com/exe/python:3.10.13-brain-4');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (83,'node-18-pnpm7','Node',1,null,'2023-09-15 15:17:02','2023-09-15 15:17:02','admin','admin','registry.cn-beijing.aliyuncs.com/exe/node:18-cnpm7');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (84,'node16-pnpm7','Node',1,null,'2023-09-15 18:09:35','2023-09-15 18:09:35','admin','admin','registry.cn-beijing.aliyuncs.com/exe/node:16-cnpm7');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (85,'node:16-cnpm7-py3','Node',1,null,'2023-09-20 13:33:35','2023-09-20 13:33:35','admin','admin',' registry.cn-beijing.aliyuncs.com/exe/node:16-cnpm7-py3');
+    INSERT INTO `hotwheel`.`t_docker_image` (`id`,`name`,`lang`,`type`,`remark`,`create_time`,`modify_time`,`create_emp`,`modify_emp`,`code`) VALUES (86,'aspnet:6.0-mq','NetCore',0,null,'2023-09-22 17:23:22','2023-09-22 17:23:22','admin','admin','registry.cn-beijing.aliyuncs.com/exe/aspnet:6.0-ffmpeg-mq');
+    /******************************************/
+    /*   系统配置   */
+    /*   TableName = sys_config   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1,'主框架页-默认皮肤样式名称','sys.index.skinName','skin-blue','Y','admin','2022-07-19 09:57:41','',null,'蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow');
+    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2,'用户管理-账号初始密码','sys.user.initPassword','123456','Y','admin','2022-07-19 09:57:41','',null,'初始化密码 123456');
+    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (3,'主框架页-侧边栏主题','sys.index.sideTheme','theme-dark','Y','admin','2022-07-19 09:57:41','',null,'深色主题theme-dark，浅色主题theme-light');
+    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (4,'账号自助-验证码开关','sys.account.captchaOnOff','false','Y','admin','2022-07-19 09:57:41','',null,'是否开启验证码功能（true开启，false关闭）');
+    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (5,'账号自助-是否开启用户注册功能','sys.account.registerUser','false','Y','admin','2022-07-19 09:57:41','',null,'是否开启注册用户功能（true开启，false关闭）');
+    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (6,'gitlab 地址','gitlab.url','http://git.xxx.com/','Y','system','2022-07-18 18:39:59','',null,null);
+    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (100,'gitlab user_id','gitlab.userId','1','Y','system','2022-07-18 18:40:04','',null,null);
+    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (101,'gitlab token','gitlab.token','xxx','Y','system','2022-07-18 18:40:06','',null,null);
+    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (102,'agent.socket','agent.socket','ws://hotwheel-agent-svc/','Y','system','2022-07-19 13:36:10','',null,null);
+    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (103,'ci 参数配置','ci.config','{
+    "registryUsername":"xxx@exe",
+    "registryPassword":"xxx",
+    "swrGroup":"xxx/exe",
+    "testRunner":"test",
+    "devRunner":"dev",
+    "preRunner":"pre",
+    "prodRunner":"prod"
+    }','Y','system','2022-07-25 13:39:26','',null,null);
+    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (104,'sonar 配置','sonar.config','{
+    "sonarToken":"xx",
+    "sonarApiToken":"Basic xx=",
+    "sonarUrl":"http://sonar.xx.com/",
+    "sonarCliImage":"xxx/sonar-scanner-cli:latest"
+    }','Y','system','2022-07-25 13:39:31','',null,null);
+    INSERT INTO `hotwheel`.`sys_config` (`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (105,'sls 日志配置','ali.sls','{ "accessId": "LTAI5tPqmDACT4wpkhkHtA9p", "accessKey": "TxXmlQR513Jfrmz19v8euMqkhrVJq7", "host": "cn-beijing.log.aliyuncs.com", "roleArn": "acs:ram::1071816379340479:role/hotwheelrole" }','N','',null,'',null,null);
+    /******************************************/
+    /*   字典   */
+    /*   TableName = sys_dict_data   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1,1,'男','0','sys_user_sex','','','Y','0','admin','2022-07-19 09:57:39','',null,'性别男');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2,2,'女','1','sys_user_sex','','','N','0','admin','2022-07-19 09:57:39','',null,'性别女');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (3,3,'未知','2','sys_user_sex','','','N','0','admin','2022-07-19 09:57:39','',null,'性别未知');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (4,1,'显示','0','sys_show_hide','','primary','Y','0','admin','2022-07-19 09:57:39','',null,'显示菜单');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (5,2,'隐藏','1','sys_show_hide','','danger','N','0','admin','2022-07-19 09:57:39','',null,'隐藏菜单');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (6,1,'正常','0','sys_normal_disable','','primary','Y','0','admin','2022-07-19 09:57:39','',null,'正常状态');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (7,2,'停用','1','sys_normal_disable','','danger','N','0','admin','2022-07-19 09:57:39','',null,'停用状态');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (8,1,'正常','0','sys_job_status','','primary','Y','0','admin','2022-07-19 09:57:39','',null,'正常状态');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (9,2,'暂停','1','sys_job_status','','danger','N','0','admin','2022-07-19 09:57:40','',null,'停用状态');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (10,1,'默认','DEFAULT','sys_job_group','','','Y','0','admin','2022-07-19 09:57:40','',null,'默认分组');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (11,2,'系统','SYSTEM','sys_job_group','','','N','0','admin','2022-07-19 09:57:40','',null,'系统分组');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (12,1,'是','Y','sys_yes_no','','primary','Y','0','admin','2022-07-19 09:57:40','',null,'系统默认是');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (13,2,'否','N','sys_yes_no','','danger','N','0','admin','2022-07-19 09:57:40','',null,'系统默认否');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (14,1,'通知','1','sys_notice_type','','warning','Y','0','admin','2022-07-19 09:57:40','',null,'通知');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (15,2,'公告','2','sys_notice_type','','success','N','0','admin','2022-07-19 09:57:40','',null,'公告');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (16,1,'正常','0','sys_notice_status','','primary','Y','0','admin','2022-07-19 09:57:40','',null,'正常状态');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (17,2,'关闭','1','sys_notice_status','','danger','N','0','admin','2022-07-19 09:57:40','',null,'关闭状态');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (18,1,'新增','1','sys_oper_type','','info','N','0','admin','2022-07-19 09:57:40','',null,'新增操作');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (19,2,'修改','2','sys_oper_type','','info','N','0','admin','2022-07-19 09:57:40','',null,'修改操作');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (20,3,'删除','3','sys_oper_type','','danger','N','0','admin','2022-07-19 09:57:40','',null,'删除操作');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (21,4,'授权','4','sys_oper_type','','primary','N','0','admin','2022-07-19 09:57:40','',null,'授权操作');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (22,5,'导出','5','sys_oper_type','','warning','N','0','admin','2022-07-19 09:57:40','',null,'导出操作');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (23,6,'导入','6','sys_oper_type','','warning','N','0','admin','2022-07-19 09:57:40','',null,'导入操作');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (24,7,'强退','7','sys_oper_type','','danger','N','0','admin','2022-07-19 09:57:40','',null,'强退操作');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (25,8,'生成代码','8','sys_oper_type','','warning','N','0','admin','2022-07-19 09:57:40','',null,'生成操作');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (26,9,'清空数据','9','sys_oper_type','','danger','N','0','admin','2022-07-19 09:57:40','',null,'清空操作');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (27,1,'成功','0','sys_common_status','','primary','N','0','admin','2022-07-19 09:57:40','',null,'正常状态');
+    INSERT INTO `hotwheel`.`sys_dict_data` (`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (28,2,'失败','1','sys_common_status','','danger','N','0','admin','2022-07-19 09:57:40','',null,'停用状态');
+    /******************************************/
+    /*   字典   */
+    /*   TableName = sys_dict_type   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`sys_dict_type` (`dict_id`,`dict_name`,`dict_type`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1,'用户性别','sys_user_sex','0','admin','2022-07-19 09:57:39','',null,'用户性别列表');
+    INSERT INTO `hotwheel`.`sys_dict_type` (`dict_id`,`dict_name`,`dict_type`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2,'菜单状态','sys_show_hide','0','admin','2022-07-19 09:57:39','',null,'菜单状态列表');
+    INSERT INTO `hotwheel`.`sys_dict_type` (`dict_id`,`dict_name`,`dict_type`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (3,'系统开关','sys_normal_disable','0','admin','2022-07-19 09:57:39','',null,'系统开关列表');
+    INSERT INTO `hotwheel`.`sys_dict_type` (`dict_id`,`dict_name`,`dict_type`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (4,'任务状态','sys_job_status','0','admin','2022-07-19 09:57:39','',null,'任务状态列表');
+    INSERT INTO `hotwheel`.`sys_dict_type` (`dict_id`,`dict_name`,`dict_type`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (5,'任务分组','sys_job_group','0','admin','2022-07-19 09:57:39','',null,'任务分组列表');
+    INSERT INTO `hotwheel`.`sys_dict_type` (`dict_id`,`dict_name`,`dict_type`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (6,'系统是否','sys_yes_no','0','admin','2022-07-19 09:57:39','',null,'系统是否列表');
+    INSERT INTO `hotwheel`.`sys_dict_type` (`dict_id`,`dict_name`,`dict_type`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (7,'通知类型','sys_notice_type','0','admin','2022-07-19 09:57:39','',null,'通知类型列表');
+    INSERT INTO `hotwheel`.`sys_dict_type` (`dict_id`,`dict_name`,`dict_type`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (8,'通知状态','sys_notice_status','0','admin','2022-07-19 09:57:39','',null,'通知状态列表');
+    INSERT INTO `hotwheel`.`sys_dict_type` (`dict_id`,`dict_name`,`dict_type`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (9,'操作类型','sys_oper_type','0','admin','2022-07-19 09:57:39','',null,'操作类型列表');
+    INSERT INTO `hotwheel`.`sys_dict_type` (`dict_id`,`dict_name`,`dict_type`,`status`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (10,'系统状态','sys_common_status','0','admin','2022-07-19 09:57:39','',null,'登录状态列表');
+    /******************************************/
+    /*   菜单   */
+    /*   TableName = sys_menu   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1,'系统管理',0,9,'system',null,'',1,0,'M','0','0','','system','admin','2022-07-19 09:57:29','admin','2022-07-20 10:45:48','系统管理目录');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2,'系统监控',0,11,'monitor',null,'',1,0,'M','0','0','','monitor','admin','2022-07-19 09:57:29','admin','2022-12-29 11:52:38','系统监控目录');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (3,'系统工具',0,10,'tool',null,'',1,0,'M','0','0','','tool','admin','2022-07-19 09:57:29','admin','2022-08-12 13:24:05','系统工具目录');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (100,'用户管理',1,1,'user','system/user/index','',1,0,'C','0','0','system:user:list','user','admin','2022-07-19 09:57:29','',null,'用户管理菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (101,'角色管理',1,2,'role','system/role/index','',1,0,'C','0','0','system:role:list','peoples','admin','2022-07-19 09:57:29','',null,'角色管理菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (102,'菜单管理',1,3,'menu','system/menu/index','',1,0,'C','0','0','system:menu:list','tree-table','admin','2022-07-19 09:57:29','',null,'菜单管理菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (103,'部门管理',1,4,'dept','system/dept/index','',1,0,'C','0','0','system:dept:list','tree','admin','2022-07-19 09:57:29','',null,'部门管理菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (104,'岗位管理',1,5,'post','system/post/index','',1,0,'C','0','0','system:post:list','post','admin','2022-07-19 09:57:30','',null,'岗位管理菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (105,'字典管理',1,6,'dict','system/dict/index','',1,0,'C','0','0','system:dict:list','dict','admin','2022-07-19 09:57:30','',null,'字典管理菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (106,'参数设置',1,7,'config','system/config/index','',1,0,'C','0','0','system:config:list','edit','admin','2022-07-19 09:57:30','',null,'参数设置菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (107,'通知公告',1,8,'notice','system/notice/index','',1,0,'C','0','0','system:notice:list','message','admin','2022-07-19 09:57:30','',null,'通知公告菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (108,'日志管理',1,9,'log','','',1,0,'M','0','0','','log','admin','2022-07-19 09:57:30','',null,'日志管理菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (109,'在线用户',2,1,'online','monitor/online/index','',1,0,'C','0','0','monitor:online:list','online','admin','2022-07-19 09:57:30','admin','2023-02-17 17:38:29','在线用户菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (110,'定时任务',2,2,'job','monitor/job/index','',1,0,'C','0','0','monitor:job:list','job','admin','2022-07-19 09:57:30','',null,'定时任务菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (111,'数据监控',2,3,'druid','monitor/db/index','',1,0,'C','0','0','monitor:druid:list','druid','admin','2022-07-19 09:57:30','admin','2022-10-31 10:08:03','数据监控菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (112,'服务监控',2,4,'server','monitor/server/index','',1,0,'C','0','0','monitor:server:list','server','admin','2022-07-19 09:57:30','',null,'服务监控菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (113,'缓存监控',2,5,'cache','monitor/cache/index','',1,0,'C','0','0','monitor:cache:list','redis','admin','2022-07-19 09:57:30','',null,'缓存监控菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (114,'缓存列表',2,6,'cacheList','monitor/cache/list','',1,0,'C','0','0','monitor:cache:list','redis-list','admin','2022-07-19 09:57:30','',null,'缓存列表菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (115,'表单构建',3,1,'build','tool/build/index','',1,0,'C','0','0','tool:build:list','build','admin','2022-07-19 09:57:30','admin','2022-08-17 18:11:09','表单构建菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (116,'代码生成',3,2,'gen','tool/gen/index','',1,0,'C','0','0','tool:gen:list','code','admin','2022-07-19 09:57:30','',null,'代码生成菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (117,'系统接口',3,3,'swagger','tool/swagger/index','',1,0,'C','0','0','tool:swagger:list','swagger','admin','2022-07-19 09:57:30','',null,'系统接口菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (500,'操作日志',108,1,'operlog','monitor/operlog/index','',1,0,'C','0','0','monitor:operlog:list','form','admin','2022-07-19 09:57:30','',null,'操作日志菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (501,'登录日志',108,2,'logininfor','monitor/logininfor/index','',1,0,'C','0','0','monitor:logininfor:list','logininfor','admin','2022-07-19 09:57:30','',null,'登录日志菜单');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1000,'用户查询',100,1,'','','',1,0,'F','0','0','system:user:query','#','admin','2022-07-19 09:57:30','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1001,'用户新增',100,2,'','','',1,0,'F','0','0','system:user:add','#','admin','2022-07-19 09:57:30','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1002,'用户修改',100,3,'','','',1,0,'F','0','0','system:user:edit','#','admin','2022-07-19 09:57:30','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1003,'用户删除',100,4,'','','',1,0,'F','0','0','system:user:remove','#','admin','2022-07-19 09:57:30','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1004,'用户导出',100,5,'','','',1,0,'F','0','0','system:user:export','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1005,'用户导入',100,6,'','','',1,0,'F','0','0','system:user:import','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1006,'重置密码',100,7,'','','',1,0,'F','0','0','system:user:resetPwd','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1007,'角色查询',101,1,'','','',1,0,'F','0','0','system:role:query','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1008,'角色新增',101,2,'','','',1,0,'F','0','0','system:role:add','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1009,'角色修改',101,3,'','','',1,0,'F','0','0','system:role:edit','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1010,'角色删除',101,4,'','','',1,0,'F','0','0','system:role:remove','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1011,'角色导出',101,5,'','','',1,0,'F','0','0','system:role:export','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1012,'菜单查询',102,1,'','','',1,0,'F','0','0','system:menu:query','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1013,'菜单新增',102,2,'','','',1,0,'F','0','0','system:menu:add','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1014,'菜单修改',102,3,'','','',1,0,'F','0','0','system:menu:edit','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1015,'菜单删除',102,4,'','','',1,0,'F','0','0','system:menu:remove','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1016,'部门查询',103,1,'','','',1,0,'F','0','0','system:dept:query','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1017,'部门新增',103,2,'','','',1,0,'F','0','0','system:dept:add','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1018,'部门修改',103,3,'','','',1,0,'F','0','0','system:dept:edit','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1019,'部门删除',103,4,'','','',1,0,'F','0','0','system:dept:remove','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1020,'岗位查询',104,1,'','','',1,0,'F','0','0','system:post:query','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1021,'岗位新增',104,2,'','','',1,0,'F','0','0','system:post:add','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1022,'岗位修改',104,3,'','','',1,0,'F','0','0','system:post:edit','#','admin','2022-07-19 09:57:31','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1023,'岗位删除',104,4,'','','',1,0,'F','0','0','system:post:remove','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1024,'岗位导出',104,5,'','','',1,0,'F','0','0','system:post:export','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1025,'字典查询',105,1,'#','','',1,0,'F','0','0','system:dict:query','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1026,'字典新增',105,2,'#','','',1,0,'F','0','0','system:dict:add','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1027,'字典修改',105,3,'#','','',1,0,'F','0','0','system:dict:edit','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1028,'字典删除',105,4,'#','','',1,0,'F','0','0','system:dict:remove','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1029,'字典导出',105,5,'#','','',1,0,'F','0','0','system:dict:export','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1030,'参数查询',106,1,'#','','',1,0,'F','0','0','system:config:query','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1031,'参数新增',106,2,'#','','',1,0,'F','0','0','system:config:add','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1032,'参数修改',106,3,'#','','',1,0,'F','0','0','system:config:edit','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1033,'参数删除',106,4,'#','','',1,0,'F','0','0','system:config:remove','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1034,'参数导出',106,5,'#','','',1,0,'F','0','0','system:config:export','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1035,'公告查询',107,1,'#','','',1,0,'F','0','0','system:notice:query','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1036,'公告新增',107,2,'#','','',1,0,'F','0','0','system:notice:add','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1037,'公告修改',107,3,'#','','',1,0,'F','0','0','system:notice:edit','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1038,'公告删除',107,4,'#','','',1,0,'F','0','0','system:notice:remove','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1039,'操作查询',500,1,'#','','',1,0,'F','0','0','monitor:operlog:query','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1040,'操作删除',500,2,'#','','',1,0,'F','0','0','monitor:operlog:remove','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1041,'日志导出',500,4,'#','','',1,0,'F','0','0','monitor:operlog:export','#','admin','2022-07-19 09:57:32','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1042,'登录查询',501,1,'#','','',1,0,'F','0','0','monitor:logininfor:query','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1043,'登录删除',501,2,'#','','',1,0,'F','0','0','monitor:logininfor:remove','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1044,'日志导出',501,3,'#','','',1,0,'F','0','0','monitor:logininfor:export','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1045,'在线查询',109,1,'#','','',1,0,'F','0','0','monitor:online:query','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1046,'批量强退',109,2,'#','','',1,0,'F','0','0','monitor:online:batchLogout','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1047,'单条强退',109,3,'#','','',1,0,'F','0','0','monitor:online:forceLogout','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1048,'任务查询',110,1,'#','','',1,0,'F','0','0','monitor:job:query','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1049,'任务新增',110,2,'#','','',1,0,'F','0','0','monitor:job:add','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1050,'任务修改',110,3,'#','','',1,0,'F','0','0','monitor:job:edit','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1051,'任务删除',110,4,'#','','',1,0,'F','0','0','monitor:job:remove','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1052,'状态修改',110,5,'#','','',1,0,'F','0','0','monitor:job:changeStatus','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1053,'任务导出',110,7,'#','','',1,0,'F','0','0','monitor:job:export','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1054,'生成查询',115,1,'#','','',1,0,'F','0','0','tool:gen:query','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1055,'生成修改',115,2,'#','','',1,0,'F','0','0','tool:gen:edit','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1056,'生成删除',115,3,'#','','',1,0,'F','0','0','tool:gen:remove','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1057,'导入代码',115,2,'#','','',1,0,'F','0','0','tool:gen:import','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1058,'预览代码',115,4,'#','','',1,0,'F','0','0','tool:gen:preview','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1059,'生成代码',115,5,'#','','',1,0,'F','0','0','tool:gen:code','#','admin','2022-07-19 09:57:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2000,'工单',0,5,'ticket',null,null,1,0,'M','0','0','','guide','admin','2022-07-20 10:49:34','admin','2022-07-20 10:49:44','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2003,'CMDB',0,1,'cmdb',null,null,1,0,'M','0','0','','list','admin','2022-07-20 11:09:11','admin','2023-04-27 14:19:32','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2004,'服务节点',2003,1,'serviceNode','cmdb/serviceNode/index',null,1,0,'C','0','0',null,'list','admin','2022-07-20 11:09:56','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2005,'资源类别',2003,2,'resourceCategory','cmdb/resourceCategory/index',null,1,0,'C','0','0',null,'documentation','admin','2022-07-20 11:10:59','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2006,'研发向导',0,2,'guide',null,null,1,0,'M','0','0','','guide','admin','2022-07-20 13:13:03','admin','2023-04-27 14:17:01','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2007,'服务导航',2006,1,'service','guide/service/index',null,1,0,'C','0','0','','cascader','admin','2022-07-20 13:13:45','admin','2022-07-20 13:25:15','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2008,'研发效能平台说明',2006,2,'hotwheel','guide/hotwheel/index',null,1,0,'C','1','0','','question','admin','2022-07-20 13:14:34','admin','2023-04-20 14:18:13','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2009,'表单配置',2000,1,'form','flowable/task/form/index',null,1,0,'C','0','0','flowable:form:list','form','admin','2022-08-05 11:37:43','admin','2022-08-22 15:08:04','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2011,'质量管控',0,6,'quality',null,null,1,0,'M','0','0','','bug','admin','2022-08-15 15:26:34','admin','2023-04-27 14:18:09','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2012,'代码质量阈',2011,1,'index','quality/index/index',null,1,0,'C','0','0','','code','admin','2022-08-15 15:29:07','admin','2022-08-15 15:33:26','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2013,'SDK 限制策略',2011,2,'sdk','quality/sdk/index',null,1,0,'C','0','0','','checkbox','admin','2022-08-15 15:36:26','admin','2022-08-15 15:39:47','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2014,'SDK 关系网',2011,3,'typology','quality/typology/index',null,1,0,'C','0','0',null,'cascader','admin','2022-08-15 15:38:53','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2015,'SDK 资源',0,3,'sdk',null,null,1,0,'M','0','0','','code','admin','2022-08-15 15:44:50','admin','2023-04-27 14:17:49','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2016,'构建流水',2015,1,'index','build/sdk/index',null,1,0,'C','0','0',null,'#','admin','2022-08-15 15:45:30','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2017,'sdk 构建记录',2015,2,'record','build/sdk/record',null,1,0,'C','0','0','','#','admin','2022-08-15 15:46:00','admin','2022-08-15 15:46:20','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2018,'配置',0,8,'config',null,null,1,0,'M','0','0',null,'#','admin','2022-08-15 15:58:14','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2019,'构建步骤',2018,1,'build/stage','config/stage/index',null,1,0,'C','0','0',null,'#','admin','2022-08-15 15:59:38','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2020,'构建模版',2018,2,'build/template','config/ci-template/index',null,1,0,'C','0','0',null,'#','admin','2022-08-15 16:00:29','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2021,'部署模版',2018,3,'cd/template','config/cd-template/index',null,1,0,'C','0','0',null,'#','admin','2022-08-15 16:01:39','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2022,'集群管理',2018,4,'cluster','config/cluster/index',null,1,0,'C','0','0',null,'#','admin','2022-08-15 16:03:10','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2023,'镜像管理',2018,5,'images','config/images/index',null,1,0,'C','0','0',null,'#','admin','2022-08-15 16:05:39','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2024,'代码阈管理',2018,6,'sonar/constraint','config/sonar-template/index',null,1,0,'C','0','0',null,'#','admin','2022-08-15 16:12:33','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2025,'SDK 阈管理',2018,7,'sdk/constraint','config/sdk-template/index',null,1,0,'C','0','0',null,'#','admin','2022-08-15 16:14:49','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2026,'元数据管理',2018,8,'metadata','config/metadata/index',null,1,0,'C','0','0',null,'#','admin','2022-08-15 16:15:47','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2027,'版本通知',2018,9,'notification','config/notification/index',null,1,0,'C','0','0',null,'#','admin','2022-08-15 16:16:44','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2028,'代码基准线设置',2018,10,'new-code','config/new-code/index',null,1,0,'C','0','0',null,'#','admin','2022-08-15 16:18:08','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2029,'通知',0,12,'notify',null,null,1,0,'M','1','0',null,'#','admin','2022-08-15 17:10:29','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2030,'构建通知',2029,1,'buildNotify','notify/build/index',null,1,0,'C','0','0',null,'#','admin','2022-08-15 17:11:08','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2031,'部署通知',2029,2,'deployNotify','notify/deployment/index',null,1,0,'C','0','0',null,'#','admin','2022-08-15 17:11:50','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2032,'工单类型',2000,2,'type','order/type/index',null,1,0,'C','0','0','','dict','admin','2022-08-19 14:27:48','admin','2022-08-22 15:08:18','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2033,'流程定义',2000,3,'flowable/definition','flowable/definition/index',null,1,0,'C','0','0','','drag','admin','2022-08-22 11:09:34','admin','2022-08-22 16:50:56','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2034,'流程设计',2000,5,'flowable/definition/model','flowable/definition/model',null,1,0,'C','1','0','','#','admin','2022-08-22 11:13:04','admin','2022-08-22 11:14:58','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2035,'工单服务',2000,4,'process','flowable/task/process/index',null,1,0,'C','0','0','','button','admin','2022-08-22 11:19:03','admin','2022-08-23 09:23:39','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2036,'待办工单',2000,5,'todo','flowable/task/todo/index',null,1,0,'C','0','0','','example','admin','2022-08-22 11:20:54','admin','2022-08-23 09:23:51','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2037,'已办工单',2000,6,'finished','flowable/task/finished/index',null,1,0,'C','0','0','','guide','admin','2022-08-22 11:21:43','admin','2022-08-23 09:24:30','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2038,'新增SDK',2015,1,'create','build/components/createBuild/index',null,1,0,'C','1','0',null,'#','admin','2022-09-28 10:14:43','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2039,'编辑 SDK',2015,1,'edit/:id','build/components/createBuild/index',null,1,0,'C','1','0','','#','admin','2022-09-29 17:33:46','admin','2022-09-29 17:38:33','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2040,'工单广场',2000,0,'square','flowable/task/square',null,1,0,'C','0','0',null,'dashboard','admin','2022-10-23 11:21:35','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2041,'统计分析',0,20,'metric',null,null,1,0,'M','1','0','','dashboard','admin','2022-10-31 09:29:03','admin','2022-11-07 14:23:30','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2042,'RDS 每日增长',2041,2,'ads','monitor/db/index',null,1,1,'C','0','0','','druid','admin','2022-10-31 09:31:55','admin','2022-11-14 15:58:10','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2043,'CICD',2041,0,'index','metabase/index',null,1,0,'C','0','0','','chart','admin','2022-11-07 14:23:02','admin','2023-02-09 13:02:01','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2044,'账号资源管理',2006,3,'account','guide/account/index',null,1,0,'C','1','0','','documentation','admin','2022-11-10 14:55:12','admin','2023-04-23 11:19:15','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2045,'大表查询',2041,3,'bigtb','monitor/bigtb/index',null,1,1,'C','0','0','','example','admin','2022-11-14 15:34:41','admin','2022-11-14 16:22:54','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2046,'工单统计',2041,4,'ticket','metabase/ticket/index',null,1,0,'C','0','0',null,'build','admin','2022-11-27 21:38:17','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2047,'慢sql查询',2041,5,'slowlog','monitor/slowlog/index',null,1,0,'C','0','0','','druid','admin','2022-12-14 13:25:35','admin','2022-12-14 13:25:52','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2048,'账号资源',2003,3,'thirdApplication','cmdb/thirdApplication/index',null,1,0,'C','0','0','','dict','admin','2022-12-21 12:49:42','admin','2023-01-05 09:32:25','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2049,'服务SLA',2041,1,'sla','metabase/sla',null,1,0,'C','0','0','','online','admin','2023-02-09 12:25:49','admin','2023-02-09 12:26:54','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2050,'应用异常日志',2041,2,'application','metabase/exception',null,1,0,'C','0','0',null,'bug','admin','2023-04-19 16:50:56','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2051,'服务访问信息',2006,2,'access','sls/access/index',null,1,0,'C','0','0',null,'bug','admin','2023-04-20 14:17:27','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2052,'日志中心',2006,3,'log','sls/log/index',null,1,0,'C','0','0',null,'bug','admin','2023-04-20 14:18:02','',null,'');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2053,'大表查询',2006,4,'bigtb','monitor/bigtb/index',null,1,1,'C','0','0','','example','admin','2023-04-23 11:17:06','admin','2023-04-23 11:17:21','');
+    INSERT INTO `hotwheel`.`sys_menu` (`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`query`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2054,'慢sql查询',2006,5,'slowlog','monitor/slowlog/index',null,1,0,'C','0','0',null,'druid','admin','2023-04-23 11:18:05','',null,'');
+    /******************************************/
+    /*   角色   */
+    /*   TableName = sys_role   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`sys_role` (`role_id`,`role_name`,`role_key`,`role_sort`,`data_scope`,`menu_check_strictly`,`dept_check_strictly`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1,'超级管理员','admin',1,'1',1,1,'0','0','admin','2022-07-19 09:57:29','',null,'超级管理员');
+    INSERT INTO `hotwheel`.`sys_role` (`role_id`,`role_name`,`role_key`,`role_sort`,`data_scope`,`menu_check_strictly`,`dept_check_strictly`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (2,'通用角色','common',2,'1',1,1,'0','0','admin','2022-07-19 09:57:29','admin','2023-04-23 11:18:20','普通角色');
+    INSERT INTO `hotwheel`.`sys_role` (`role_id`,`role_name`,`role_key`,`role_sort`,`data_scope`,`menu_check_strictly`,`dept_check_strictly`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (100,'devops','devops',0,'1',1,1,'0','0','admin','2022-09-05 14:41:58','admin','2023-04-23 11:18:31',null);
+    INSERT INTO `hotwheel`.`sys_role` (`role_id`,`role_name`,`role_key`,`role_sort`,`data_scope`,`menu_check_strictly`,`dept_check_strictly`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (101,'产品经理','product',0,'1',1,1,'0','0','admin','2022-11-29 17:34:11','',null,null);
+    /******************************************/
+    /*   角色-菜单   */
+    /*   TableName = sys_role_menu   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,1);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,100);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,103);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,104);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,1000);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,1016);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,1020);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2000);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2003);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2004);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2005);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2006);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2007);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2008);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2011);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2012);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2013);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2014);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2015);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2016);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2017);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2029);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2030);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2031);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2035);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2036);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2037);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2038);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2039);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2040);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2041);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2042);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2043);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2044);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2045);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2046);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2047);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2048);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2049);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2050);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2051);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2052);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2053);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (2,2054);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,3);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,100);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,101);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,102);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,103);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,104);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,105);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,106);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,107);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,108);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,109);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,110);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,111);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,112);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,113);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,114);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,115);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,116);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,117);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,500);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,501);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1000);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1001);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1002);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1003);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1004);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1005);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1006);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1007);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1008);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1009);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1010);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1011);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1012);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1013);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1014);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1015);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1016);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1017);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1018);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1019);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1020);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1021);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1022);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1023);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1024);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1025);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1026);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1027);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1028);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1029);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1030);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1031);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1032);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1033);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1034);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1035);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1036);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1037);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1038);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1039);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1040);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1041);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1042);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1043);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1044);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1045);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1046);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1047);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1048);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1049);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1050);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1051);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1052);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1053);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1054);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1055);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1056);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1057);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1058);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,1059);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2000);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2003);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2004);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2005);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2006);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2007);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2008);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2009);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2011);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2012);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2013);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2014);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2015);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2016);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2017);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2018);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2019);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2020);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2021);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2022);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2023);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2024);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2025);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2026);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2027);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2028);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2029);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2030);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2031);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2032);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2033);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2034);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2035);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2036);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2037);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2038);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2039);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2040);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2041);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2042);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2043);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2044);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2045);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2046);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2047);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2048);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2049);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2050);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2051);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2052);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2053);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (100,2054);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (101,2000);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (101,2009);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (101,2032);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (101,2033);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (101,2034);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (101,2035);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (101,2036);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (101,2037);
+    INSERT INTO `hotwheel`.`sys_role_menu` (`role_id`,`menu_id`) VALUES (101,2040);
+    /******************************************/
+    /*   部门   */
+    /*   TableName = sys_dept   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (100,0,'0','职行力',0,'xx','15888888888','exe@exe.com','0','0','admin','2022-07-19 09:57:28','admin','2022-11-15 15:15:10');
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (101,100,'0,100','产研',1,'xx','15888888888','ry@qq.com','0','0','admin','2022-07-19 09:57:28','admin','2022-12-23 16:59:20');
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (102,100,'0,100','长沙分公司',2,'若依','15888888888','ry@qq.com','0','2','admin','2022-07-19 09:57:28','',null);
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (103,101,'0,100,101','组织发展',1,'张宝根','15750755308','zhangbaogen@exexm.com','0','0','admin','2022-07-19 09:57:28','admin','2022-11-03 13:35:54');
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (104,101,'0,100,101','激励运营',2,'周亚滨','17750582656','zhouyabin@exexm.com','0','0','admin','2022-07-19 09:57:28','admin','2022-11-03 13:37:09');
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (105,101,'0,100,101','测试部门',3,'王淑梅','13459252603','282141709@qq.com','0','0','admin','2022-07-19 09:57:28','admin','2022-11-03 13:42:29');
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (106,101,'0,100,101','业务运营',4,'刘哲镕','18649627196','liuzherong@exexm.com','0','0','admin','2022-07-19 09:57:28','admin','2022-11-03 13:38:02');
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (107,101,'0,100,101','运维部门',5,'若依','15888888888','ry@qq.com','0','0','admin','2022-07-19 09:57:28','',null);
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (108,102,'0,100,102','市场部门',1,'若依','15888888888','ry@qq.com','0','2','admin','2022-07-19 09:57:28','',null);
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (109,102,'0,100,102','财务部门',2,'若依','15888888888','ry@qq.com','0','2','admin','2022-07-19 09:57:28','',null);
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (200,101,'0,100,101','公共业务',6,'梁志','18649755679','liangzhi@exexm.com','0','0','admin','2022-11-03 13:39:21','',null);
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (201,101,'0,100,101','技术赋能',7,'郭健勇','13313867637','guojianyong@exexm.com','0','0','admin','2022-11-03 13:40:07','',null);
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (202,101,'0,100,101','新平台',8,'跃辉','13806013390','houyuehui@exexm.com','0','0','admin','2022-11-03 13:41:00','',null);
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (203,101,'0,100,101','test',3,'lingmu.huang',null,null,'0','2','admin','2022-11-15 15:56:54','',null);
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (204,100,'0,100','行政',2,null,null,null,'0','0','ruijin.zhou','2022-12-22 17:20:17','',null);
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (205,100,'0,100','财务',3,null,null,null,'0','0','ruijin.zhou','2022-12-22 17:20:26','',null);
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (206,100,'0,100','人事',4,null,null,null,'0','0','ruijin.zhou','2022-12-22 17:20:39','',null);
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (207,100,'0,100','营销',5,null,null,null,'0','0','admin','2022-12-23 16:55:38','',null);
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (208,100,'0,100','交付保障',6,null,null,null,'0','0','admin','2022-12-23 16:55:57','',null);
+    INSERT INTO `hotwheel`.`sys_dept` (`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_emp`,`create_time`,`modify_emp`,`modify_time`) VALUES (209,100,'0,100','总经办',7,null,null,null,'0','0','admin','2022-12-23 17:00:02','',null);
+    /******************************************/
+    /*   cmdb 服务节点   */
+    /*   TableName = t_cmdb_user_role   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`t_cmdb_user_role` (`id`,`service_name`,`module_id`,`group_symbole`,`account`,`name`,`email`,`enterprise_email`,`phonenumber`,`type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`,`cmdb_resource_type`,`tags`,`deploy_type`) VALUES (234133,'hotwheel-admin','devops',null,'admin','hotwheel','admin@exe.com',null,null,1,null,null,null,null,null,1,null,'k8s');
+    INSERT INTO `hotwheel`.`t_cmdb_user_role` (`id`,`service_name`,`module_id`,`group_symbole`,`account`,`name`,`email`,`enterprise_email`,`phonenumber`,`type`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`,`cmdb_resource_type`,`tags`,`deploy_type`) VALUES (232971,'hotwheel-front','devops',null,'admin','hotwheel','zhouruijin@exe.com',null,null,1,null,null,null,null,'test',1,null,'k8s');
+    /******************************************/
+    /*   用户   */
+    /*   TableName = sys_user   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`sys_user` (`user_id`,`dept_id`,`user_name`,`nick_name`,`user_type`,`email`,`phonenumber`,`sex`,`avatar`,`password`,`status`,`del_flag`,`login_ip`,`login_date`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1,103,'admin','hotwheel','00','admin@exe.com','18850341087','0','','$2a$10$3rg8AX3nqSKuVFJ9RcvWGuW7xJFuRO.wQfMbMqMe1SGg3SNkfzwmW','0','0','172.17.2.64','2023-10-06 15:34:49','admin','2022-07-19 09:57:28','','2023-10-06 15:34:48','管理员');
+    /******************************************/
+    /*   服务组   */
+    /*   TableName = t_sys_service_group   */
+    /******************************************/
+    INSERT INTO `hotwheel`.`t_sys_service_group` (`id`,`group_id`,`group_name`,`create_time`,`modify_time`) VALUES (1,'devops','效能团队',null,null);
+    INSERT INTO `hotwheel`.`t_sys_service_group` (`id`,`group_id`,`group_name`,`create_time`,`modify_time`) VALUES (8,'common','公共',null,null);

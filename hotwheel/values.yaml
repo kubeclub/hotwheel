@@ -25,6 +25,8 @@ config:
 
 mysql:
   enabled: false
+  # 初始化风火轮平台的数据，第一次必需要，更新不用。
+  insertInitData: true
 
 imagePullSecrets: []
 nameOverride: ""

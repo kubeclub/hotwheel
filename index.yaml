@@ -2,13 +2,41 @@ apiVersion: v1
 entries:
   hotwheel:
   - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2023-09-29T11:20:48.114402+08:00"
-    description: A Helm chart for Kubernetes
-    digest: 02f4cdfe75236371139638e7e4a9b0210253b54bca7311ba735c6cea9adf3b0a
+    appVersion: "0.1"
+    created: "2023-10-06T17:45:40.367221+08:00"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://kubeclub.github.io/hotwheel
+      version: 0.3.5
+    description: 云原生一体化运维平台
+    digest: 7c3fded380d9f77f1196fd6df3304e801bbe6d4866aa38d24e97fa3ef7990336
+    icon: http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/a198caf3b2456d9f02ec302f9e7cb1ca.png
     name: hotwheel
     type: application
     urls:
     - https://kubeclub.github.io/hotwheel/hotwheel-0.1.0.tgz
     version: 0.1.0
-generated: "2023-09-29T11:20:48.113682+08:00"
+  mysql:
+  - apiVersion: v2
+    created: "2023-10-06T17:45:40.369222+08:00"
+    description: Fast, reliable, scalable, and easy to use open-source relational
+      database system.
+    digest: 3dda6adce894980592162376fd52efb58d8e3d2f66b6329f05bab7c3ff1d34f4
+    home: https://www.mysql.com/
+    icon: https://www.mysql.com/common/logos/logo-mysql-170x115.png
+    keywords:
+    - mysql
+    - database
+    - sql
+    maintainers:
+    - email: viglesias@google.com
+      name: Vic Iglesias
+    name: mysql
+    sources:
+    - https://github.com/kubernetes/charts
+    - https://github.com/docker-library/mysql
+    urls:
+    - https://kubeclub.github.io/hotwheel/mysql-0.3.5.tgz
+    version: 0.3.5
+generated: "2023-10-06T17:45:40.365893+08:00"

@@ -25,5 +25,5 @@ icon: http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/a198caf3b
 dependencies:
   - name: mysql
     version: 0.3.5
-    repository: https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+    repository: https://kubeclub.github.io/hotwheel
     condition: mysql.enabled
