@@ -15,7 +15,11 @@ helm repo add kubeclub  https://kubeclub.github.io/hotwheel/
 ```shell
 helm repo update
 ```
-3. 部署
+3. 下载相关依赖
+```shell
+helm dependency update
+```
+4. 部署
 ```shell
 helm upgrade --install my-release \
      --set config.database_url='' \

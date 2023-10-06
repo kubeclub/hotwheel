@@ -16,17 +16,32 @@ image:
     # Overrides the image tag whose default is the chart appVersion.
     tag: "v1.0"
 
+# 依赖的中间件
+mysql:
+  enabled: true
+  # 初始化风火轮平台的数据，第一次必需要，后续更新不用。
+  insertInitData: true
+  mysqlRootPassword: &mysqlRootPassword kubeclub
+redis:
+  enabled: true
+  redisPassword: &redisPassword kubeclub
+
+# 服务配置
 config:
-  database_url: jdbc:mysql://xxx
-  database_username: ''
-  database_password: ''
+  database_url: jdbc:mysql://mysql/hotwheel?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+  database_username: 'root'
+  database_password: *mysqlRootPassword
   app_backend_url: 'http://backend.xxx.com'
   app_ui_url: 'http://www.xxx.com'
-
-mysql:
-  enabled: false
-  # 初始化风火轮平台的数据，第一次必需要，更新不用。
-  insertInitData: true
+  redis:
+    host: redis
+    port: 6379
+    password: *redisPassword
+  ldap:
+    urls: ldap://xxx:389
+    username: xxx
+    password: xxx
+    base: dc=kubeclub,dc=com
 
 imagePullSecrets: []
 nameOverride: ""
