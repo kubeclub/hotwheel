@@ -21,15 +21,16 @@ helm dependency update
 ```
 4. 部署
 ```shell
-helm upgrade -n devops --install my-release \
+helm upgrade -n devops --install hotwheel \
      --set config.app_backend_url='backend.kubeclub.cn' \
      --set config.app_ui_url='hotwheel.kubeclub.cn' \
      --set config.ldap.urls='ldap://xxx:389' \
-     --set config.ldap.username='' \
-     --set config.ldap.password='' \
+     --set config.ldap.username='admin' \
+     --set config.ldap.password='pwd' \
      --set config.ldap.base='dc=kubeclub,dc=com' \
      kubeclub/hotwheel
 ```
+[查看更多部署详情](./doc/deploy.md)
 
 ## 功能列表
 - 构建
