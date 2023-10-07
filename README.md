@@ -21,12 +21,13 @@ helm dependency update
 ```
 4. 部署
 ```shell
-helm upgrade --install my-release \
-     --set config.database_url='' \
-     --set config.database_username='' \
-     --set config.database_password='' \
+helm upgrade -n devops --install my-release \
      --set config.app_backend_url='' \
      --set config.app_ui_url='' \
+     --set config.ldap.urls='ldap://xxx:389' \
+     --set config.ldap.username='' \
+     --set config.ldap.password='' \
+     --set config.ldap.base='dc=kubeclub,dc=com' \
      kubeclub/hotwheel
 ```
 

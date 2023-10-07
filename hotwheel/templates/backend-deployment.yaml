@@ -42,15 +42,29 @@ spec:
               protocol: TCP
           env:
             - name: SPRING_DATASOURCE_DRUID_MASTER_URL
-              value: {{- with .Values.config.database_url }}
+              value: {{ .Values.config.database_url }}
             - name: SPRING_DATASOURCE_DRUID_MASTER_USERNAME
-              value: {{- with .Values.config.database_username }}
+              value: {{ .Values.config.database_username }}
             - name: SPRING_DATASOURCE_DRUID_MASTER_PASSWORD
-              value: {{- with .Values.config.database_password }}
+              value: {{ .Values.config.database_password }}
             - name: CI_ADMIN-DOMAIN
-              value: {{- with .Values.config.app_backend_url }}
+              value: {{ .Values.config.app_backend_url }}
             - name: CI_FRONT-DOMAIN
-              value: {{- with .Values.config.app_ui_url }}
+              value: {{ .Values.config.app_ui_url }}
+            - name: SPRING_REDIS_HOST
+              value: {{ .Values.config.redis.host}}
+            - name: SPRING_REDIS_PORT
+              value: {{ .Values.config.redis.port}}
+            - name: SPRING_REDIS_PASSWORD
+              value: {{ .Values.config.redis.password}}
+            - name: SPRING_LDAP_URLS
+              value: {{ .Values.config.ldap.urls}}
+            - name: SPRING_LDAP_USERNAME
+              value: {{ .Values.config.ldap.username}}
+            - name: SPRING_LDAP_PASSWORD
+              value: {{ .Values.config.ldap.password}}
+            - name: SPRING_LDAP_BASE
+              value: {{ .Values.config.ldap.base}}
           livenessProbe:
             httpGet:
               path: /
