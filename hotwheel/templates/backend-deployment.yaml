@@ -42,7 +42,7 @@ spec:
               protocol: TCP
           env:
             - name: SPRING_DATASOURCE_DRUID_MASTER_URL
-              value: {{ .Values.config.database_url }}
+              value: {{ required "A valid .Values.config.database_url entry required!" .Values.config.database_url }}
             - name: SPRING_DATASOURCE_DRUID_MASTER_USERNAME
               value: {{ .Values.config.database_username }}
             - name: SPRING_DATASOURCE_DRUID_MASTER_PASSWORD
@@ -58,13 +58,13 @@ spec:
             - name: SPRING_REDIS_PASSWORD
               value: {{ .Values.config.redis.password}}
             - name: SPRING_LDAP_URLS
-              value: {{ .Values.config.ldap.urls}}
+              value: {{ required "A valid .Values.config.ldap.urls entry required!" .Values.config.ldap.urls}}
             - name: SPRING_LDAP_USERNAME
-              value: {{ .Values.config.ldap.username}}
+              value: {{ required "A valid .Values.config.ldap.username entry required!" .Values.config.ldap.username}}
             - name: SPRING_LDAP_PASSWORD
-              value: {{ .Values.config.ldap.password}}
+              value: {{ required "A valid .Values.config.ldap.password entry required!" .Values.config.ldap.password}}
             - name: SPRING_LDAP_BASE
-              value: {{ .Values.config.ldap.base}}
+              value: {{ required "A valid .Values.config.ldap.base entry required!" .Values.config.ldap.base}}
           livenessProbe:
             httpGet:
               path: /

@@ -3,7 +3,7 @@ entries:
   hotwheel:
   - apiVersion: v2
     appVersion: "0.1"
-    created: "2023-10-07T14:08:36.841408+08:00"
+    created: "2023-10-07T20:05:15.855925+08:00"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -23,7 +23,7 @@ entries:
     version: 0.1.0
   mysql:
   - apiVersion: v2
-    created: "2023-10-07T14:08:36.844846+08:00"
+    created: "2023-10-07T20:05:15.858214+08:00"
     description: Fast, reliable, scalable, and easy to use open-source relational
       database system.
     digest: 68aff32dab74eb884db99ed4ce547974d28f2f5c4277984bcc64e05d7cb128db
@@ -43,4 +43,27 @@ entries:
     urls:
     - https://kubeclub.github.io/hotwheel/mysql-0.3.5.tgz
     version: 0.3.5
-generated: "2023-10-07T14:08:36.837306+08:00"
+  redis:
+  - apiVersion: v2
+    appVersion: 4.0.8
+    created: "2023-10-07T20:05:15.858906+08:00"
+    description: Open source, advanced key-value store. It is often referred to as
+      a data structure server since keys can contain strings, hashes, lists, sets
+      and sorted sets.
+    digest: 2d7fba83e89b16c8313d2d5772537dfe3d61613c3e4fddeec984ed4b90307ebc
+    home: http://redis.io/
+    icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
+    keywords:
+    - redis
+    - keyvalue
+    - database
+    maintainers:
+    - email: containers@bitnami.com
+      name: bitnami-bot
+    name: redis
+    sources:
+    - https://github.com/bitnami/bitnami-docker-redis
+    urls:
+    - https://kubeclub.github.io/hotwheel/redis-1.1.15.tgz
+    version: 1.1.15
+generated: "2023-10-07T20:05:15.846481+08:00"
