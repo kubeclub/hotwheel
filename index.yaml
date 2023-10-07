@@ -3,7 +3,7 @@ entries:
   hotwheel:
   - apiVersion: v2
     appVersion: "0.1"
-    created: "2023-10-07T13:48:14.705954+08:00"
+    created: "2023-10-07T14:08:36.841408+08:00"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -14,7 +14,7 @@ entries:
       repository: https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
       version: 1.1.15
     description: 云原生一体化运维平台
-    digest: b08a1314c7170e13cb3e27315e4dd2a936036faf4630df9bb48fae3eb4f6f4c1
+    digest: 07fda4c1f6e7673d4185a551c9b0b4c67baa7a53121d485553f25d5459b14968
     icon: http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/a198caf3b2456d9f02ec302f9e7cb1ca.png
     name: hotwheel
     type: application
@@ -23,7 +23,7 @@ entries:
     version: 0.1.0
   mysql:
   - apiVersion: v2
-    created: "2023-10-07T13:48:14.715035+08:00"
+    created: "2023-10-07T14:08:36.844846+08:00"
     description: Fast, reliable, scalable, and easy to use open-source relational
       database system.
     digest: 68aff32dab74eb884db99ed4ce547974d28f2f5c4277984bcc64e05d7cb128db
@@ -43,4 +43,4 @@ entries:
     urls:
     - https://kubeclub.github.io/hotwheel/mysql-0.3.5.tgz
     version: 0.3.5
-generated: "2023-10-07T13:48:14.701918+08:00"
+generated: "2023-10-07T14:08:36.837306+08:00"
