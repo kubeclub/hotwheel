@@ -22,8 +22,8 @@ helm dependency update
 4. 部署
 ```shell
 helm upgrade -n devops --install my-release \
-     --set config.app_backend_url='' \
-     --set config.app_ui_url='' \
+     --set config.app_backend_url='backend.kubeclub.cn' \
+     --set config.app_ui_url='hotwheel.kubeclub.cn' \
      --set config.ldap.urls='ldap://xxx:389' \
      --set config.ldap.username='' \
      --set config.ldap.password='' \
