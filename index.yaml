@@ -3,7 +3,7 @@ entries:
   hotwheel:
   - apiVersion: v2
     appVersion: "0.1"
-    created: "2023-10-08T11:35:44.304217+08:00"
+    created: "2023-10-08T21:09:17.811071+08:00"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -23,10 +23,10 @@ entries:
     version: 0.1.0
   mysql:
   - apiVersion: v2
-    created: "2023-10-08T11:35:44.308001+08:00"
+    created: "2023-10-08T21:09:17.814395+08:00"
     description: Fast, reliable, scalable, and easy to use open-source relational
       database system.
-    digest: 02492fb1bdff12c90aba20ef49b82ecdf824642120e3c08957d40bf332818cd5
+    digest: 66b2887b476d727787dcaee8e2b18b6fcd5b8aec2955eb440f243f5c3c46bbdf
     home: https://www.mysql.com/
     icon: https://www.mysql.com/common/logos/logo-mysql-170x115.png
     keywords:
@@ -46,7 +46,7 @@ entries:
   redis:
   - apiVersion: v2
     appVersion: 4.0.8
-    created: "2023-10-08T11:35:44.309408+08:00"
+    created: "2023-10-08T21:09:17.815638+08:00"
     description: Open source, advanced key-value store. It is often referred to as
       a data structure server since keys can contain strings, hashes, lists, sets
       and sorted sets.
@@ -66,4 +66,4 @@ entries:
     urls:
     - https://kubeclub.github.io/hotwheel/redis-1.1.15.tgz
     version: 1.1.15
-generated: "2023-10-08T11:35:44.298862+08:00"
+generated: "2023-10-08T21:09:17.800177+08:00"

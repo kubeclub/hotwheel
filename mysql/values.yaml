@@ -67,9 +67,9 @@ resources:
 
 # Custom mysql configuration files used to override default mysql settings
 configurationFiles:
-#  mysql.cnf: |-
-#    [mysqld]
-#    skip-name-resolve
+  mysql.cnf: |-
+    [mysqld]
+    lower_case_table_names = 1
 
 
 
