@@ -3,7 +3,7 @@ entries:
   hotwheel:
   - apiVersion: v2
     appVersion: "0.1"
-    created: "2023-10-08T11:14:07.590823+08:00"
+    created: "2023-10-08T11:35:44.304217+08:00"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -14,7 +14,7 @@ entries:
       repository: https://kubeclub.github.io/hotwheel
       version: 1.1.15
     description: 云原生一体化运维平台
-    digest: cb956a6b46e78087f3cc87239dec593981d6b143dbb3d13727afad0d91ba68a0
+    digest: 2e5aaf15161debe3076d11c97e0a7e1c4d1c745d0ada81e85f25b1a5c4aef171
     icon: http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/a198caf3b2456d9f02ec302f9e7cb1ca.png
     name: hotwheel
     type: application
@@ -23,7 +23,7 @@ entries:
     version: 0.1.0
   mysql:
   - apiVersion: v2
-    created: "2023-10-08T11:14:07.596943+08:00"
+    created: "2023-10-08T11:35:44.308001+08:00"
     description: Fast, reliable, scalable, and easy to use open-source relational
       database system.
     digest: 02492fb1bdff12c90aba20ef49b82ecdf824642120e3c08957d40bf332818cd5
@@ -46,7 +46,7 @@ entries:
   redis:
   - apiVersion: v2
     appVersion: 4.0.8
-    created: "2023-10-08T11:14:07.598937+08:00"
+    created: "2023-10-08T11:35:44.309408+08:00"
     description: Open source, advanced key-value store. It is often referred to as
       a data structure server since keys can contain strings, hashes, lists, sets
       and sorted sets.
@@ -66,4 +66,4 @@ entries:
     urls:
     - https://kubeclub.github.io/hotwheel/redis-1.1.15.tgz
     version: 1.1.15
-generated: "2023-10-08T11:14:07.585097+08:00"
+generated: "2023-10-08T11:35:44.298862+08:00"

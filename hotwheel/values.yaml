@@ -50,9 +50,13 @@ mysql:
       url: *gitlabUrl
       token: *gitlabToken
       userId: *gitlabUserId
+  # 为了快速体验，默认不持久化，正式环境要配置上
+  persistence: false
 redis:
   enabled: true
   redisPassword: *redisPassword
+  # 为了快速体验，默认不持久化，正式环境要配置上
+  persistence: false
 
 imagePullSecrets: []
 nameOverride: ""
