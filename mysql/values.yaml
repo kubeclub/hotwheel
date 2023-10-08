@@ -81,3 +81,9 @@ service:
   type: ClusterIP
   port: 3306
   # nodePort: 32000
+
+data:
+  gitlab:
+    url: xx
+    token: xx
+    userId: 1

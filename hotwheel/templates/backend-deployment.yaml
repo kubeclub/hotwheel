@@ -41,6 +41,8 @@ spec:
               containerPort: 8080
               protocol: TCP
           env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: dev
             - name: SPRING_DATASOURCE_DRUID_MASTER_URL
               value: {{ required "A valid .Values.config.database_url entry required!" .Values.config.database_url }}
             - name: SPRING_DATASOURCE_DRUID_MASTER_USERNAME
