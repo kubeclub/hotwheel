@@ -50,7 +50,7 @@ _为了快速体验，mysql、redis 默认都没有持久化_
 
 **账号**：(非 ldap 登录页面要把 ldap 勾选框去除)
     - admin
-    - admin123
+    - 123admin
 
 
 ## 常见问题
