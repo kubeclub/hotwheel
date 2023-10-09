@@ -48,9 +48,14 @@ _为了快速体验，mysql、redis 默认都没有持久化_
 
 ## 访问
 
-**账号**：(非 ldap 登录页面要把 ldap 勾选框去除)
+![登录界面](./img/login.jpg)
+- **账号**：(非 ldap 登录页面要把 ldap 勾选框去除)
     - admin
     - 123admin
+
+## 依赖服务配置
+1. [注册 gitlab runner 并配置到风火轮平台](gitlab-runner.md) 【必需】
+2. [搭建 sonarqube 静态代码扫描服务，并配置到风火轮平台](sonarqube.md) 【可选】
 
 
 ## 常见问题

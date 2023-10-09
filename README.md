@@ -42,5 +42,9 @@ helm upgrade -n devops --install hotwheel \
 
 ## 架构图
 
-![服务说明](http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/1c108f5744d6e8caac9270af8df7a19c.png)
+[//]: # (![服务说明]&#40;http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/1c108f5744d6e8caac9270af8df7a19c.png&#41;)
 ![流程图](http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/7f25bcad35ba193f3d12809ff611cb51.png)
+
+项目核心引擎是借助 gitlab runner 的 ci 能力 [查看更多详情](https://www.kubeclub.cn/devops/121.html)
+
+---
