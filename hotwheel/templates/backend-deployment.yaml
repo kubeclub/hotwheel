@@ -49,9 +49,9 @@ spec:
               value: {{ .Values.config.database_username }}
             - name: SPRING_DATASOURCE_DRUID_MASTER_PASSWORD
               value: {{ .Values.config.database_password }}
-            - name: CI_ADMIN-DOMAIN
+            - name: CI_ADMIN_DOMAIN
               value: {{ .Values.config.app_backend_url }}
-            - name: CI_FRONT-DOMAIN
+            - name: CI_FRONT_DOMAIN
               value: {{ .Values.config.app_ui_url }}
             - name: SPRING_REDIS_HOST
               value: {{ .Values.config.redis.host}}
