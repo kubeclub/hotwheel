@@ -1,4 +1,5 @@
 apiVersion: v2
+appVersion: 5.7.14
 description: Fast, reliable, scalable, and easy to use open-source relational database system.
 engine: gotpl
 home: https://www.mysql.com/

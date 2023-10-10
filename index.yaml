@@ -1,9 +1,30 @@
 apiVersion: v1
 entries:
+  gitlab-runner:
+  - apiVersion: v1
+    appVersion: 15.1.0
+    created: "2023-10-10T09:56:12.451361+08:00"
+    description: GitLab Runner
+    digest: 6e0597037e9b39d5c2299940931147556be080a7d9a5d6a596a265492928104f
+    icon: https://gitlab.com/uploads/-/system/project/avatar/250833/runner_logo.png
+    keywords:
+    - git
+    - ci
+    - deploy
+    maintainers:
+    - email: support@gitlab.com
+      name: GitLab Inc.
+    name: gitlab-runner
+    sources:
+    - https://gitlab.com/gitlab-org/gitlab-runner
+    - https://docs.gitlab.com/runner/
+    urls:
+    - https://kubeclub.github.io/hotwheel/gitlab-runner-0.42.1.tgz
+    version: 0.42.1
   hotwheel:
   - apiVersion: v2
     appVersion: "0.1"
-    created: "2023-10-08T21:09:17.811071+08:00"
+    created: "2023-10-10T09:56:12.459088+08:00"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -14,7 +35,7 @@ entries:
       repository: https://kubeclub.github.io/hotwheel
       version: 1.1.15
     description: 云原生一体化运维平台
-    digest: 2e5aaf15161debe3076d11c97e0a7e1c4d1c745d0ada81e85f25b1a5c4aef171
+    digest: d6f85f791420274253d681f9349540a0676f0ad6218bf192ecbd4ed584bef6e9
     icon: http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/a198caf3b2456d9f02ec302f9e7cb1ca.png
     name: hotwheel
     type: application
@@ -23,7 +44,7 @@ entries:
     version: 0.1.0
   mysql:
   - apiVersion: v2
-    created: "2023-10-08T21:09:17.814395+08:00"
+    created: "2023-10-10T09:56:12.462509+08:00"
     description: Fast, reliable, scalable, and easy to use open-source relational
       database system.
     digest: 66b2887b476d727787dcaee8e2b18b6fcd5b8aec2955eb440f243f5c3c46bbdf
@@ -46,7 +67,7 @@ entries:
   redis:
   - apiVersion: v2
     appVersion: 4.0.8
-    created: "2023-10-08T21:09:17.815638+08:00"
+    created: "2023-10-10T09:56:12.46376+08:00"
     description: Open source, advanced key-value store. It is often referred to as
       a data structure server since keys can contain strings, hashes, lists, sets
       and sorted sets.
@@ -66,4 +87,4 @@ entries:
     urls:
     - https://kubeclub.github.io/hotwheel/redis-1.1.15.tgz
     version: 1.1.15
-generated: "2023-10-08T21:09:17.800177+08:00"
+generated: "2023-10-10T09:56:12.446993+08:00"
