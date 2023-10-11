@@ -12,6 +12,8 @@ $ helm install stable/redis
 
 This chart bootstraps a [Redis](https://github.com/bitnami/bitnami-docker-redis) deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
+helm upgrade --set persistence.enabled=false --install epaas-redis redis -n poc
+
 ## Prerequisites
 
 - Kubernetes 1.4+ with Beta APIs enabled
