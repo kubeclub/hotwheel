@@ -60,4 +60,6 @@ _为了快速体验，mysql、redis 默认都没有持久化_
 
 ## 常见问题
 
+[前往问答社区](https://www.kubeclub.cn/ask7/questions.html)
+
 * 系统中用到 flowable 工作流，数据库要关闭大小写敏感
