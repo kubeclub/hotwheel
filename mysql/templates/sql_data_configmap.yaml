@@ -1090,6 +1090,11 @@ data:
     /******************************************/
     INSERT INTO `hotwheel`.`sys_user` (`user_id`,`dept_id`,`user_name`,`nick_name`,`user_type`,`email`,`phonenumber`,`sex`,`avatar`,`password`,`status`,`del_flag`,`login_ip`,`login_date`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1,103,'admin','hotwheel','00','admin@exe.com','18850341087','0','','$2a$10$3rg8AX3nqSKuVFJ9RcvWGuW7xJFuRO.wQfMbMqMe1SGg3SNkfzwmW','0','0','172.17.2.64','2023-10-06 15:34:49','admin','2022-07-19 09:57:28','','2023-10-06 15:34:48','管理员');
     /******************************************/
+    /*   用户角色   */
+    /*   TableName = sys_user_role   */
+    /******************************************/
+    INSERT INTO `sys_user_role` (`user_id`,`role_id`) VALUES (1,1);
+    /******************************************/
     /*   服务组   */
     /*   TableName = t_sys_service_group   */
     /******************************************/
