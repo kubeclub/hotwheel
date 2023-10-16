@@ -1,6 +1,14 @@
 ## 监控
-### grafana 内嵌仪表盘
-> JSON Model
+> grafana 内嵌仪表盘
+
+![监控](./img/monitor.png)
+
+## iframe 传递参数
+- var-NameSpace=
+- var-Container=All
+- var-Pod=
+
+## grafana JSON Model
 
 ```
 {
