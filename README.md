@@ -6,6 +6,9 @@
 
 [介绍视频](https://www.bilibili.com/video/BV1WR4y1w7R8/)
 
+[为什么需要 hotwheel](https://www.kubeclub.cn/devops/200.html)
+
+
 ## 快速开始
 1. 添加 helm 仓库
 ```
@@ -42,7 +45,8 @@ helm upgrade -n devops --install hotwheel \
 
 ![使用手册](./doc/img/guide_console.jpg)
 
-[使用手册-钉钉-链接](https://alidocs.dingtalk.com/i/nodes/LeBq413JA2ROrdb9tMv7Xq6P8DOnGvpb)
+- [使用手册下载](./doc/service_manual.pdf)
+- [申请完整钉钉知识库](https://alidocs.dingtalk.com/i/nodes/LeBq413JA2ROrdb9tMv7Xq6P8DOnGvpb)
 
 ## 架构图
 
