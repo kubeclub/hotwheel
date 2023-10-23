@@ -57,6 +57,7 @@ _为了快速体验，mysql、redis 默认都没有持久化_
 1. [注册 gitlab runner 并配置到风火轮平台](gitlab-runner.md) 【必需】
 2. [搭建 sonarqube 静态代码扫描服务，并配置到风火轮平台](sonarqube.md) 【可选】
 3. [监控](grafana.md) 【可选】
+4. [统计分析](metabase.md) 【可选】
 
 
 ## 常见问题

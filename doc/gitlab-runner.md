@@ -25,11 +25,11 @@ kubeclub/gitlab-runner  0.42.1          15.1.0          GitLab Runner
 - 生产：prod
 
 ```
-helm upgrade --install \
+helm install --dry-run --debug \
 --set runners.imagePullPolicy="if-not-present" \
 --set gitlabUrl="http://git.kubeclub.com" \
 --set runnerRegistrationToken="xxx" \
 --set runners.tags="dev" \
 --set runners.namespace="dev" \
-runner-dev kubeclub/gitlab-runner --version 0.42.1 -n devops
+runner-dev kubeclub/gitlab-runner --version 0.42.1 -n a
 ```

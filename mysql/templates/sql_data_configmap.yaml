@@ -1091,11 +1091,17 @@ data:
     /******************************************/
     INSERT INTO `hotwheel`.`sys_user` (`user_id`,`dept_id`,`user_name`,`nick_name`,`user_type`,`email`,`phonenumber`,`sex`,`avatar`,`password`,`status`,`del_flag`,`login_ip`,`login_date`,`create_emp`,`create_time`,`modify_emp`,`modify_time`,`remark`) VALUES (1,103,'admin','hotwheel','00','admin@exe.com','18850341087','0','','$2a$10$3rg8AX3nqSKuVFJ9RcvWGuW7xJFuRO.wQfMbMqMe1SGg3SNkfzwmW','0','0','172.17.2.64','2023-10-06 15:34:49','admin','2022-07-19 09:57:28','','2023-10-06 15:34:48','管理员');
     /******************************************/
+    /*   用户角色   */
+    /*   TableName = sys_user_role   */
+    /******************************************/
+    INSERT INTO `sys_user_role` (`user_id`,`role_id`) VALUES (1,1);
+    /******************************************/
     /*   服务组   */
     /*   TableName = t_sys_service_group   */
     /******************************************/
     INSERT INTO `hotwheel`.`t_sys_service_group` (`id`,`group_id`,`group_name`,`create_time`,`modify_time`) VALUES (1,'devops','效能团队',null,null);
     INSERT INTO `hotwheel`.`t_sys_service_group` (`id`,`group_id`,`group_name`,`create_time`,`modify_time`) VALUES (8,'common','公共',null,null);
+<<<<<<< HEAD
     
     /******************************************/
     /*   集群   */
@@ -1299,4 +1305,29 @@ data:
     INSERT INTO `sys_order_type` (`type_id`,`parent_id`,`type_name`,`form_id`,`order_num`,`status`) VALUES (26,0,'上线审批',1518,0,'0');
     INSERT INTO `sys_order_type` (`type_id`,`parent_id`,`type_name`,`form_id`,`order_num`,`status`) VALUES (27,0,'k8s 负载资源申请',1519,0,'0');
     INSERT INTO `sys_order_type` (`type_id`,`parent_id`,`type_name`,`form_id`,`order_num`,`status`) VALUES (28,0,'申请域名',1527,0,'0');
+
+    /******************************************/
+    /*   mebase 配置   */
+    /*   TableName = t_sys_metabase_config   */
+    /******************************************/
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (16,'techView','dashboard',3,'技术中心总览','5d6a27578f257ad6ad091acd052be7d4f62019deda061b5ea63f74623a108609','2021-10-28 16:08:36','2021-10-28 16:24:00');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (17,'deployTicket','dashboard',14,'发布故障系数','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2021-10-28 16:08:36','2021-10-28 16:08:36');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (18,'codeQuality','dashboard',15,'代码质量','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2021-10-28 16:08:36','2021-10-28 16:08:36');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (19,'unitCoverage','dashboard',37,'单测覆盖率','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2021-10-28 16:08:36','2021-10-28 16:08:36');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (20,'unitNewCoverage','dashboard',38,'单测新覆盖率','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2021-10-28 16:08:36','2021-10-28 16:08:36');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (21,'unitCaseView','dashboard',39,'单测用例概览','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2021-10-28 16:08:36','2021-10-28 16:08:36');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (22,'unitDuration','dashboard',40,'单测耗时','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2021-10-28 16:08:36','2021-10-28 16:08:36');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (23,'unitServiceView','dashboard',41,'服务单测列表','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2021-10-28 16:08:36','2021-10-28 16:08:36');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (24,'teamTrendView','dashboard',43,'团队单测-趋势','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2021-10-28 16:08:36','2021-10-28 16:08:36');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (25,'serviceTrendView','dashboard',44,'服务单测-趋势','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2021-10-28 16:08:36','2021-10-28 16:08:36');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (26,'groupCodeTrend','dashboard',48,'团队代码质量趋势看板','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2021-10-28 16:08:36','2021-10-28 16:08:36');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (27,'serviceCodeTrend','dashboard',49,'服务代码质量趋势看板','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2021-10-28 16:08:36','2021-10-28 16:08:36');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (28,'groupDeployTicketTrend','dashboard',46,'团队发布故障系数趋势看板','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2021-10-28 16:08:36','2021-10-28 16:08:36');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (29,'serviceDeployTicketTrend','dashboard',47,'服务发布故障系数趋势看板','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2021-10-28 16:08:36','2021-10-28 16:08:36');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (30,'codeViewDifferent','dashboard',144,'全量代码不同时间的差值','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2022-04-19 14:01:54','2022-04-19 14:01:57');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (31,'unitCoverageDifferent','dashboard',146,'单测-差量-覆盖率','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2022-04-19 15:53:29','2022-04-19 15:53:32');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (32,'unitCaseDifferent','dashboard',147,'单测-差量-用例数','f61d9d18fbb0f80d13d9b5b8ec91ac8e7ebc762a9710815e6d91a14c3dcb58c2','2022-04-19 15:53:29','2022-04-19 15:53:32');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (33,'ticket','dashboard',4,'工单统计','5d6a27578f257ad6ad091acd052be7d4f62019deda061b5ea63f74623a108609','2021-10-28 16:08:36','2021-10-28 16:24:00');
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (34,'slaView','dashboard',6,'服务SLA','5d6a27578f257ad6ad091acd052be7d4f62019deda061b5ea63f74623a108609',null,null);
+    INSERT INTO `t_sys_metabase_config` (`id`,`config_code`,`type`,`metabase_id`,`desc`,`secretKey`,`create_time`,`modify_time`) VALUES (35,'exceptionView','dashboard',7,'服务应用异常','5d6a27578f257ad6ad091acd052be7d4f62019deda061b5ea63f74623a108609',null,null);
 

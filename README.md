@@ -40,6 +40,10 @@ helm upgrade -n devops --install hotwheel \
   - 容器文件自由上下传
   - 集成 arthas 调试工具  
 
+![使用手册](./doc/img/guide_console.jpg)
+
+[使用手册-钉钉-链接](https://alidocs.dingtalk.com/i/nodes/LeBq413JA2ROrdb9tMv7Xq6P8DOnGvpb)
+
 ## 架构图
 
 [//]: # (![服务说明]&#40;http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/1c108f5744d6e8caac9270af8df7a19c.png&#41;)
