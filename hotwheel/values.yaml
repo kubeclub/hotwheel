@@ -15,6 +15,11 @@ image:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: "v1.0"
+  agent:
+    repository: swr.cn-south-1.myhuaweicloud.com/kubeclub/hotwheel-agent
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "v1.0"
 
 
 
@@ -60,11 +65,11 @@ redis:
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: "hotwheel"
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -108,6 +113,15 @@ ingress:
     # kubernetes.io/tls-acme: "true"
     hosts:
       - host: hotwheel.example.cn
+        paths: [ ]
+    tls: [ ]
+  agent:
+    enabled: true
+    annotations: { }
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: hotwheelagent.example.cn
         paths: [ ]
     tls: [ ]
     #  - secretName: chart-example-tls

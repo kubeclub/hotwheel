@@ -45,6 +45,13 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
+Create chart name and version as used by the chart label.
+*/}}
+{{- define "hotwheel.agent.fullname" -}}
+{{ template "hotwheel.fullname" . }}-agent
+{{- end }}
+
+{{/*
 Common labels
 */}}
 {{- define "hotwheel.labels" -}}

@@ -3,7 +3,7 @@ entries:
   gitlab-runner:
   - apiVersion: v1
     appVersion: 15.1.0
-    created: "2023-10-10T09:56:12.451361+08:00"
+    created: "2024-08-29T20:19:40.0568275+08:00"
     description: GitLab Runner
     digest: 6e0597037e9b39d5c2299940931147556be080a7d9a5d6a596a265492928104f
     icon: https://gitlab.com/uploads/-/system/project/avatar/250833/runner_logo.png
@@ -24,7 +24,7 @@ entries:
   hotwheel:
   - apiVersion: v2
     appVersion: "0.1"
-    created: "2023-10-10T09:56:12.459088+08:00"
+    created: "2024-08-29T20:19:40.0768262+08:00"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -44,10 +44,11 @@ entries:
     version: 0.1.0
   mysql:
   - apiVersion: v2
-    created: "2023-10-10T09:56:12.462509+08:00"
+    appVersion: 5.7.14
+    created: "2024-08-29T20:19:40.0798269+08:00"
     description: Fast, reliable, scalable, and easy to use open-source relational
       database system.
-    digest: 66b2887b476d727787dcaee8e2b18b6fcd5b8aec2955eb440f243f5c3c46bbdf
+    digest: cae2e4587a3dc13619bd61199612125c9b6b6e0243d0768f8ea04b8238bc9a42
     home: https://www.mysql.com/
     icon: https://www.mysql.com/common/logos/logo-mysql-170x115.png
     keywords:
@@ -67,11 +68,11 @@ entries:
   redis:
   - apiVersion: v2
     appVersion: 4.0.8
-    created: "2023-10-10T09:56:12.46376+08:00"
+    created: "2024-08-29T20:19:40.0798269+08:00"
     description: Open source, advanced key-value store. It is often referred to as
       a data structure server since keys can contain strings, hashes, lists, sets
       and sorted sets.
-    digest: 2d7fba83e89b16c8313d2d5772537dfe3d61613c3e4fddeec984ed4b90307ebc
+    digest: a44632d7808978860ce68aa4c8aae00ab34bbabb53254d6994fb14794b7257a8
     home: http://redis.io/
     icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
     keywords:
@@ -87,4 +88,4 @@ entries:
     urls:
     - https://kubeclub.github.io/hotwheel/redis-1.1.15.tgz
     version: 1.1.15
-generated: "2023-10-10T09:56:12.446993+08:00"
+generated: "2024-08-29T20:19:40.0508279+08:00"
