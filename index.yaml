@@ -3,7 +3,7 @@ entries:
   gitlab-runner:
   - apiVersion: v1
     appVersion: 15.1.0
-    created: "2024-08-29T20:19:40.0568275+08:00"
+    created: "2024-08-29T20:42:18.1766246+08:00"
     description: GitLab Runner
     digest: 6e0597037e9b39d5c2299940931147556be080a7d9a5d6a596a265492928104f
     icon: https://gitlab.com/uploads/-/system/project/avatar/250833/runner_logo.png
@@ -24,7 +24,7 @@ entries:
   hotwheel:
   - apiVersion: v2
     appVersion: "0.1"
-    created: "2024-08-29T20:19:40.0768262+08:00"
+    created: "2024-08-29T20:42:18.197624+08:00"
     dependencies:
     - condition: mysql.enabled
       name: mysql
@@ -32,10 +32,10 @@ entries:
       version: 0.3.5
     - condition: redis.enabled
       name: redis
-      repository: https://kubeclub.github.io/hotwheel
+      repository: file://../redis
       version: 1.1.15
     description: 云原生一体化运维平台
-    digest: d6f85f791420274253d681f9349540a0676f0ad6218bf192ecbd4ed584bef6e9
+    digest: 5f16d6b1f7f735fb41654a52ca7206bfde56007325fa0f30e95af685b6720817
     icon: http://kube-portal.oss-cn-shenzhen.aliyuncs.com/uploads/20220524/a198caf3b2456d9f02ec302f9e7cb1ca.png
     name: hotwheel
     type: application
@@ -45,7 +45,7 @@ entries:
   mysql:
   - apiVersion: v2
     appVersion: 5.7.14
-    created: "2024-08-29T20:19:40.0798269+08:00"
+    created: "2024-08-29T20:42:18.2006262+08:00"
     description: Fast, reliable, scalable, and easy to use open-source relational
       database system.
     digest: cae2e4587a3dc13619bd61199612125c9b6b6e0243d0768f8ea04b8238bc9a42
@@ -68,11 +68,11 @@ entries:
   redis:
   - apiVersion: v2
     appVersion: 4.0.8
-    created: "2024-08-29T20:19:40.0798269+08:00"
+    created: "2024-08-29T20:42:18.2006262+08:00"
     description: Open source, advanced key-value store. It is often referred to as
       a data structure server since keys can contain strings, hashes, lists, sets
       and sorted sets.
-    digest: a44632d7808978860ce68aa4c8aae00ab34bbabb53254d6994fb14794b7257a8
+    digest: 1b8a89a37ca7df12949d6cf4014ab5efa5fff193f80f0b38bc091675c13db66a
     home: http://redis.io/
     icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
     keywords:
@@ -88,4 +88,4 @@ entries:
     urls:
     - https://kubeclub.github.io/hotwheel/redis-1.1.15.tgz
     version: 1.1.15
-generated: "2024-08-29T20:19:40.0508279+08:00"
+generated: "2024-08-29T20:42:18.1746246+08:00"
