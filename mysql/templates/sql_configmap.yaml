@@ -2398,6 +2398,9 @@ data:
     `create_emp` varchar(255) NOT NULL COMMENT '创建人',
     `modify_emp` varchar(255) NOT NULL COMMENT '更新人',
     `kubeconfig_content` text COMMENT '配置内容',
+    `order`     int            null comment '越小越靠前',
+    `title`       varchar(255)         null comment '标题',
+    `enable`      tinyint(1) default 1 null comment '启用状态'
     PRIMARY KEY (`id`) USING BTREE
     ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='集群信息'
     ;
@@ -3171,6 +3174,53 @@ data:
     PRIMARY KEY (`id`) USING BTREE
     ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='构建流水'
     ;
+
+    create table t_cd_pipeline_scheduling
+    (
+    id             bigint unsigned auto_increment comment '主键'
+    primary key,
+    cd_pipeline_id bigint unsigned not null comment '构建主表ID',
+    type           varchar(64)     not null comment '类型',
+    json_field     json            not null comment '动态字段',
+    create_time    datetime        not null comment '创建时间',
+    modify_time    datetime        not null comment '更新时间',
+    create_emp     varchar(255)    not null comment '创建人',
+    modify_emp     varchar(255)    not null comment '更新人'
+    )
+    comment '部署流水-調度策略';
+    
+    create table t_cd_pipeline_init_containers
+    (
+        id             bigint unsigned auto_increment comment '主键'
+            primary key,
+        name           varchar(64)     null comment '任务名',
+        image          varchar(255)    null comment '镜像地址',
+        command        text            null comment '执行命令',
+        args           varchar(255)    null comment '执行参数',
+        create_time    datetime        not null comment '创建时间',
+        modify_time    datetime        not null comment '更新时间',
+        create_emp     varchar(255)    not null comment '创建人',
+        modify_emp     varchar(255)    not null comment '更新人',
+        cd_pipeline_id bigint unsigned not null comment '构建主表ID'
+    )
+    comment '部署流水-启动任务' row_format = DYNAMIC;
+    
+    create table t_cd_pipeline_volume_data
+    (
+      id             bigint unsigned auto_increment comment '主键'
+      primary key,
+      cd_pipeline_id bigint unsigned not null comment '构建主表ID',
+      name           varchar(255)    null comment '名字',
+      type           varchar(64)     not null comment '类型[emptyDir,nfs,pvc]',
+      mount_path     varchar(128)    not null comment '挂载路径',
+      sub_mount_path varchar(64)     null comment '挂载路径',
+      json_field     json            not null comment '动态字段',
+      create_time    datetime        not null comment '创建时间',
+      modify_time    datetime        not null comment '更新时间',
+      create_emp     varchar(255)    not null comment '创建人',
+      modify_emp     varchar(255)    not null comment '更新人'
+    )
+    comment '部署流水-数据挂载';
 
 
 
